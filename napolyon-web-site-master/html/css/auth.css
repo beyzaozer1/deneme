@@ -1,0 +1,35 @@
+.nap-point{
+    width: 50px;
+    padding: 5px;
+}
+.bg-half-25{padding:25px 0;background-size:cover;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;position:relative;background-position:center center}
+.single-item img {
+    border-radius: 5px;
+    width: 100%;
+}
+.single-item .slider-content{
+    margin-top: -3px;
+    height: 100%;
+    background: #01b6a6;
+    padding: 5px;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.slider-content .description{
+    margin: 0;
+}
+.slider-content .description{
+    font-size: 14px;
+    margin: 0;
+}
+.box-shadow{
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.5);
+    -moz-box-shadow:    0px 2px 5px 0px rgba(50, 50, 50, 0.5);
+    box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.5);
+}
+.accounts.active .nap-point{
+    background: #fff;
+    border-radius: 100%;
+    padding: 0px;
+}
