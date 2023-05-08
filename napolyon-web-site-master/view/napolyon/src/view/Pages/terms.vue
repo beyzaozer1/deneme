@@ -369,13 +369,12 @@
             information, forms and content that takes place or will take place
             on the SITE, the SITE and the conditions of use of the SITE is
             reserved.<br />
-            <br /><b>1.2.</b> The owner of the SITE is DORINSIGHT RESEARCH AND
-            CONSULTING SERVICES TRADING JOINT STOCK COMPANY resident in Province
-            of İstanbul,District of Ümraniye, Neighbourhood of Saray, Dr. Adnan
-            Büyükdeniz Road, Apartment Building No:4/2 3rd floor Cessas Plz
-            Ümraniye. The services on the SITE are provided by DORINSIGHT
-            RESEARCH AND CONSULTING SERVICES TRADING JOINT STOCK COMPANY
-            (hereinafter will be referred to as "Napolyon.com"). <br />
+            <br /><b>1.2.</b> The owner of the SITE is DORINSIGHT ARAŞTIRMA VE
+            DANIŞMANLIK HİZMETLERİ TİCARET ANONİM ŞİRKETİ resident in Saray Mh.
+            Dr. Adnan Büyükdeniz Cad. No:4/2 Cessas Plaza Kat:3 Ümraniye. The
+            services on the SITE are provided by DORINSIGHT ARAŞTIRMA VE
+            DANIŞMANLIK HİZMETLERİ TİCARET ANONİM ŞİRKETİ (hereinafter will be
+            referred to as "Napolyon.com"). <br />
             <br /><b>1.3.</b> All the natural and legal persons utilizing,
             whether charged or for free, from the services offered on the SITE
             and/or accessing the SITE in any way, are deemed to have accepted
@@ -523,9 +522,7 @@
             on the date of their announcement. This "Napolyon.com Website
             Conditions of Use" may not be amended by the unilateral declarations
             of the USER.<br />
-            <b>
-              <br /> </b
-            ><b>6. FORCE MAJEURE</b> <br />
+            <b> <br /> </b><b>6. FORCE MAJEURE</b> <br />
             In cases which are legally deemed as force majeure; Napolyon.com
             shall not have any obligations for not fulfilling or for fulfilling
             in an imperfect or in a delayed way this "Napolyon.com Website
@@ -540,9 +537,7 @@
             war, strikes, communication problem, infrastructure and internet
             failures, electrical power cuts or bad weather shall be deemed as
             force majeure.<br />
-            <b>
-              <br /> </b
-            ><b>7. APPLICABLE LAW AND JURISDICTION</b><br />
+            <b> <br /> </b><b>7. APPLICABLE LAW AND JURISDICTION</b><br />
             In the application and interpretation of this "Napolyon.com Website
             Conditions of Use" and in the management of legal relations in the
             context of this "Napolyon.com Website Conditions of Use" where there
@@ -551,9 +546,7 @@
             executive offices shall be the competent jurisdictions for any
             conflicts that occur or might occur in the context of this
             "Napolyon.com Website Conditions of Use". <br />
-            <b>
-              <br /> </b
-            ><b>8. EFFECT AND ACCEPTANCE</b><br />
+            <b> <br /> </b><b>8. EFFECT AND ACCEPTANCE</b><br />
             This "Napolyon.com Website Conditions of Use" shall become effective
             on the date that it is announced in the SITE by Napolyon.com. USERS
             shall be deemed to have accepted the provisions of this
@@ -583,12 +576,12 @@ export default {
   components: {
     "t-footer": Footer,
     "t-up-footer": upFooter,
-    "t-header": Header,
+    "t-header": Header
   },
   mounted() {
     window.scrollTo(0, 0);
     feather.replace();
-  },
+  }
 };
 </script>
 
