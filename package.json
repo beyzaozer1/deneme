@@ -1,0 +1,14 @@
+{
+  "name": "napolyon-web-site-master",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitlab.skyalp.com.tr/napolyon_frontend/websube/napolyon-web-site-master.git",
+  "author": "devrim ayyıldızlı <devrim.ayyildizli@skyalp.com.tr>",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.0"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^5.0.8"
+  }
+}
