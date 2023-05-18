@@ -135,6 +135,10 @@ export default {
 .company-list {
   height: 100%;
 }
+.text-center{
+  width: 100%;
+  margin: 0 auto;
+}
 .cursor-pointer {
   cursor: pointer;
 }

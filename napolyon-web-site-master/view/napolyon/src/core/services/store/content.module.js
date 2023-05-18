@@ -25,7 +25,7 @@ export const SET_TITLES = `${BASE}/M/TITLES`;
 export const SET_FAQS = `${BASE}/M/FAQS`;
 export const SET_FAQS_SUBJECTS = `${BASE}/M/FAQS_SUBJECTS`;
 export const SET_ITEM = `${BASE}/M/CURRENT_ITEM`;
-export const SET_CONTACT_PREFERENCE_REASONS= `${BASE}/M/CONTACT_PREFERENCE_REASONS`;
+export const SET_CONTACT_PREFERENCE_REASONS = `${BASE}/M/CONTACT_PREFERENCE_REASONS`;
 
 // ACTIONS
 export const GET_ITEMS = `${BASE}/GET_ITEMS`;
@@ -42,12 +42,12 @@ export const DELETE_ITEM = `${BASE}/DELETE_ITEM`;
 
 const config = {
   headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-    'Content-Type': 'application/json',
-  }
-}
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    "Content-Type": "application/json",
+  },
+};
 const state = {
   items: null,
   faqs: null,
@@ -58,7 +58,7 @@ const state = {
   loading: false,
   error: null,
   success: null,
-  titles :null
+  titles: null,
 };
 
 const getters = {
@@ -124,7 +124,7 @@ const mutations = {
   },
   [SET_ITEM]: (state, payload) => {
     state.item = payload;
-  }
+  },
 };
 
 const actions = {
@@ -133,70 +133,86 @@ const actions = {
     let filters = payload.filters;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
-    return ApiService.get(`${url}?` + querystring.stringify(filters),"", config)
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_FAQS, response.data);
-        })
-        .catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+    return ApiService.get(
+      `${url}?` + querystring.stringify(filters),
+      "",
+      config
+    )
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_FAQS, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [GET_FAQS_SUBJECTS]: (context, payload) => {
     let url = payload.url;
     let filters = payload.filters;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
-    return ApiService.get(`${url}?` + querystring.stringify(filters),"", config)
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_FAQS_SUBJECTS, response.data);
-        })
-        .catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+    return ApiService.get(
+      `${url}?` + querystring.stringify(filters),
+      "",
+      config
+    )
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_FAQS_SUBJECTS, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [GET_CONTACT_PREFERENCE_REASONS]: (context, payload) => {
     let url = payload.url;
     let filters = payload.filters;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
-    return ApiService.get(`${url}?` + querystring.stringify(filters),"", config)
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_CONTACT_PREFERENCE_REASONS, response.data);
-        })
-        .catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+    return ApiService.get(
+      `${url}?` + querystring.stringify(filters),
+      "",
+      config
+    )
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_CONTACT_PREFERENCE_REASONS, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [GET_TITLES]: (context, payload) => {
-    let url = '/mobile/codeData/title';
+    let url = "/mobile/codeData/title";
     let filters = payload.filters;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
     return ApiService.get(`${url}?` + querystring.stringify(filters))
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_TITLES, response.data);
-        })
-        .catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_TITLES, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [GET_CITIES]: (context, payload) => {
-    let url = '/mobile/codeData/city';
+    let url = "/mobile/codeData/city";
     let filters = payload.filters;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
-    return ApiService.get(`${url}?` + querystring.stringify(filters),"", config)
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_CITIES, response.data);
-        })
-        .catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+    return ApiService.get(
+      `${url}?` + querystring.stringify(filters),
+      "",
+      config
+    )
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_CITIES, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [CREATE_CONTACT_US]: (context, payload) => {
     let url = payload.url;
@@ -204,8 +220,8 @@ const actions = {
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
 
-    if (payload.hasOwnProperty('isAuthenticated') && payload.isAuthenticated) {
-      config.headers.Authorization = 'Bearer ' + payload.isAuthenticated;
+    if (payload.hasOwnProperty("isAuthenticated") && payload.isAuthenticated) {
+      config.headers.Authorization = "Bearer " + payload.isAuthenticated;
     }
 
     return ApiService.post(url, contents, config);
@@ -216,25 +232,26 @@ const actions = {
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
     return ApiService.get(`${url}?` + querystring.stringify(filters))
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_ITEMS, response.data);
-        })
-        .catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_ITEMS, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [GET_ITEM]: (context, payload) => {
     let url = payload.url;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
     return ApiService.get(url)
-        .then((response) => {
-          context.commit(SET_ITEM, response.data);
-          context.commit(SET_LOADING, false);
-        }).catch((error) => {
-          context.commit(SET_ERROR, error);
-        });
+      .then((response) => {
+        context.commit(SET_ITEM, response.data);
+        context.commit(SET_LOADING, false);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [UPDATE_ITEM]: (context, payload) => {
     let url = payload.url;
@@ -242,12 +259,13 @@ const actions = {
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
     ApiService.put(url, contents)
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_ITEM, response.data);
-        }).catch((error) => {
-      context.commit(SET_ERROR, error);
-    });
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_ITEM, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [CREATE_ITEM]: (context, payload) => {
     let url = payload.url;
@@ -255,25 +273,27 @@ const actions = {
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
     ApiService.post(url, contents)
-        .then((response) => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_ITEM, response.data);
-        }).catch((error) => {
-      context.commit(SET_ERROR, error);
-    });
+      .then((response) => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_ITEM, response.data);
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
   },
   [DELETE_ITEM]: (context, payload) => {
     let url = payload.url;
     context.commit(SET_LOADING, true);
     context.commit(SET_ERROR, null);
     ApiService.delete(url)
-        .then(() => {
-          context.commit(SET_LOADING, false);
-          context.commit(SET_ITEM, {});
-        }).catch((error) => {
-      context.commit(SET_ERROR, error);
-    });
-  }
+      .then(() => {
+        context.commit(SET_LOADING, false);
+        context.commit(SET_ITEM, {});
+      })
+      .catch((error) => {
+        context.commit(SET_ERROR, error);
+      });
+  },
 };
 
 export default {
@@ -281,5 +301,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 };
