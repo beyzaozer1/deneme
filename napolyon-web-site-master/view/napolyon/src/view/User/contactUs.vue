@@ -2,8 +2,8 @@
   <div id="contentUs">
     <t-header :nav-light="false"></t-header>
     <section
-        class="bg-half bg-light d-table w-100"
-        style="background: url('media/images/images/contact-detail.jpg') center center;"
+      class="bg-half bg-light d-table w-100"
+      style="background: url('media/images/images/contact-detail.jpg') center center;"
     >
       <div class="bg-overlay bg-overlay-white"></div>
       <div class="container">
@@ -16,8 +16,8 @@
                   <ul class="breadcrumb bg-white rounded shadow mb-0">
                     <li class="breadcrumb-item">
                       <a @click="$router.push({ name: 'user.index' })">{{
-                          $t("index.home")
-                        }}</a>
+                        $t("index.home")
+                      }}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                       {{ $t("contactUs.contact_us") }}
@@ -37,13 +37,13 @@
     <div class="position-relative">
       <div class="shape overflow-hidden text-white">
         <svg
-            viewBox="0 0 2880 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 2880 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
-              d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z"
-              fill="currentColor"
+            d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z"
+            fill="currentColor"
           ></path>
         </svg>
       </div>
@@ -63,97 +63,98 @@
         <div class="row justify-content-center">
           <div class="col-lg-12 col-md-12">
             <ul
-                class="nav nav-pills mb-3 justify-content-center questions-nav-pills"
-                id="questions-pills-tab"
-                role="tablist"
+              class="nav nav-pills mb-3 justify-content-center questions-nav-pills"
+              id="questions-pills-tab"
+              role="tablist"
             >
               <li
-                  class="nav-item questions-nav-item"
-                  v-for="(item, index) in items"
-                  :key="index"
+                class="nav-item questions-nav-item"
+                v-for="(item, index) in items"
+                :key="index"
               >
                 <a
-                    class="nav-link questions-nav-link"
-                    @click="setActiveItemId(item.faqCategoryID)"
-                    :class="{ active: index === 0 }"
-                    :id="'tab-accordion-' + item.faqCategoryID"
-                    data-toggle="pill"
-                    :href="'#tab-category-' + item.faqCategoryID"
-                    role="tab"
-                    :aria-controls="'tab-accordion-' + item.faqCategoryID"
-                    aria-selected="true"
-                >{{ item.faqCategoryName }}</a
+                  v-if="item.faqCategoryID !== 7"
+                  class="nav-link questions-nav-link"
+                  @click="setActiveItemId(item.faqCategoryID)"
+                  :class="{ active: index === 0 }"
+                  :id="'tab-accordion-' + item.faqCategoryID"
+                  data-toggle="pill"
+                  :href="'#tab-category-' + item.faqCategoryID"
+                  role="tab"
+                  :aria-controls="'tab-accordion-' + item.faqCategoryID"
+                  aria-selected="true"
+                  >{{ item.faqCategoryName }}</a
                 >
               </li>
             </ul>
             <div
-                class="tab-content questions-tab-content"
-                id="pills-tabContent"
-                v-for="(item, index) in items"
-                :key="index"
-                v-if="item.faqCategoryID === activeItemId"
+              class="tab-content questions-tab-content"
+              id="pills-tabContent"
+              v-for="(item, index) in items"
+              :key="index"
+              v-if="item.faqCategoryID === activeItemId"
             >
               <div
-                  class="tab-pane fade questions-tab-pane"
-                  :class="{
+                class="tab-pane fade questions-tab-pane"
+                :class="{
                   show: activeItemId === item.faqCategoryID,
                   active: activeItemId === item.faqCategoryID,
                 }"
-                  :id="'tab-category-' + item.faqCategoryID"
-                  role="tabpanel"
-                  :aria-labelledby="'tab-accordion-' + item.faqCategoryID"
+                :id="'tab-category-' + item.faqCategoryID"
+                role="tabpanel"
+                :aria-labelledby="'tab-accordion-' + item.faqCategoryID"
               >
                 <div class="questions-accordion" id="withdrawal-accordion">
                   <div
-                      class="card questions-card"
-                      v-for="(subItem, subIndex) in item.content"
+                    class="card questions-card"
+                    v-for="(subItem, subIndex) in item.content"
                   >
                     <div
-                        class="card-header questions-card-header"
-                        :id="'withdrawal-heading' + subItem.faqID"
+                      class="card-header questions-card-header"
+                      :id="'withdrawal-heading' + subItem.faqID"
                     >
                       <h5 class="mb-0">
                         <button
-                            class="btn btn-link questions-btn-link"
-                            :class="{ collapsed: subIndex !== 0 }"
-                            data-toggle="collapse"
-                            :data-target="'#withdrawal-collapse' + subItem.faqID"
-                            :aria-expanded="subIndex === 0 ? true : false"
-                            aria-controls="tab-main-accordion"
+                          class="btn btn-link questions-btn-link"
+                          :class="{ collapsed: subIndex !== 0 }"
+                          data-toggle="collapse"
+                          :data-target="'#withdrawal-collapse' + subItem.faqID"
+                          :aria-expanded="subIndex === 0 ? true : false"
+                          aria-controls="tab-main-accordion"
                         >
                           {{ subItem.faqContent }}
                         </button>
                       </h5>
                     </div>
                     <div
-                        :id="'withdrawal-collapse' + subItem.faqID"
-                        class="collapse questions-show"
-                        :class="{ show: subIndex === 0 }"
-                        :aria-labelledby="'withdrawal-heading' + subItem.faqID"
-                        data-parent="#withdrawal-accordion"
+                      :id="'withdrawal-collapse' + subItem.faqID"
+                      class="collapse questions-show"
+                      :class="{ show: subIndex === 0 }"
+                      :aria-labelledby="'withdrawal-heading' + subItem.faqID"
+                      data-parent="#withdrawal-accordion"
                     >
                       <div class="card-body questions-card-body">
                         <span v-html="subItem.faqAnswerHtmlContent"></span>
                         <div class="question-wizard">
-                          <hr/>
+                          <hr />
                           <h5>{{ $t("contactUs.did_this_help_you") }}</h5>
                           <div class="buttons">
                             <a
-                                class="btn btn-sm btn-pills btn-soft-primary mr-2 question-yes"
-                                @click.prevent="submitFeedback(subItem.faqID)"
-                            ><i
+                              class="btn btn-sm btn-pills btn-soft-primary mr-2 question-yes"
+                              @click.prevent="submitFeedback(subItem.faqID)"
+                              ><i
                                 data-feather="thumbs-up"
                                 class="fea icon-sm"
-                            ></i>
+                              ></i>
                               {{ $t("contactUs.yes") }}</a
                             >
                             <a
-                                class="btn btn-sm btn-pills btn-soft-danger help-form"
-                                @click.prevent="showContactForm(true)"
-                            ><i
+                              class="btn btn-sm btn-pills btn-soft-danger help-form"
+                              @click.prevent="showContactForm(true)"
+                              ><i
                                 data-feather="thumbs-down"
                                 class="fea icon-sm"
-                            ></i>
+                              ></i>
                               {{ $t("contactUs.no") }}</a
                             >
                           </div>
@@ -172,8 +173,8 @@
 
     <!-- Start Contact -->
     <section
-        id="iletisim-formu"
-        :style="{ display: contactFormStatus ? 'block' : 'none' }"
+      id="iletisim-formu"
+      :style="{ display: contactFormStatus ? 'block' : 'none' }"
     >
       <div class="container">
         <div class="row">
@@ -186,18 +187,18 @@
                 <div class="custom-form mt-4">
                   <p>{{ $t("contactUs.contact_us_form_description") }}</p>
                   <div
-                      id="message"
-                      class="col-xs-12 col-md-12 col-lg-6 offset-lg-3 text-center error-result-message"
-                      v-if="contactUsError"
+                    id="message"
+                    class="col-xs-12 col-md-12 col-lg-6 offset-lg-3 text-center error-result-message"
+                    v-if="contactUsError"
                   >
                     <div class="alert alert-danger text-center">
                       <span v-html="contactUsError"></span>
                     </div>
                   </div>
                   <div
-                      id="message"
-                      class="col-xs-12 col-md-12 col-lg-6 offset-lg-3 text-center error-result-message"
-                      v-if="contactUsSuccess"
+                    id="message"
+                    class="col-xs-12 col-md-12 col-lg-6 offset-lg-3 text-center error-result-message"
+                    v-if="contactUsSuccess"
                   >
                     <div class="alert alert-success text-center">
                       İletiniz kaydedilmiştir. Size en kısa sürede geri dönüş
@@ -209,25 +210,25 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label
-                          >{{ $t("contactUs.object") }}
+                            >{{ $t("contactUs.object") }}
                             <span class="text-danger">*</span></label
                           >
                           <select
-                              class="form-control custom-select"
-                              name="konu"
-                              v-model="topic"
+                            class="form-control custom-select"
+                            name="konu"
+                            v-model="topic"
                           >
                             <option
-                                :value="item.value"
-                                v-for="(item, index) in categories"
-                                :key="index"
+                              :value="item.value"
+                              v-for="(item, index) in categories"
+                              :key="index"
                             >
                               {{ item.text }}
                             </option>
                           </select>
                           <div
-                              v-if="submitStatus && !$v.topic.required"
-                              class="error d-block"
+                            v-if="submitStatus && !$v.topic.required"
+                            class="error d-block"
                           >
                             Konuyu seçiniz
                           </div>
@@ -236,27 +237,27 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label
-                          >{{ $t("contactUs.name") }}
+                            >{{ $t("contactUs.name") }}
                             <span class="text-danger">*</span></label
                           >
                           <div class="position-relative">
                             <i
-                                data-feather="user"
-                                class="fea icon-sm icons"
+                              data-feather="user"
+                              class="fea icon-sm icons"
                             ></i>
                             <input
-                                name="name"
-                                id="name"
-                                v-model="firstName"
-                                :disabled="!!user"
-                                type="text"
-                                class="form-control pl-5"
-                                placeholder="Adınız"
+                              name="name"
+                              id="name"
+                              v-model="firstName"
+                              :disabled="!!user"
+                              type="text"
+                              class="form-control pl-5"
+                              placeholder="Adınız"
                             />
                           </div>
                           <div
-                              v-if="submitStatus && !$v.firstName.required"
-                              class="error d-block"
+                            v-if="submitStatus && !$v.firstName.required"
+                            class="error d-block"
                           >
                             Adınızı giriniz
                           </div>
@@ -270,22 +271,22 @@
                           >
                           <div class="position-relative">
                             <i
-                                data-feather="user"
-                                class="fea icon-sm icons"
+                              data-feather="user"
+                              class="fea icon-sm icons"
                             ></i>
                             <input
-                                name="lastname"
-                                v-model="lastName"
-                                :disabled="!!user"
-                                id="lastname"
-                                type="text"
-                                class="form-control pl-5"
-                                placeholder="Soyadınız"
+                              name="lastname"
+                              v-model="lastName"
+                              :disabled="!!user"
+                              id="lastname"
+                              type="text"
+                              class="form-control pl-5"
+                              placeholder="Soyadınız"
                             />
                           </div>
                           <div
-                              v-if="submitStatus && !$v.lastName.required"
-                              class="error d-block"
+                            v-if="submitStatus && !$v.lastName.required"
+                            class="error d-block"
                           >
                             Soyadınızı giriniz
                           </div>
@@ -299,27 +300,27 @@
                           >
                           <div class="position-relative">
                             <i
-                                data-feather="mail"
-                                class="fea icon-sm icons"
+                              data-feather="mail"
+                              class="fea icon-sm icons"
                             ></i>
                             <input
-                                v-model="email"
-                                id="email"
-                                :disabled="!!user"
-                                type="email"
-                                class="form-control pl-5"
-                                placeholder="E-Posta Adresiniz :"
+                              v-model="email"
+                              id="email"
+                              :disabled="!!user"
+                              type="email"
+                              class="form-control pl-5"
+                              placeholder="E-Posta Adresiniz :"
                             />
                           </div>
                           <div
-                              v-if="submitStatus && !$v.email.required"
-                              class="error d-block"
+                            v-if="submitStatus && !$v.email.required"
+                            class="error d-block"
                           >
                             Email adresinizi giriniz
                           </div>
                           <div
-                              v-if="submitStatus && !$v.email.email"
-                              class="error d-block"
+                            v-if="submitStatus && !$v.email.email"
+                            class="error d-block"
                           >
                             Geçerli bir Email adresi giriniz
                           </div>
@@ -331,18 +332,18 @@
                           <label> {{ $t("contactUs.phone") }}</label>
                           <div class="position-relative">
                             <i
-                                data-feather="phone"
-                                class="fea icon-sm icons"
+                              data-feather="phone"
+                              class="fea icon-sm icons"
                             ></i>
                             <input
-                                name="phone"
-                                v-model="phone"
-                                id="phone"
-                                :disabled="!!user"
-                                v-mask="'##########'"
-                                type="text"
-                                class="form-control pl-5"
-                                placeholder="Telefon"
+                              name="phone"
+                              v-model="phone"
+                              id="phone"
+                              :disabled="!!user"
+                              v-mask="'##########'"
+                              type="text"
+                              class="form-control pl-5"
+                              placeholder="Telefon"
                             />
                           </div>
                         </div>
@@ -353,21 +354,21 @@
                           <label> {{ $t("contactUs.message") }}</label>
                           <div class="position-relative">
                             <i
-                                data-feather="message-circle"
-                                class="fea icon-sm icons"
+                              data-feather="message-circle"
+                              class="fea icon-sm icons"
                             ></i>
                             <textarea
-                                name="comments"
-                                v-model="message"
-                                id="comments"
-                                rows="4"
-                                class="form-control pl-5"
-                                placeholder="Mesajınız :"
+                              name="comments"
+                              v-model="message"
+                              id="comments"
+                              rows="4"
+                              class="form-control pl-5"
+                              placeholder="Mesajınız :"
                             ></textarea>
                           </div>
                           <div
-                              v-if="submitStatus && !$v.message.required"
-                              class="error d-block"
+                            v-if="submitStatus && !$v.message.required"
+                            class="error d-block"
                           >
                             Lütfen mesajınızı giriniz
                           </div>
@@ -381,54 +382,54 @@
                     </div>
                     <!--end row-->
                     <div
-                        class="row d-flex justify-content-between flex-wrap px-3 py-1"
+                      class="row d-flex justify-content-between flex-wrap px-3 py-1"
                     >
                       <div class="d-flex justify-content-center flex-wrap p-0">
                         <div class="p-1">
                           <button
-                              :disabled="submitButtonStatus"
-                              @click.prevent="triggerFileChooser"
-                              class="btn btn-primary btn-block m-1"
+                            :disabled="submitButtonStatus"
+                            @click.prevent="triggerFileChooser"
+                            class="btn btn-primary btn-block m-1"
                           >
                             {{ $t("contactUs.add_file") }}
                             <i
-                                data-feather="upload"
-                                class="fea icon-sm pull-right mt-1"
+                              data-feather="upload"
+                              class="fea icon-sm pull-right mt-1"
                             >
                             </i>
                           </button>
                           <input
-                              accept="image/*, application/pdf"
-                              type="file"
-                              style="display: none"
-                              id="file-chooser"
-                              @change="fileSelected"
+                            accept="image/*, application/pdf"
+                            type="file"
+                            style="display: none"
+                            id="file-chooser"
+                            @change="fileSelected"
                           />
                           <span class="d-block" v-if="filename">{{
-                              filename
-                            }}</span>
+                            filename
+                          }}</span>
                         </div>
 
                         <div class=" text-nowrap p-1">
                           <button
-                              :disabled="submitButtonStatus"
-                              class="btn btn-warning  text-nowrap m-1"
-                              @click.prevent="submit"
+                            :disabled="submitButtonStatus"
+                            class="btn btn-warning  text-nowrap m-1"
+                            @click.prevent="submit"
                           >
                             {{ $t("contactUs.send") }}
                             <span>
                               <i
-                                  data-feather="send"
-                                  class="fea icon-sm pull-right mt-1"
+                                data-feather="send"
+                                class="fea icon-sm pull-right mt-1"
                               >
                               </i
-                              ></span>
+                            ></span>
                           </button>
                         </div>
                       </div>
                       <div class="text-nowrap">
                         <div
-                            class="textarea-count-box p-3 text-center text-nowrap align-items-center"
+                          class="textarea-count-box p-3 text-center text-nowrap align-items-center"
                         >
                           500
                         </div>
@@ -474,8 +475,8 @@ import module, {
   FAQS_SUBJECTS,
 } from "@/core/services/store/content.module";
 import * as external from "@/core/mixin/external";
-import {maxLength, required, email} from "vuelidate/lib/validators";
-import {CREATE_ITEM as FILE_UPLOAD} from "@/core/services/store/rest.module";
+import { maxLength, required, email } from "vuelidate/lib/validators";
+import { CREATE_ITEM as FILE_UPLOAD } from "@/core/services/store/rest.module";
 import moduleAuth, {
   IS_AUTHENTICATED,
   MODULE_NAME as MODULE_NAME_AUTH,
@@ -552,8 +553,7 @@ export default {
       get() {
         return store.getters[_MODULE_NAME_AUTH + "/" + USER];
       },
-      set(value) {
-      },
+      set(value) {},
     },
     items() {
       let items = store.getters[_MODULE_NAME + "/" + ITEMS];
@@ -563,7 +563,7 @@ export default {
       return items;
     },
     categories() {
-      let results = [{text: "Seçiniz", value: null}];
+      let results = [{ text: "Seçiniz", value: null }];
       let items = store.getters[_MODULE_NAME + "/" + FAQS_SUBJECTS];
       if (items && items.length) {
         for (let i = 0; i < items.length; i++) {
@@ -593,7 +593,7 @@ export default {
       let self = this;
       if (self.topic != 16 && !self.user) {
         self.contactUsError =
-            "Talebinizi iletmek için Giriş yapmanız gerekmektedir.";
+          "Talebinizi iletmek için Giriş yapmanız gerekmektedir.";
 
         let element = document.getElementById("iletisim-formu");
         let top = element.offsetTop;
@@ -607,11 +607,13 @@ export default {
       let value = self.phone;
 
       if (value && !Number.isInteger(Number(value))) {
-        self.contactUsError = "Lütfen rakamlardan oluşan telefon numaranızı giriniz";
+        self.contactUsError =
+          "Lütfen rakamlardan oluşan telefon numaranızı giriniz";
         return;
       }
       if (value && String(value).length !== 10) {
-        self.contactUsError = "Lütfen Telefon numaranızı başında 0 olmadan 10 haneli olarak giriniz";
+        self.contactUsError =
+          "Lütfen Telefon numaranızı başında 0 olmadan 10 haneli olarak giriniz";
         return;
       }
       self.submitButtonStatus = true;
@@ -631,7 +633,7 @@ export default {
               self.contactUsError = response.data.response.data;
             } catch (e) {
               self.contactUsError =
-                  "İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz";
+                "İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz";
             }
           }
         });
@@ -673,23 +675,23 @@ export default {
         }
 
         this.$store
-            .dispatch(_MODULE_NAME + "/" + CREATE_CONTACT_US, {
-              url: url,
-              contents: formData,
-              isAuthenticated: self.isAuthenticated,
-            })
-            .then(() => {
-              self.contactUsSuccess = true;
-            })
-            .catch((response) => {
-              self.submitButtonStatus = false;
-              try {
-                self.contactUsError = response.data.response.data;
-              } catch (e) {
-                self.contactUsError =
-                    "İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz";
-              }
-            });
+          .dispatch(_MODULE_NAME + "/" + CREATE_CONTACT_US, {
+            url: url,
+            contents: formData,
+            isAuthenticated: self.isAuthenticated,
+          })
+          .then(() => {
+            self.contactUsSuccess = true;
+          })
+          .catch((response) => {
+            self.submitButtonStatus = false;
+            try {
+              self.contactUsError = response.data.response.data;
+            } catch (e) {
+              self.contactUsError =
+                "İşlem yapılırken hata oluştu. Lütfen daha sonra tekrar deneyiniz";
+            }
+          });
       } else {
         self.submitButtonStatus = false;
       }
@@ -697,9 +699,9 @@ export default {
     fileSelected(file) {
       let fileChooser = document.getElementById("file-chooser");
       this.filename =
-          fileChooser && fileChooser.files[0] && fileChooser.files[0].name
-              ? fileChooser.files[0].name
-              : null;
+        fileChooser && fileChooser.files[0] && fileChooser.files[0].name
+          ? fileChooser.files[0].name
+          : null;
 
       this.file = true;
     },
@@ -708,7 +710,7 @@ export default {
     },
     showContactForm(status) {
       this.contactFormStatus = status;
-      setTimeout(function () {
+      setTimeout(function() {
         let element = document.getElementById("iletisim-formu");
         let top = element.offsetTop;
         window.scrollTo(0, Number(top) - 100);
