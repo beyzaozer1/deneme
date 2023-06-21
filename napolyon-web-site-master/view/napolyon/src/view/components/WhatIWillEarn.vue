@@ -243,7 +243,6 @@ export default {
     };
   },
   mounted() {
-    console.log("ilk çalıştı");
     // Clear the browser cache data in localStorage when closing the browser window
     // this.tokenCookieControl();
     window.insider_object = window.insider_object || {};
