@@ -110,11 +110,16 @@ export default {
   mounted() {
     // Clear the browser cache data in localStorage when closing the browser window
     // this.tokenCookieControl();
-    window.insider_object = window.insider_object || {};
-   window.insider_object.page = {
-        "type": "Confirmation"
-}
-
+    if (
+      this.$route.fullPath.includes("hesap-aktivasyon") ||
+      this.$route.fullPath.includes("nap-transferleri") ||
+      this.$route.fullPath.includes("ssi-web")
+    ) {
+      window.insider_object = window.insider_object || {};
+      window.insider_object.page = {
+        type: "Confirmation"
+      };
+    }
   },
 };
 </script>

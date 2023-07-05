@@ -585,12 +585,6 @@ export default {
       return store.getters[_MODULE_NAME_AUTH + "/" + IS_AUTHENTICATED];
     },
   },
-  mounted() {
-    window.insider_object = window.insider_object || {};
-    window.insider_object.page = {
-      type: "Confirmation"
-    };
-  },
   methods: {
     triggerFileChooser(itemId) {
       document.getElementById("file-chooser").click();
