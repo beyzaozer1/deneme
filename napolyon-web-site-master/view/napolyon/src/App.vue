@@ -112,7 +112,9 @@ export default {
     // this.tokenCookieControl();
     if (
       this.$route.fullPath.includes("hesap-aktivasyon") ||
-      this.$route.fullPath.includes("nap-transferleri") ||
+      this.$route.fullPath.includes("nap-transferleri/2/189") ||
+      this.$route.fullPath.includes("nap-transferleri/2/188") ||
+      this.$route.fullPath.includes("nap-transferleri/2/185") ||
       this.$route.fullPath.includes("ssi-web")
     ) {
       window.insider_object = window.insider_object || {};
