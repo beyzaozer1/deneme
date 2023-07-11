@@ -5,17 +5,11 @@
       <div class="container text-center">
         <div class="row align-items-center">
           <div class="col-sm-6">
-            <div class="text-sm-left" style="min-width: 300px;">
-              <p class="mb-0">
-                <img src="https://www.limonist.com/img/theme-1/logoas.png" style="margin-top: -7px; width: 80px !important;" width="85" /> ©
-                2021 Tüm hakları saklıdır.
-              </p>
-            </div>
           </div>
           <!--end col-->
           <div class="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
             <ul class="list-unstyled text-sm-right mb-0">
-              <li class="list-inline-item"><a href="javascript:void(0)"><img src="images/hitay-logo.png" class="avatar avatar-ex-sm" title="Hitay Holding" alt=""></a></li></li>
+              <li class="list-inline-item"><a href="javascript:void(0)"><img src="https://cdn.napolyon.com/skyalp/images/white-logo.svg" class="avatar avatar-ex-sm" title="Hitay Holding" alt=""></a></li></li>
             </ul>
           </div>
           <!--end col-->
