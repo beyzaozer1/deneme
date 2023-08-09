@@ -155,6 +155,10 @@ export default {
     },
   },
   mounted() {
+    window.insider_object = window.insider_object || {};
+      window.insider_object.page = {
+        type: "Confirmation"
+      };
     let self = this;
     window.scrollTo(0, 0);
     feather.replace();
