@@ -516,6 +516,10 @@ export default {
     },
   },
   mounted() {
+    window.insider_object = window.insider_object || {};
+    window.insider_object.page = {
+      type: "Confirmation"
+    };
     external.head_script(
       "/js/main.js",
       "main-js",

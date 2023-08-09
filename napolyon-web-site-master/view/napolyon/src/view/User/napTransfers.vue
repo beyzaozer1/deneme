@@ -1653,6 +1653,10 @@ export default {
     },
   },
   mounted() {
+    window.insider_object = window.insider_object || {};
+      window.insider_object.page = {
+        type: "Confirmation"
+      };
     feather.replace();
     if (this.$route.params.type) {
       let type = Number(this.$route.params.type);
