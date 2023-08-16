@@ -51,7 +51,7 @@ export default {
         axios.post(`https://apiv2.napolyon.com/files/upload`, formData);
         Cookies.remove("redirectUrl");
         alert("Resminiz Başarıyla Yüklenmiştir");
-        this.$router.push('/hesabim')
+        this.$router.push("/hesabim");
       }
     },
   },
@@ -61,6 +61,7 @@ export default {
 .upload-image {
   width: 100%;
   margin: 150px auto;
+
   input {
     border: none;
   }
@@ -70,6 +71,9 @@ export default {
     color: white;
     border-radius: 8px;
     padding: 8px 12px;
+    @media only screen and (max-width: 768px) {
+      margin-top: 25px;
+    }
   }
 }
 </style>
