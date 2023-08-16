@@ -18,7 +18,6 @@
   </div>
 </template>
 <script>
-import Cookies from "js-cookie";
 import Footer from "@/view/layouts/Footer";
 import Loader from "@/view/components/LoaderFull";
 import upFooter from "@/view/layouts/upFooter";
@@ -105,10 +104,6 @@ export default {
         localStorage.setItem("reload", "force");
         location.reload();
       }*/
-    }
-
-    if (Cookies.get("redirectUrl")) {
-      this.$router.push("/resim-yukle");
     }
 
     if (token == null && this.authUser == null) {
