@@ -43,11 +43,11 @@ export default {
         const formData = new FormData();
         formData.append("file", this.selectedFile);
         axios.post(`https://apiv2.napolyon.com/files/upload?name=${this.$route.query.mid}`, formData);
-        alert("Resminiz Başarıyla Yüklenmiştir");
-        this.$router.push("/hesabim");
+        //alert("Resminiz Başarıyla Yüklenmiştir");
+        window.location.href = `https://www.napolyon.com/#/anket-sonuc?mid=${this.$route.query.mid}`;
       }
     },
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
