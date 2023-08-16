@@ -1,6 +1,6 @@
 <template>
   <div class="upload-image container">
-    <input type="file" @change="handleFileChange" />
+    <input type="file" accept="image/*" @change="handleFileChange" />
     <button @click="uploadImage">Resim Yükle</button>
     <div v-if="imageUrl">
       <img :src="imageUrl" alt="Yüklenen Resim" />
@@ -9,20 +9,9 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import store from "@/core/services";
 import axios from "axios";
-import {
-  IS_AUTHENTICATED,
-  MODULE_NAME,
-} from "@/core/services/store/auth.module";
-const _MODULE_NAME = MODULE_NAME;
+
 export default {
-  computed: {
-    isAuthenticated() {
-      return store.getters[_MODULE_NAME + "/" + IS_AUTHENTICATED];
-    },
-  },
   data() {
     return {
       selectedFile: null,
@@ -30,10 +19,7 @@ export default {
     };
   },
   mounted() {
-    if (!this.isAuthenticated) {
-      this.$router.push("/giris");
-      Cookies.set("redirectUrl", true);
-    }
+    console.log(this.$route.query.mid);
   },
   methods: {
     handleFileChange(event) {
@@ -43,13 +29,20 @@ export default {
         alert("Resim boyutu 5MB'dan büyük olmamalıdır.");
         return;
       }
+
+      const allowedImageTypes = ["image/jpeg", "image/png", "image/gif"]; // İzin verilen resim tipleri
+      if (!allowedImageTypes.includes(this.selectedFile.type)) {
+        alert(
+          "Lütfen sadece JPEG, PNG veya GIF formatındaki resimleri yükleyin."
+        );
+        return;
+      }
     },
     async uploadImage() {
       if (this.selectedFile) {
         const formData = new FormData();
         formData.append("file", this.selectedFile);
-        axios.post(`https://apiv2.napolyon.com/files/upload`, formData);
-        Cookies.remove("redirectUrl");
+        axios.post(`https://apiv2.napolyon.com/files/upload?name=${this.$route.query.mid}`, formData);
         alert("Resminiz Başarıyla Yüklenmiştir");
         this.$router.push("/hesabim");
       }
