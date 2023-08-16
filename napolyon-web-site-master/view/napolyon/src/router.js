@@ -242,6 +242,11 @@ export default new Router({
       component: () => import("@/view/Pages/terms"),
     },
     {
+      path: "/resim-yukle",
+      name: "index.resim_yukle",
+      component: () => import("@/view/Pages/uploadImage.vue")
+    },
+    {
       path: "/uyelik-sozlesmesi",
       name: "index.membership_agreement",
       component: () => import("@/view/Pages/membership_agreement"),

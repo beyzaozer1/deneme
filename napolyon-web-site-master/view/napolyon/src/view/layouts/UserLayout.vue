@@ -4,7 +4,7 @@
     <template v-if="authUser">
       <t-header :user-layout="true"></t-header>
       <ProfileCard :item="authUser"></ProfileCard>
-      <section class="section background-napolyon" >
+      <section class="section background-napolyon">
         <div class="container">
           <div class="row margin-top-100">
             <ScoreStatus :item="authUser"></ScoreStatus>
@@ -18,6 +18,7 @@
   </div>
 </template>
 <script>
+import Cookies from "js-cookie";
 import Footer from "@/view/layouts/Footer";
 import Loader from "@/view/components/LoaderFull";
 import upFooter from "@/view/layouts/upFooter";
@@ -83,13 +84,13 @@ export default {
     return {
       routerName: null,
       loaderEnabled: true,
-      localAuthUser : null
+      localAuthUser: null,
     };
   },
   mounted() {
     let token = window.localStorage.getItem("token");
     if (token !== null && this.authUser === null) {
-      this.$store.dispatch(_MODULE_NAME + "/" + GET_USER).then(response => {
+      this.$store.dispatch(_MODULE_NAME + "/" + GET_USER).then((response) => {
         if (response) {
           this.localAuthUser = response;
         }
@@ -106,10 +107,17 @@ export default {
       }*/
     }
 
+    if (Cookies.get("redirectUrl")) {
+      this.$router.push("/resim-yukle");
+    }
+
     if (token == null && this.authUser == null) {
       let self = this;
       setTimeout(() => {
-        self.$router.push({name: 'index.login', params: {redirect: self.$route.fullPath}});
+        self.$router.push({
+          name: "index.login",
+          params: { redirect: self.$route.fullPath },
+        });
       }, 1000);
     }
     external.head_link("/css/auth.css", "auth-css", "owl-theme-default-css");
@@ -122,7 +130,7 @@ export default {
         store.dispatch(_MODULE_NAME + "/" + LOGOUT);
         this.$router.push({ name: "index.login" });
       }
-    }
+    },
   },
 };
 </script>
