@@ -78,7 +78,10 @@
             <div class="kunye">
               <div class="kunye-title">
                 <strong>Firma Adı:</strong>
-                <span>NAPOLYON REKLAM VE DANIŞMANLIK HİZMETLERİ TİC. A.Ş</span>
+                <span
+                  >DORINSIGHT ARAŞTIRMA VE DANIŞMANLIK HİZMETLERİ TİCARET ANONİM
+                  ŞİRKETİ</span
+                >
               </div>
 
               <div class="kunye-title">

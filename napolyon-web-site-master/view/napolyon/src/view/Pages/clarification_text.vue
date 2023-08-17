@@ -69,16 +69,16 @@
                 Kişisel verileriniz, Napolyon tarafından sağlanan hizmet ve Şirketimizin ticari faaliyetlerine bağlı olarak değişkenlik gösterebilmekle birlikte; otomatik ya da otomatik olmayan yöntemlerle, Napolyon’un  birimleri ve ofisler, internet sitesi, sosyal medya mecraları, mobil uygulamalar ve benzeri vasıtalarla sözlü, yazılı ya da elektronik olarak toplanabilecektir.
               </p>
 
-              <p>Napolyon ve  Hitay Grup Şirketleri‘nin  sunduğu ürün ve hizmetlerden yararlandığınız müddetçe, Şirket çağrı merkezlerimizi veya internet sayfamızı kullandığınızda, internet sitelerimizi ziyaret ettiğinizde, Şirket’in düzenlediği eğitim, seminer veya organizasyonlara katıldığınızda Kişisel Verileriniz işlenebilecektir.</p>
+              <p>Napolyon ve  Hedef Holding‘nin  sunduğu ürün ve hizmetlerden yararlandığınız müddetçe, Şirket çağrı merkezlerimizi veya internet sayfamızı kullandığınızda, internet sitelerimizi ziyaret ettiğinizde, Şirket’in düzenlediği eğitim, seminer veya organizasyonlara katıldığınızda Kişisel Verileriniz işlenebilecektir.</p>
 
 
 
               <p>
-                Ayrıca, Kişisel Verileriniz aşağıda yer verilen amaçlar doğrultusunda Napolyon ve Hitay Grup Şirketleri‘nin sunduğu ürün ve hizmetlerin belirlenen yasal çerçevede sunulabilmesi ve bu kapsamda sözleşme ve yasadan doğan mesuliyetlerini eksiksiz ve doğru bir şekilde yerine getirebilmesi için işlenebilecektir.
+                Ayrıca, Kişisel Verileriniz aşağıda yer verilen amaçlar doğrultusunda Napolyon ve Hedef Holding‘nin sunduğu ürün ve hizmetlerin belirlenen yasal çerçevede sunulabilmesi ve bu kapsamda sözleşme ve yasadan doğan mesuliyetlerini eksiksiz ve doğru bir şekilde yerine getirebilmesi için işlenebilecektir.
               </p>
 
               <p>
-                Napolyon’un Kişisel Veri işleme amacı ve dayanağı Hitay Grup Şirketleri‘nin kayıtlı bulundukları sicillerde belirtilmiş olan amaçların bütünüdür. Bu kapsamda Napolyon‘un amacı ile ilişkili olarak aşağıdakilerle sınırlı olmamak üzere, araştırma katılımcılarının Kişisel Verileri toplanabilmekte ve işlenebilmektedir:
+                Napolyon’un Kişisel Veri işleme amacı ve dayanağı Hedef Holding‘nin kayıtlı bulundukları sicillerde belirtilmiş olan amaçların bütünüdür. Bu kapsamda Napolyon‘un amacı ile ilişkili olarak aşağıdakilerle sınırlı olmamak üzere, araştırma katılımcılarının Kişisel Verileri toplanabilmekte ve işlenebilmektedir:
               </p>
 
               <p><i class="fa fa-arrow-circle-o-right"></i> 	Pazar araştırması ve sosyal araştırma gerçekleştirmek; bu kapsamda, sizin anket araştırmasına katılmanız; </p>
@@ -89,7 +89,7 @@
               <p><i class="fa fa-arrow-circle-o-right"></i> KVK Kanunu’nun 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları dâhilinde işlenebilecektir. </p>
 
 
-              <p>Şirket ve Hitay Grup Şirketleri olarak, Kişisel Verilerin işlenmesi bakımından işbu amaç ve dayanağın dışına çıkmayacaktır.</p>
+              <p>Şirket ve Hedef Holding olarak, Kişisel Verilerin işlenmesi bakımından işbu amaç ve dayanağın dışına çıkmayacaktır.</p>
 
 
 
@@ -99,12 +99,12 @@
 
               </h3>
               <p>Şirket, araştırma katılımcıların Kişisel Verilerini üçüncü şahıslara aşağıdaki şekillerde aktarabilmektedir:</p>
-              <p><i class="fa fa-arrow-circle-o-right"></i>	Hitay Grup Şirketleri ve bağlı şirketleri (yurtdışında bulunanlar dahil) ile paylaşılması;</p>
+              <p><i class="fa fa-arrow-circle-o-right"></i>	Hedef Holding ve bağlı şirketleri (yurtdışında bulunanlar dahil) ile paylaşılması;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	Şirket ve Şirket’in  iş ilişkisi içerisinde olan tüzel ve gerçek kişiler tarafından sunulan ürün ve hizmetlerden sizleri faydalandırmak için gerekli çalışmaların iş birimlerimiz tarafından yapılması;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	Şirket için veya sunduğu hizmetler ile bağlantılı olarak tedarikçileri ve danışmanları ile paylaşılması ve belirtilenler tarafından işlenmesine. Örneğin, anket sitelerini barındıracak, veri toplamak veya işleme hizmetleri;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	Şirket’in sizden ayrıca alınacak onay ile müşterileri ile paylaşması için;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	Yürürlükteki kanunlar uyarınca veya bir mahkeme celbine ya da bir resmi kurumun emrine cevaben;</p>
-              <p><i class="fa fa-arrow-circle-o-right"></i>	Sınırlı kalmamak kaydıyla veri ekleme hizmetleri, veri doğrulama hizmetleri, veri tabanı eşleme hizmetleri, kodlama hizmetleri, veri segmentasyonu hizmetleri ve ödül, teşvik ve çekilişle ilgili hizmetler dahil olmak üzere Hitay Grup şirketlerinin hizmet sağlayan yetkili temsilcileri ve/veya tedarikçileri ile paylaşılması;</p>
+              <p><i class="fa fa-arrow-circle-o-right"></i>	Sınırlı kalmamak kaydıyla veri ekleme hizmetleri, veri doğrulama hizmetleri, veri tabanı eşleme hizmetleri, kodlama hizmetleri, veri segmentasyonu hizmetleri ve ödül, teşvik ve çekilişle ilgili hizmetler dahil olmak üzere Hedef Holding‘in hizmet sağlayan yetkili temsilcileri ve/veya tedarikçileri ile paylaşılması;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	Şirketimizin ticari ve iş stratejilerinin belirlenmesi ve uygulanması;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	Sınırlı kalmamak kaydıyla ilgili kişiyi tanımlayıcı bilgileri alan veya elde eden tarafın, kişisel tanımlayıcı bilgileri işbu Aydınlatma Metnine uygun olarak kullanmayı ve işbu Aydınlatma Metnine uygun olarak güvenliğini, bütünlüğünü ve gizliliğini korumayı ve sürdürmeyi kabul etmesi şartıyla, sınırlı kalmamak kaydıyla Şirket’in ticari varlıklarından herhangi birinin veya tamamının birleşmesi veya satın alınması dahil olmak üzere bir mülkiyet veya kontrol değişikliğiyle bağlantılı olarak;</p>
               <p><i class="fa fa-arrow-circle-o-right"></i>	KVK Kanunu’nun 8. ve 9. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları çerçevesinde</p>
