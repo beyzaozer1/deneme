@@ -15,11 +15,8 @@ export default {
   data() {
     return {
       selectedFile: null,
-      imageUrl: "",
+      imageUrl: ""
     };
-  },
-  mounted() {
-    console.log(this.$route.query.mid);
   },
   methods: {
     handleFileChange(event) {
@@ -42,12 +39,14 @@ export default {
       if (this.selectedFile) {
         const formData = new FormData();
         formData.append("file", this.selectedFile);
-        axios.post(`https://apiv2.napolyon.com/files/upload?name=${this.$route.query.mid}`, formData);
-        //alert("Resminiz Başarıyla Yüklenmiştir");
-        window.location.href = `https://www.napolyon.com/#/anket-sonuc?mid=${this.$route.query.mid}`;
+        axios.post(
+          `https://apiv2.napolyon.com/files/upload?name=${this.$route.query.mid}`,
+          formData
+        );
+        window.location.href = `https://www.napolyon.com/#/anket-sonuc?mid=${this.$route.query.mid}&ca=c`;
       }
     },
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
