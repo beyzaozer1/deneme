@@ -37,13 +37,15 @@ export default {
     },
     async uploadImage() {
       if (this.selectedFile) {
-        const formData = new FormData();
+        let formData = new FormData();
         formData.append("file", this.selectedFile);
-        axios.post(
-          `https://apiv2.napolyon.com/files/upload?name=${this.$route.query.mid}`,
-          formData
-        );
-        window.location.href = `https://www.napolyon.com/#/anket-sonuc?mid=${this.$route.query.mid}&ca=c`;
+        try {
+          await axios.post(
+            `https://apiv2.napolyon.com/files/upload?name=${this.$route.query.mid}`,formData);
+          window.location.href = `https://www.napolyon.com/#/anket-sonuc?mid=${this.$route.query.mid}&ca=c`;
+        } catch (error) {
+          console.error("Upload error:", error);
+        }
       }
     },
   },
