@@ -9,7 +9,7 @@
           <!--end col-->
           <div class="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
             <ul class="list-unstyled text-sm-right mb-0">
-              <li class="list-inline-item"><a href="javascript:void(0)"><img src="https://cdn.napolyon.com/skyalp/images/white-logo.svg" class="avatar avatar-ex-sm" title="Skyalp" alt=""></a></li></li>
+              <li class="list-inline-item"><a href="https://www.skyalp.com.tr/"><img src="https://cdn.napolyon.com/skyalp/images/white-logo.svg" class="avatar avatar-ex-sm" title="Skyalp" alt=""></a></li></li>
             </ul>
           </div>
           <!--end col-->
