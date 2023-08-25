@@ -220,7 +220,7 @@ export const locale = {
 
     information: "Bilgiler",
     terms_of_us: "Kullanım Koşulları",
-    membership_agreement: "üyelik Sözleşmesi",
+    membership_agreement: "Üyelik Sözleşmesi",
     privacy: "Gizlilik",
     clarification_text: "Anket Katılımcı Aydınlatma Metni",
     nap_transfer: "NAP Transferi",
