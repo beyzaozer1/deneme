@@ -93,22 +93,22 @@ export default {
     },
     downloadPdfOne() {
       const pdfUrl =
-        "https://cdn.napolyon.com/skyalp/images/acik-riza-metni.docx";
+        "https://cdn.napolyon.com/skyalp/images/acik-riza-metni.pdf";
 
       const link = document.createElement("a");
       link.href = pdfUrl;
       link.target = "_blank";
-      link.download = "acik-riza-metni.docx";
+      link.download = "acik-riza-metni.pdf";
       link.click();
     },
     downloadPdfTwo() {
       const pdfUrl =
-        "https://cdn.napolyon.com/skyalp/images/aydinlatma-metni.docx";
+        "https://cdn.napolyon.com/skyalp/images/aydinlatma-metni.pdf";
 
       const link = document.createElement("a");
       link.href = pdfUrl;
       link.target = "_blank";
-      link.download = "aydinlatma-metni.docx";
+      link.download = "aydinlatma-metni.pdf";
       link.click();
     }
   }
