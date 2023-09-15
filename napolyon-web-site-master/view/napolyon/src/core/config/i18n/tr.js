@@ -85,7 +85,7 @@ export const locale = {
   },
   solutionCenter: {
     self: "Çözüm Merkezi",
-    help_text: "Size nasıl yardımcı olabiliriz?"
+    help_text: "Size nasıl yardımcı olabiliriz?",
   },
   index: {
     solution_center: "ÇÖZÜM MERKEZİ",
@@ -347,4 +347,9 @@ export const locale = {
     show_result:
       "{total} kayıttan {start} - {end} arasındaki kayıtlar gösteriliyor",
   },
+  cookieControltext:
+    "İnternet sitemizde, içeriğin tarafınıza sağlanması, İnternet Sitemizin performansının optimize edilmesi ve ziyaretçi profilinin anlaşılması için gerekli olan çerezler kullanılmaktadır. İnternet Sitemiz üzerinde kullanılan çerezler hakkında detaylı bilgi almak için Çerez Politikamızı incelemenizi rica ederiz. Çerezlere dair tercihlerinizi panel vasıtasıyla yönetmeniz mümkündür.",
+  acceptAll: "Tümünü Kabul Et",
+  rejectAll: "Hepsini Reddet",
+  manageCookies: "Çerez Politikası"
 };
