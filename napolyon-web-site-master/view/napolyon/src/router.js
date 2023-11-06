@@ -277,6 +277,22 @@ export default new Router({
       name: "index.have_fun_and_learn",
       component: () => import("@/view/mobile/haveFundAndLearn"),
     },
+    {
+      path: "/mobil-liderlik",
+      name: "index.leadership_rank",
+      component: () => import("@/view/mobile/leadershipRank"),
+    },
+    {
+      path: "/mobil-nap-transferleri/:type?/:id?",
+      name: "index.nap_transfers",
+      component: () => import("@/view/mobile/napTransfers"),
+    },
+    {
+      path: "/mobil-duello",
+      name: "index.duel",
+      component: () => import("@/view/mobile/duel"),
+    },
+
     //MOBILE GAMES 
     {
       path: "/mobil-evet-hayir",
