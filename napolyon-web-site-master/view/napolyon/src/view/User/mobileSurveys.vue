@@ -554,7 +554,7 @@
                           ).length
                       "
                     >
-                      <h5 class="main_question d-inline">Cep Tefononu</h5>
+                      <h5 class="main_question d-inline">Cep Telefonu</h5>
                       <div class="form-group">
                         <template v-for="(item, index) in item.answerList">
                           <label class="container_check version_2 answer"
@@ -1664,7 +1664,7 @@ export default {
               Swal.fire({
                 title: "Tebrikler!",
                 text:
-                    "Bilgilerinizi başarıyla tamamlayarak 250 NAP ve 10 Kupa kazandınız.",
+                    "Bilgilerinizi başarıyla tamamlayarak 1000 NAP ve 1 Kupa kazandınız.",
                 icon: "success",
                 confirmButtonText: "Tamam",
               }).then(() => {
