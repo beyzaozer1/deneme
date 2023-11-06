@@ -262,11 +262,6 @@ export default new Router({
       component: () => import("@/view/Pages/clarification_text"),
     },
     ///MOBILE
-    // { 
-    //   path: "/mobil-hesabim",
-    //   name: "index.account",
-    //   component: () => import("@/view/mobile/Account.vue"),
-    // },
     { 
       path: "/mobil-nap-hareketleri",
       name: "index.nap_actions",
@@ -276,6 +271,27 @@ export default new Router({
       path: "/mobil-gorevlerim",
       name: "index.tasks",
       component: () => import("@/view/mobile/Tasks.vue"),
+    },
+    {
+      path: "/mobil-eglen-ogren",
+      name: "index.have_fun_and_learn",
+      component: () => import("@/view/mobile/haveFundAndLearn"),
+    },
+    //MOBILE GAMES 
+    {
+      path: "/mobil-evet-hayir",
+      name: "index.games.yes_no",
+      component: () => import("@/view/mobile/games/yes_no"),
+    },
+    {
+      path: "/mobil-eslestir",
+      name: "index.games.match",
+      component: () => import("@/view/User/Games/match"),
+    },
+    {
+      path: "/mobil-bosluklari-doldur",
+      name: "index.games.fill_in_the_blank",
+      component: () => import("@/view/mobile/games/fill_in_the_blank"),
     },
     //404 
     {
