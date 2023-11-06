@@ -261,6 +261,23 @@ export default new Router({
       name: "index.clarification_text",
       component: () => import("@/view/Pages/clarification_text"),
     },
+    ///MOBILE
+    // { 
+    //   path: "/mobil-hesabim",
+    //   name: "index.account",
+    //   component: () => import("@/view/mobile/Account.vue"),
+    // },
+    { 
+      path: "/mobil-nap-hareketleri",
+      name: "index.nap_actions",
+      component: () => import("@/view/mobile/napActions.vue"),
+    },
+    {
+      path: "/mobil-gorevlerim",
+      name: "index.tasks",
+      component: () => import("@/view/mobile/Tasks.vue"),
+    },
+    //404 
     {
       path: "*",
       redirect: "/404",
