@@ -293,6 +293,24 @@ export default new Router({
       component: () => import("@/view/mobile/duel"),
     },
 
+    //MOBILE DUELLO
+
+    {
+      path: "/duello/mobil-haftanin-kazanani",
+      name: "index.duel.winner_week",
+      component: () => import("@/view/mobile/duel/winnerOfWeek"),
+    },
+    {
+      path: "/duello/mobil-istatistiklerim",
+      name: "index.duel.my_duel_stats",
+      component: () => import("@/view/mobile/duel/statistics"),
+    },
+    {
+      path: "/duello/mobil-giris",
+      name: "index.duel.join",
+      component: () => import("@/view/mobile/duel/join"),
+    },
+
     //MOBILE GAMES 
     {
       path: "/mobil-evet-hayir",
@@ -302,7 +320,7 @@ export default new Router({
     {
       path: "/mobil-eslestir",
       name: "index.games.match",
-      component: () => import("@/view/User/Games/match"),
+      component: () => import("@/view/mobile/games/match"),
     },
     {
       path: "/mobil-bosluklari-doldur",
