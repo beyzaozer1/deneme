@@ -34,5 +34,7 @@ module.exports = {
       scss: {}
     }
   },
-  transpileDependencies: []
+  transpileDependencies: [
+    'sweetalert2'
+  ]
 };

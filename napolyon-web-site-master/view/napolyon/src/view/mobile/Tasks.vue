@@ -25,7 +25,7 @@
                   href="#"
                   @click="
                     $router.push({
-                      name: 'user.surveys',
+                      name: 'index.surveys',
                       params: {
                         name: convertToKebabCase(item.name),
                         id: item.id,
@@ -70,7 +70,7 @@
                         href="#"
                         @click="
                           $router.push({
-                            name: 'user.campaign',
+                            name: 'index.campaign',
                             params: { id: item.id },
                           })
                         "
@@ -244,7 +244,7 @@ export default {
       if (url && url.includes("napolyon_internal_survey")) {
         let id = url.split("-")[1];
         this.$router.push({
-          name: "user.surveys",
+          name: "index.surveys",
           params: {
             name: this.convertToKebabCase(item.name),
             id: id,
