@@ -327,6 +327,21 @@ export default new Router({
       name: "index.games.fill_in_the_blank",
       component: () => import("@/view/mobile/games/fill_in_the_blank"),
     },
+    {
+      path: "/payment-success",
+      name: "index.payment-success",
+      component: () => import("@/view/mobile/situation/Success"),
+    },
+    {
+      path: "/payment-fail",
+      name: "index.payment-fail",
+      component: () => import("@/view/mobile/situation/Fail"),
+    },
+    {
+      path: "/beyza",
+      name: "index.beyza",
+      component: () => import("@/view/mobile/situation/beyza"),
+    },
     //404 
     {
       path: "*",
