@@ -89,14 +89,7 @@ const mainConfig = function() {
               name: "fonts/[name].[ext]",
             },
           },
-        },
-        {
-          // i've added here the fonts extensions
-          // from your warnings, it may seem so that this will fix the problem
-          test: /\.(jpg|jpeg|png|gif|mp3|svg|ttf|woff2|woff|eot)$/,
-          loaders: ["file-loader"]
-        },
-        { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+        }
       ]
     }
   };
