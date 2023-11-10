@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
  <div>
     <h1>Payment Success Page</h1>
     <ul>
@@ -114,4 +114,4 @@ export default {
   }
 };
 </script>
-   -->
+  
