@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     makeApiRequest() {
-      const apiUrl = "http://tomcat.skyalp.com.tr:8181/smartgateway/payment/success";
+      const apiUrl = "https://tomcat.skyalp.com.tr:8181/smartgateway/payment/success";
 
       const requestData = {
         sipay_status: this.sipayStatus,
