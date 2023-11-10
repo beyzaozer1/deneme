@@ -337,11 +337,6 @@ export default new Router({
       name: "index.payment-fail",
       component: () => import("@/view/mobile/situation/Fail"),
     },
-    {
-      path: "/beyza",
-      name: "index.beyza",
-      component: () => import("@/view/mobile/situation/beyza"),
-    },
     //404 
     {
       path: "*",
