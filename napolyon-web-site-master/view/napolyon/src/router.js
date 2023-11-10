@@ -332,11 +332,11 @@ export default new Router({
       name: "index.payment-success",
       component: () => import("@/view/mobile/situation/Success"),
     },
-    {
-      path: "/payment-fail",
-      name: "index.payment-fail",
-      component: () => import("@/view/mobile/situation/Fail"),
-    },
+    // {
+    //   path: "/payment-fail",
+    //   name: "index.payment-fail",
+    //   component: () => import("@/view/mobile/situation/Fail"),
+    // },
     //404 
     {
       path: "*",

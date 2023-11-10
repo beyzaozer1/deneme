@@ -108,7 +108,7 @@
              console.log('api call is successful:', response.data);
            })
            .catch(error => {
-             console.error('Something went wrong error!:', error);
+             console.error('Something went wrong error!', error);
            });
        }
      }
