@@ -35,6 +35,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12 col-md-12">
+            <p><strong>Son düzenlenme tarihi: 13.11.2023</strong></p>
               <p>
                 Napolyon.com projesi için tahsis edilmiş www.napolyon.com alan adlı web sitesinin (kısaca "Web Sitesi" olarak anılacaktır) tüm hakları Napolyon Reklam ve Danışmanlık Hizmetleri Ticaret Anonim Şirketi'ne (kısaca "Napolyon.com" olarak anılacaktır) aittir. Napolyon.com, Web Sitesi üzerinden kullanıcılar tarafından kendisine elektronik ortamda iletilen kişisel bilgileri, üyeleri ile yaptığı "Napolyon.com Üyelik Sözleşmesi" ile belirlenen amaçlar ve kapsam dışında üçüncü kişilere açıklamayacaktır.
               </p><p>
@@ -68,6 +69,7 @@
               <hr>
 
               <h1 class="turuncu-baslik">Privacy</h1>
+              <p>Last review date 13.11.2023</p>
               <p>
                 All the rights on the Website dedicated to the Napolyon.com project under the domain name "www.napolyon.com" (hereinafter will be referred to as the "WebSite") belong to Napolyon Reklam ve Danışmanlık Hizmetleri Ticaret Anonim Şirketi (hereinafter will be referred to as "Napolyon.com"). Napolyon.com will not reveal to third parties the personal information electronically transmitted by the users from the Website except for the purposes and scope identified by the "Napolyon.com Membership Agreement" that it has made with its members.
               </p><p>
