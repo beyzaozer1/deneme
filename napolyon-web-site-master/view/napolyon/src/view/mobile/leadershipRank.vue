@@ -5,94 +5,200 @@
         <loader :loading="loading"></loader>
       </template>
       <template v-else>
-        <div class="rounded shadow border-bottom p-4">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-12" v-if="currentUser">
-              <div class="text-center">
+        <div
+          class="d-flex align-items-center justify-content-center p-4 flex-column"
+          v-if="currentUser"
+        >
+          <div class="tab-tournament">
+            <button
+              type="button"
+              class="tab-detail"
+              :class="{ active: isLast }"
+              @click="getItems(true)"
+            >
+              Yeni Turnuva
+            </button>
+            <button
+              type="button"
+              class="tab-detail"
+              :class="{ active: !isLast }"
+              @click="getItems(false)"
+            >
+              Önceki Turnuva
+            </button>
+          </div>
+        </div>
+        <div
+          v-if="items"
+          class="pink-background-container outer-container d-flex align-items-center justify-content-around"
+        >
+          <div class="box"></div>
+          <div class="box1"></div>
+          <div class="absolute winner-container">
+            <div class="second">
+              <div
+                class="mini-icon text-white d-flex align-items-center justify-content-center"
+              >
+                2
+              </div>
+              <img
+                class="profile-photo relative"
+                width="100%"
+                height="100%"
+                v-if="items.content[1].isPictureActive"
+                :src="
+                  items.content[1].isPictureActive &&
+                  mediaBase + '/images/avatars/' + items.content[1].pictureName
+                "
+              />
+              <div class="profile-photo relative bg-no-image" v-else>
+                {{ capitalizeFirstLetter(items.content[1].firstName) }}
+              </div>
+              <div class="winners-name">
+                {{ items.content[1].firstName }} {{ items.content[1].lastName }}
+              </div>
+              <div class="cup-container">
+                <img src="/images/mobile/cup.svg" width="16px" height="16px" />
+                <span class="cup-text"
+                  >{{ formatNumber(items?.content[1].cupQuantity) }} Kupa</span
+                >
+              </div>
+            </div>
+            <div class="first">
+              <div
+                class="mini-icon-first text-white d-flex align-items-center justify-content-center"
+              >
+                1
+              </div>
+              <div>
                 <img
+                  v-if="items.content[0].isPictureActive"
+                  class="profile-photo-first relative"
+                  width="100%"
+                  height="100%"
                   :src="
-                    userLeadership.avatar
-                      ? mediaBase + '/images/avatars/' + userLeadership.avatar
-                      : defaultAvatar
-                  "
-                  class="avatar avatar-medium shadow-lg rounded-pill"
-                  :alt="
-                    userLeadership.firstName + ' ' + userLeadership.lastName
+                    items.content[0].isPictureActive &&
+                    mediaBase +
+                      '/images/avatars/' +
+                      items.content[0].pictureName
                   "
                 />
-                <div class="content">
-                  <a href="javascript:void(0)" class="h5 text-dark"
-                    >{{ capitalizeFirstLetter(userLeadership.firstName) }}
-                    {{ capitalizeFirstLetter(userLeadership.lastName) }}</a
-                  >
-                  <ul class="list-unstyled social-icon social">
-                    <li class="list-inline-item" v-if="currentUser.memberRank">
-                      <span class="text-muted">
-                        {{ formatNumber(currentUser.memberRank) }}. sıradasınız
-                      </span>
-                    </li>
-                    <li class="list-inline-item mt-3" v-else></li>
-                    <li class="list-inline-item text-center" v-if="message">
-                      <span class="text-muted" v-html="message"></span>
-                    </li>
-                    <li
-                      class="list-inline-item text-center d-flex justify-content-between"
-                    >
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-primary"
-                        :class="{ active: !isLast }"
-                        @click="getItems(false)"
-                      >
-                        Önceki Turnuva
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-primary"
-                        :class="{ active: isLast }"
-                        @click="getItems(true)"
-                      >
-                        Yeni Turnuva
-                      </button>
-                    </li>
-                  </ul>
+                <div class="profile-photo-first bg-no-image" v-else>
+                  {{ capitalizeFirstLetter(items.content[0].firstName) }}
                 </div>
+              </div>
+              <div class="winners-name">
+                {{ items.content[0].firstName }} {{ items.content[0].lastName }}
+              </div>
+              <div class="cup-container">
+                <img src="/images/mobile/cup.svg" width="16px" height="16px" />
+                <span class="cup-text"
+                  >{{ formatNumber(items.content[0].cupQuantity) }} Kupa</span
+                >
+              </div>
+            </div>
+            <div class="third">
+              <div
+                class="mini-icon text-white d-flex align-items-center justify-content-center"
+              >
+                3
+              </div>
+              <div>
+                <img
+                  class="profile-photo relative"
+                  width="100%"
+                  height="100%"
+                  v-if="items.content[2].isPictureActive"
+                  :src="
+                    items.content[2].isPictureActive &&
+                    mediaBase +
+                      '/images/avatars/' +
+                      items.content[2].pictureName
+                  "
+                />
+                <div class="profile-photo relative bg-no-image" v-else>
+                  {{ capitalizeFirstLetter(items.content[2].firstName) }}
+                </div>
+              </div>
+              <div class="winners-name">
+                {{ items.content[2].firstName }} {{ items.content[2].lastName }}
+              </div>
+              <div class="cup-container">
+                <img src="/images/mobile/cup.svg" width="16px" height="16px" />
+                <span class="cup-text"
+                  >{{ formatNumber(items.content[2].cupQuantity) }} Kupa</span
+                >
               </div>
             </div>
           </div>
-          <hr />
-          <div class="row" v-if="items">
+        </div>
+        <div>
+          <div class="other-items-container">
             <div
-              class="col-lg-12 col-md-12 col-12 text-center"
-              v-for="(item, index) in items.content"
+              v-for="(item, index) in items?.content?.slice(3)"
               :key="index"
+              class="d-flex align-items-center justify-content-between user-container"
             >
-              <div
-                class="d-flex align-content-center align-items-center justify-content-center"
-              >
-                <div
-                  class="circle avatar avatar-medium shadow-lg rounded-pill"
-                  :style="{ backgroundColor: backgroundColors[index % 10] }"
-                >
-                  <span>{{ ++index }}</span>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="queue">{{ index + 4 }}</div>
+                <div class="d-flex align-items-center" :style="{ gap: '8px' }">
+                  <img
+                    v-if="item?.avatar"
+                    width="100%"
+                    height="100%"
+                    class="user-avatar"
+                    :src="
+                      item?.avatar
+                        && mediaBase + '/images/avatars/' + item?.avatar
+                    "
+                  />
+                  <div v-else class="bg-no-image-queue user-avatar">
+                    {{ capitalizeFirstLetter(item?.firstName) }}
+                  </div>
+                  <div class="user-name">
+                    {{ item.firstName }} {{ item.lastName }}
+                  </div>
                 </div>
               </div>
-              <div class="content mb-3 align-items-end">
-                <a href="javascript:void(0)" class="h5 text-dark"
-                  >{{ item.firstName }} {{ item.lastName }}</a
+              <div class="cup-container border">
+                <img src="/images/mobile/cup.svg" width="16px" height="16px" />
+                <span class="cup-text"
+                  >{{ formatNumber(item.cupQuantity) }} Kupa</span
                 >
-                <ul class="list-unstyled social-icon social">
-                  <li class="list-inline-item">
-                    <span class="text-muted"
-                      >{{ formatNumber(item.cupQuantity) }}
-                      <i
-                        class="mdi mdi-seal icon-ex-md text-primary mb-1 mdi-24px"
-                      ></i
-                    ></span>
-                  </li>
-                </ul>
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          class="current-user d-flex align-items-center justify-content-between"
+        >
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="queue text-white">
+              {{ formatNumber(currentUser?.memberRank) }}
+            </div>
+            <div class="d-flex align-items-center" :style="{ gap: '8px' }">
+              <img
+                v-if="userLeadership?.avatar"
+                :src="
+                  userLeadership?.avatar &&
+                  mediaBase + '/images/avatars/' + userLeadership?.avatar
+                "
+                width="100%"
+                height="100%"
+                class="user-avatar"
+                :alt="currentUser?.firstName + ' ' + currentUser?.lastName"
+              />
+              <div v-else class="bg-no-image-queue user-avatar">
+                {{ capitalizeFirstLetter(currentUser?.firstName) }}
+              </div>
+              <div class="user-name text-white">
+                {{ currentUser?.firstName }} {{ currentUser?.lastName }}
+              </div>
+            </div>
+          </div>
+          <div class="cup-container border">
+            <img src="/images/mobile/cup.svg" width="16px" height="16px" />
+            <span class="cup-text">{{ currentUser?.cupQuantity }}</span>
           </div>
         </div>
       </template>
@@ -117,7 +223,7 @@ const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_USER = MODULE_NAME_USER;
 
 export default {
-  name: "account",
+  name: "leadership_rank",
   components: { Loader },
   beforeCreate() {
     function registerStoreModule(moduleName, storeModule) {
@@ -186,6 +292,9 @@ export default {
     },
   },
   methods: {
+    capitalizeFirstLetter(text) {
+      if (text) return text.charAt(0).toUpperCase();
+    },
     getItems(isLast = true) {
       if (this.isLast === isLast) {
         return false;
@@ -208,6 +317,10 @@ export default {
 </script>
 
 <style scoped>
+.body {
+  color: #001d3a;
+  font-family: Eina 01;
+}
 .circle {
   border-radius: 50%;
   width: 110px;
@@ -220,8 +333,205 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.circle span {
-  font-size: 70px;
-  font-family: "Abadi-MT-Condensed", serif;
+
+.tab-tournament {
+  background-color: #edeff2;
+  border-radius: 80px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.tab-detail {
+  border-radius: 40px;
+  padding: 4px 16px;
+  border: none;
+}
+
+.pink-background-container {
+  position: relative; /* Set the position of the container to relative */
+  background-color: rgb(249, 238, 242);
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 197px;
+  margin-bottom: 16px;
+}
+
+.box,
+.box1,
+.winner-container {
+  position: absolute;
+  width: 100%; /* Make them fill the entire width of the container */
+}
+
+.box {
+  height: 10rem;
+  background-color: rgb(247, 231, 236);
+  border-radius: 0rem 0rem 12rem 12rem;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 60%, black 50%);
+  mask-image: linear-gradient(to bottom, transparent 60%, black 50%);
+  z-index: 2;
+  margin-top: -231px;
+}
+
+.box1 {
+  background-color: rgb(255 233 241);
+  border: 1px solid rgb(247, 229, 236);
+  border-radius: 0rem 0rem 12rem 12rem;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 25%,
+    rgb(0, 0, 0) 75%
+  );
+  mask-image: linear-gradient(to bottom, transparent 50%, black 75%);
+  height: 196px;
+  z-index: 1;
+}
+
+.winner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 5;
+  margin-top: 32px;
+}
+
+.second,
+.first,
+.third {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.first {
+  margin-bottom: 12px;
+}
+
+.profile-photo {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 0px solid black;
+}
+
+.profile-photo-first {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 0px solid black;
+  z-index: 7;
+}
+
+.mini-icon {
+  background-color: #f76e9c;
+  width: 19.75px;
+  height: 19.75px;
+  border-radius: 50%;
+  font-size: 12px;
+  z-index: 7;
+  position: absolute;
+  bottom: 119px;
+}
+
+.mini-icon-first {
+  background-color: #f76e9c;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+  z-index: 7;
+  position: absolute;
+  bottom: 130px;
+}
+
+.cup-container {
+  padding: 4px 8px;
+  border-radius: 40px;
+  gap: 4px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.cup-text {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.border {
+  border: 0.5px solid #001d3a !important;
+}
+
+.user-container {
+  padding: 8px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0px 5px 20px 0px rgba(205, 205, 205, 0.25);
+  margin-bottom: 8px;
+}
+.queue {
+  width: 42px;
+  height: 19px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0px solid black;
+}
+
+.user-name {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.winners-name {
+  font-size: 13px;
+  font-weight: 600px;
+}
+
+.tab-detail.active {
+  background-color: white; /* Change this to the desired background color */
+}
+
+.current-user {
+  padding: 8px 24px 18px 24px;
+  width: 100%;
+  height: 72px;
+  background-color: rgba(227, 92, 128);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-no-image-queue {
+  background-color: #40c9c0;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-no-image {
+  background-color: #40c9c0;
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
- <div>
+  <div>
     <h1>Payment Success Page</h1>
     <ul>
       <li><strong>sipay_status:</strong> {{ $route.query.sipay_status }}</li>
@@ -7,19 +7,39 @@
       <li><strong>order_id:</strong> {{ $route.query.order_id }}</li>
       <li><strong>invoice_id:</strong> {{ $route.query.invoice_id }}</li>
       <li><strong>status_code:</strong> {{ $route.query.status_code }}</li>
-      <li><strong>status_descriptio:</strong> {{ $route.query.status_description }}</li>
-      <li><strong>sipay_payment_method:</strong> {{ $route.query.sipay_payment_method }}</li>
-      <li><strong>credit_card_no:</strong> {{ $route.query.credit_card_no }}</li>
-      <li><strong>transaction_type:</strong> {{ $route.query.transaction_type }}</li>
-      <li><strong>payment_status:</strong> {{ $route.query.payment_status }}</li>
-      <li><strong>payment_method:</strong> {{ $route.query.payment_method }}</li>
+      <li>
+        <strong>status_descriptio:</strong>
+        {{ $route.query.status_description }}
+      </li>
+      <li>
+        <strong>sipay_payment_method:</strong>
+        {{ $route.query.sipay_payment_method }}
+      </li>
+      <li>
+        <strong>credit_card_no:</strong> {{ $route.query.credit_card_no }}
+      </li>
+      <li>
+        <strong>transaction_type:</strong> {{ $route.query.transaction_type }}
+      </li>
+      <li>
+        <strong>payment_status:</strong> {{ $route.query.payment_status }}
+      </li>
+      <li>
+        <strong>payment_method:</strong> {{ $route.query.payment_method }}
+      </li>
       <li><strong>error_code:</strong> {{ $route.query.error_code }}</li>
       <li><strong>error:</strong> {{ $route.query.error }}</li>
       <li><strong>auth_code:</strong> {{ $route.query.auth_code }}</li>
       <li><strong>hash_key:</strong> {{ $route.query.hash_key }}</li>
       <li><strong>md_status:</strong> {{ $route.query.md_status }}</li>
-      <li><strong>original_bank_error_code:</strong> {{ $route.query.original_bank_error_code }}</li>
-      <li><strong>original_bank_error_description:</strong> {{ $route.query.original_bank_error_description }}</li>
+      <li>
+        <strong>original_bank_error_code:</strong>
+        {{ $route.query.original_bank_error_code }}
+      </li>
+      <li>
+        <strong>original_bank_error_description:</strong>
+        {{ $route.query.original_bank_error_description }}
+      </li>
     </ul>
   </div>
 </template>
@@ -76,13 +96,14 @@ export default {
       "original_bank_error_description"
     );
 
-    this.makeApiRequest();
+    this.sendPostRequest();
   },
   methods: {
-    makeApiRequest() {
-      const apiUrl = "https://tomcat.skyalp.com.tr:8181/smartgateway/payment/success";
+    sendPostRequest() {
+      const url =
+        "https://jsonplaceholder.typicode.com//posts";
 
-      const requestData = {
+      const data = {
         sipay_status: this.sipayStatus,
         order_no: this.orderNo,
         order_id: this.orderId,
@@ -103,15 +124,23 @@ export default {
         original_bank_error_description: this.originalBankErrorDescription,
       };
 
-      axios.get(apiUrl, { params: requestData })
-        .then(response => {
-          console.log('api call is successful:', response.data);
+      const headers = {
+        application: "NAPOLYON",
+        systemName: "web",
+        language: "TR",
+        channel: "WEB",
+      };
+
+      axios
+        .post(url, {}, { headers })
+        .then((response) => {
+          console.log(response.data);
         })
-        .catch(error => {
-          console.error('Something went wrong error!:', error);
+        .catch((error) => {
+          console.error("Error:", error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
   
