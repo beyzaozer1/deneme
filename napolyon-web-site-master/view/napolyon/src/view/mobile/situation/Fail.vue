@@ -45,11 +45,8 @@
 </template>
      
    <script>
-import axios from "axios";
-
 export default {
   name: "fail",
-  beforeCreate() {},
   data() {
     return {
       sipayStatus: null,
@@ -72,78 +69,83 @@ export default {
       originalBankErrorDescription: null,
     };
   },
-  created() {
-    const urlParams = new URLSearchParams(window.location.search);
+  mounted() {
+    const urlParams = this.$route.query;
+    this.sipayStatus = urlParams.sipay_status;
+    this.orderNo = urlParams.order_no;
+    this.orderId = urlParams.order_id;
+    this.invoiceId = urlParams.invoice_id;
+    this.statusCode = urlParams.status_code;
+    this.statusDescription = urlParams.status_description;
+    this.sipayPaymentMethod = urlParams.sipay_payment_method;
+    this.creditCardNo = urlParams.credit_card_no;
+    this.transactionType = urlParams.transaction_type;
+    this.paymentStatus = urlParams.payment_status;
+    this.paymentMethod = urlParams.payment_method;
+    this.errorCode = urlParams.error_code;
+    this.error = urlParams.error;
+    this.authCode = urlParams.auth_code;
+    this.hashKey = urlParams.hash_key;
+    this.mdStatus = urlParams.md_status;
+    this.originalBankErrorCode = urlParams.original_bank_error_code;
+    this.originalBankErrorDescription =
+      urlParams.original_bank_error_description;
 
-    this.sipayStatus = urlParams.get("sipay_status");
-    this.orderNo = urlParams.get("order_no");
-    this.orderId = urlParams.get("order_id");
-    this.invoiceId = urlParams.get("invoice_id");
-    this.statusCode = urlParams.get("status_code");
-    this.statusDescription = urlParams.get("status_description");
-    this.sipayPaymentMethod = urlParams.get("sipay_payment_method");
-    this.creditCardNo = urlParams.get("credit_card_no");
-    this.transactionType = urlParams.get("transaction_type");
-    this.paymentStatus = urlParams.get("payment_status");
-    this.paymentMethod = urlParams.get("payment_method");
-    this.errorCode = urlParams.get("error_code");
-    this.error = urlParams.get("error");
-    this.authCode = urlParams.get("auth_code");
-    this.hashKey = urlParams.get("hash_key");
-    this.mdStatus = urlParams.get("md_status");
-    this.originalBankErrorCode = urlParams.get("original_bank_error_code");
-    this.originalBankErrorDescription = urlParams.get(
-      "original_bank_error_description"
-    );
-
-    this.makeApiRequest();
+    this.sendPostRequest();
   },
   methods: {
-    makeApiRequest() {
-      const apiUrl =
+    sendPostRequest() {
+      const url =
         "http://tomcat.skyalp.com.tr:8080/smartgateway/v1/ccpayment/threed/fail";
 
       const requestData = {
-        sipay_status: this.sipayStatus,
-        order_no: this.orderNo,
-        order_id: this.orderId,
-        invoice_id: this.invoiceId,
-        status_code: this.statusCode,
-        status_description: this.statusDescription,
-        sipay_payment_method: this.sipayPaymentMethod,
-        credit_card_no: this.creditCardNo,
-        transaction_type: this.transactionType,
-        payment_status: this.paymentStatus,
-        payment_method: this.paymentMethod,
-        error_code: this.errorCode,
+        sipayStatus: this.sipayStatus,
+        orderNo: this.orderNo,
+        orderId: this.orderId,
+        invoiceId: this.invoiceId,
+        statusCode: this.statusCode,
+        statusDescription: this.statusDescription,
+        sipayPaymentMethod: this.sipayPaymentMethod,
+        creditCardNo: this.creditCardNo,
+        transactionType: this.transactionType,
+        paymentStatus: this.paymentStatus,
+        paymentMethod: this.paymentMethod,
+        errorCode: this.errorCode,
         error: this.error,
-        auth_code: this.authCode,
-        hash_key: this.hashKey,
-        md_status: this.mdStatus,
-        original_bank_error_code: this.originalBankErrorCode,
-        original_bank_error_description: this.originalBankErrorDescription,
+        authCode: this.authCode,
+        hashKey: this.hashKey,
+        mdStatus: this.mdStatus,
+        originalBankErrorCode: this.originalBankErrorCode,
+        originalBankErrorDescription: this.originalBankErrorDescription,
       };
 
-      let config = {
+      const requestOptions = {
+        method: "POST",
         headers: {
-          "Access-Control-Allow-Origin": "*", // Bu başlık sunucu tarafında ayarlanmalıdır.
-          "Access-Control-Allow-Methods":
-            "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
           "Content-Type": "application/json",
+          application: "NAPOLYON",
+          systemName: "web",
+          language: "TR",
+          channel: "WEB",
         },
+        body: JSON.stringify(requestData),
       };
 
-      axios
-        .get(apiUrl, {
-          params: requestData,
-          headers: config.headers, // Headers'ları burada ekleyin
-        })
+      fetch(url, requestOptions)
         .then((response) => {
-          console.log("API çağrısı başarılı:", response.data);
+          if (!response.ok) {
+            throw new Error("Network response was not ok.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
         })
         .catch((error) => {
-          console.error("Bir şeyler ters gitti!", error);
+          console.error(
+            "There has been a problem with fetch operation:",
+            error
+          );
         });
     },
   },
