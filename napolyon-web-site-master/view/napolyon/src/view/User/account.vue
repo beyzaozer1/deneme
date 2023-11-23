@@ -25,6 +25,18 @@
     <br />
     <div v-if="userAccount" class="rounded shadow border-bottom p-4">
       <div class="row">
+        <div class="col-12 text-center download-app">
+          Uygulama ayarları bölümü Napoylon mobil uygulamasına taşındı  uygulamayı indirerek ayarlara erişebilirsin.
+        </div>
+        <div class="col-12">
+          <img src="/images/account/downloadApp.png" alt="" width="100%" height="100%">
+        </div>
+      </div>
+      <!--end row-->
+    </div>
+  <br />
+    <div v-if="userAccount" class="rounded shadow border-bottom p-4">
+      <div class="row">
         <div class="col-12">
           <h5>{{ $t("account.personal_information") }}:</h5>
         </div>
@@ -33,7 +45,7 @@
             <i class="fea icon-ex-md text-muted mr-3" data-feather="mail"></i>
             <div class="media-body">
               <h6 class="text-primary mb-0">{{ $t("account.email") }} :</h6>
-              <a class="text-muted" href="javascript:void(0)">{{
+              <a class="text-muted">{{
                 userAccount.email || "Tanımlı Değil"
               }}</a>
               <a
@@ -41,7 +53,6 @@
                 href="#"
                 v-show="showChangeToPrimary"
                 title="Birincil E-Posta olarak kullan"
-                @click.prevent="sendUpdateRequest('STD')"
               >
                 <i class="fas fa-exchange-alt  ml-2 color-primary"></i>
               </a>
@@ -62,15 +73,11 @@
               </h6>
               <a
                 class="text-muted"
-                href="#"
-                @click.prevent="updateInformation(-2)"
                 >{{ userAccount.alternateEmail || "Tanımlamak için tıklayın" }}
               </a>
               <a class="text-muted"
-                href="#"
                 v-show="showChangeToAlternate"
                 title="Birincil E-Posta olarak kullan"
-                @click.prevent="sendUpdateRequest('ALT')"
               >
                 <i class="fas fa-exchange-alt ml-2 color-primary"></i>
               </a>
@@ -88,8 +95,6 @@
               <h6 class="text-primary mb-0">{{ $t("account.gsm_no") }} :</h6>
               <a
                 class="text-muted"
-                href="#"
-                @click.prevent="$router.push({ name: 'user.setting' })"
               >
                 {{
                   userAccount.gsmNumber == "9999999999" ||
@@ -110,10 +115,9 @@
               <a
                 v-if="userAccount.facebookUserId"
                 class="text-muted"
-                href="javascript:void(0)"
                 >Bağlantılı</a
               >
-              <a v-else class="text-muted" href="javascript:void(0)"
+              <a v-else class="text-muted"
                 >Bağlantılı Değil</a
               >
             </div>
@@ -126,8 +130,6 @@
               <h6 class="text-primary mb-0">{{ $t("account.tc_no") }}:</h6>
               <a
                 class="text-muted"
-                href="#"
-                @click.prevent="updateInformationTC()"
                 >{{ userAccount.tcNo || "Tanımlamak için tıklayın" }}</a
               >
             </div>
@@ -136,7 +138,7 @@
             <i class="fea icon-ex-md text-muted mr-3" data-feather="gift"></i>
             <div class="media-body">
               <h6 class="text-primary mb-0">{{ $t("account.birthday") }} :</h6>
-              <a class="text-muted" href="javascript:void(0)">{{
+              <a class="text-muted">{{
                 birthday || "Tanımlı Değil"
               }}</a>
             </div>
@@ -150,7 +152,7 @@
               <h6 class="text-primary mb-0">
                 {{ $t("account.live_place") }} :
               </h6>
-              <a class="text-muted" href="javascript:void(0)">{{
+              <a class="text-muted">{{
                 userAccount.homeCityName || "Tanımlamak için tıklayın"
               }}</a>
             </div>
@@ -161,8 +163,6 @@
               <h6 class="text-primary mb-0">{{ $t("account.iban_no") }} :</h6>
               <a
                 class="text-muted"
-                href="#"
-                @click.prevent="updateInformation(-1)"
               >
                 {{
                   userAccount.hasOwnProperty("memberIbanObject") &&
@@ -777,5 +777,20 @@ export default {
 }
 html {
   scroll-behavior: smooth !important;
+}
+
+.download-app {
+  z-index: 1;
+  margin-top: 11%;
+  font-size: 20px;
+  margin-bottom: -80px;
+
+}
+
+@media (max-width: 972px) {
+  .download-app {
+    margin-bottom: 0px !important;
+  }
+  
 }
 </style>
