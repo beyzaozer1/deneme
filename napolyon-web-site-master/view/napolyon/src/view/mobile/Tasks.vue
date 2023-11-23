@@ -5,45 +5,39 @@
         <loader :loading="tasksLoading"></loader>
       </div>
       <div v-else class="pb-4">
-        <div class="row">
-          <div
-            v-for="(item, index) in items"
-            :key="index"
-            class="col-lg-6 col-md-6 col-12 mb-4"
-          >
-            <div
-              class="company-list card border-0 rounded shadow bg-white d-flex align-items-end flex-column mb-3"
-            >
-              <div class="text-center">
+        <div>
+          <div v-for="(item, index) in items" :key="index">
+            <div>
+              <div class="image-container">
                 <img
-                  :src="item.taskImage"
-                  alt=""
-                  class="mx-auto d-block mb-3 img-fluid"
+                  src="images/mobile/green-task-bg.png"
+                  width="100%"
+                  height="100%"
+                  class="image"
                 />
-                <a
-                  class="text-dark h5 name"
-                  href="#"
-                  @click="
-                    $router.push({
-                      name: 'index.surveys',
-                      params: {
-                        name: convertToKebabCase(item.name),
-                        id: item.id,
-                        questionIds: item.questionIds,
-                        code: item.code,
-                      },
-                    })
-                  "
-                  >{{ item.name }}</a
-                >
-                <p class="text-muted mt-1 mb-0" v-html="item.description"></p>
               </div>
-              <div class="mt-auto border-top">
-                <div class="px-4 pt-4">
+              <div class="description-container">
+                <div class="description">
+                  <!-- <a
+                    class="content-title"
+                    href="#"
+                    @click="
+                      $router.push({
+                        name: 'user.surveys.mobil',
+                        params: {
+                          name: convertToKebabCase(item.name),
+                          id: item.id,
+                          questionIds: item.questionIds,
+                          code: item.code,
+                        },
+                      })
+                    "
+                    >{{ item.name }}</a
+                  > -->
                   <template v-if="!item.isCelebration">
                     <template v-if="item.taskType == 'ProfileTask'">
                       <a
-                        class="btn btn-block btn-soft-primary"
+                        class="content-title"
                         href="#"
                         @click="
                           $router.push({
@@ -56,83 +50,163 @@
                             },
                           })
                         "
-                        >Göreve katılmak için tıklayın.
-                        <i class="fea icon-sm" data-feather="arrow-right"></i
-                      ></a>
-                      <span class="float-right text-muted small mt-2">
-                        {{ item.date }} - ID: {{ item.id }}
-                      </span>
+                        >{{ item.name }}</a
+                      >
                     </template>
 
                     <template v-else-if="item.taskType == 'CRMCampaign'">
                       <a
-                        class="btn btn-block btn-soft-primary"
+                        class="content-title"
                         href="#"
                         @click="
                           $router.push({
-                            name: 'index.campaign',
+                            name: 'user.campaign',
                             params: { id: item.id },
                           })
                         "
-                        >Göreve katılmak için tıklayın.
-                        <i class="fea icon-sm" data-feather="arrow-right"></i
-                      ></a>
-                      <span class="float-right text-muted small mt-2">
-                        {{ item.date }} - ID: {{ item.id }}
-                      </span>
+                        >{{ item.name }} ></a
+                      >
                     </template>
 
                     <template v-else-if="item.taskType == 'ExternalSurvey'">
                       <a
-                        class="btn btn-block btn-soft-primary"
+                        class="content-title"
                         href="#"
                         @click="redirectTo(item)"
-                        >Göreve katılmak için tıklayın.
-                        <i class="fea icon-sm" data-feather="arrow-right"></i
-                      ></a>
-                      <span class="float-right text-muted small mt-2">
-                        {{ item.date }} - ID: {{ item.id }}
-                      </span>
+                        >{{ item.name }} ></a
+                      >
                     </template>
 
                     <template v-else-if="item.taskType == 'LiveSurvey'">
                       <a
-                        class="btn btn-block btn-soft-primary"
+                        class="content-title"
                         href="#"
                         @click="redirectTo(item, 'live')"
-                        >Göreve katılmak için tıklayın.
-                        <i class="fea icon-sm" data-feather="arrow-right"></i
-                      ></a>
-                      <span class="float-right text-muted small mt-2">
-                        {{ item.date }} - ID: {{ item.id }}
-                      </span>
+                        >{{ item.name }} ></a
+                      >
                     </template>
 
                     <template v-else-if="item.taskType == 'CrmMiniAnket'">
-                      <a
-                        class="btn btn-block btn-soft-primary"
-                        :href="item.urlLink"
+                      <a class="content-title" :href="item.urlLink">
+                        {{ item.name }}
+                        ></a
                       >
-                        Göreve katılmak için tıklayın.
-                        <i class="fea icon-sm" data-feather="arrow-right"></i
-                      ></a>
-                      <span class="float-right text-muted small mt-2">
-                        {{ item.date }} - ID: {{ item.id }}
-                      </span>
                     </template>
                     <template v-else>
                       <a
-                        class="btn btn-block btn-soft-primary"
+                        class="content-title"
                         href="#"
                         @click.prevent="return false;"
-                        >Göreve katılmak için tıklayın.
-                        <i class="fea icon-sm" data-feather="arrow-right"></i
-                      ></a>
-                      <span class="float-right text-muted small mt-2">
-                        {{ item.date }} - ID: {{ item.id }}
-                      </span>
+                        >{{ item.name }} ></a
+                      >
+                      <span class="float-right text-muted small mt-2"> </span>
                     </template>
                   </template>
+                  <div class="nap-points">
+                    <p class="content-desc" v-html="item.description"></p>
+                    <!-- <div class="common">
+                      <img src="/images/mobile/clock.png" />
+                      <span>5 dk</span>
+                    </div>
+                    <div class="common">
+                      <img
+                        src="/images/mobile/coin.png"
+                        width="18"
+                        height="18"
+                      />
+                      <span>3000 NAP Puan</span>
+                    </div> -->
+                  </div>
+                </div>
+                <div>
+                  <div class="icon-container">
+                    <template v-if="!item.isCelebration">
+                      <template v-if="item.taskType == 'ProfileTask'">
+                        <a
+                          class="content-title"
+                          href="#"
+                          @click="
+                            $router.push({
+                              name: 'user.surveys.mobil',
+                              params: {
+                                name: convertToKebabCase(item.name),
+                                id: item.id,
+                                questionIds: item.questionIds,
+                                code: item.code,
+                              },
+                            })
+                          "
+                          ><img
+                            src="/images/mobile/right-icon.png"
+                            class="icon-image"
+                            width="8px"
+                            height="10px"
+                        /></a>
+                      </template>
+
+                      <template v-else-if="item.taskType == 'CRMCampaign'">
+                        <a
+                          class="content-title"
+                          href="#"
+                          @click="
+                            $router.push({
+                              name: 'user.campaign',
+                              params: { id: item.id },
+                            })
+                          "
+                          ><img
+                            src="/images/mobile/right-icon.png"
+                            class="icon-image"
+                            width="8px"
+                            height="10px"
+                          />
+                          </a
+                        >
+                      </template>
+
+                      <template v-else-if="item.taskType == 'ExternalSurvey'">
+                        <a
+                          class="content-title"
+                          href="#"
+                          @click="redirectTo(item)"
+                          ><img
+                            src="/images/mobile/right-icon.png"
+                            class="icon-image"
+                            width="8px"
+                            height="10px"
+                          />
+                          </a
+                        >
+                      </template>
+
+                      <template v-else-if="item.taskType == 'LiveSurvey'">
+                        <a
+                          class="content-title"
+                          href="#"
+                          @click="redirectTo(item, 'live')"
+                          ><img
+                            src="/images/mobile/right-icon.png"
+                            class="icon-image"
+                            width="8px"
+                            height="10px"
+                          />
+                          </a
+                        >
+                      </template>
+
+                      <template v-else-if="item.taskType == 'CrmMiniAnket'">
+                        <a class="content-title" :href="item.urlLink">
+                          <img
+                            src="/images/mobile/right-icon.png"
+                            class="icon-image"
+                            width="8px"
+                            height="10px"
+                          />
+                          ></a
+                        >
+                      </template>
+                    </template>
+                  </div>
                 </div>
               </div>
             </div>
@@ -244,7 +318,7 @@ export default {
       if (url && url.includes("napolyon_internal_survey")) {
         let id = url.split("-")[1];
         this.$router.push({
-          name: "index.surveys",
+          name: "user.surveys.mobil",
           params: {
             name: this.convertToKebabCase(item.name),
             id: id,
@@ -342,7 +416,86 @@ export default {
 </script>
 
 <style scoped>
+.image-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 200px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  z-index: 12;
+  color: white;
+  margin-bottom: 37px;
+  padding: 16px;
+}
+.description-container {
+  background-color: white;
+  border-radius: 16px;
+  z-index: 2;
+  position: relative;
+  top: -47px;
+  box-shadow: 0px 5px 20px 0px #cdcdcd40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.description {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  flex-direction: column;
+}
 .company-list {
   height: 100%;
+}
+.nap-points {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.content-title {
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.content-desc {
+  /* padding: 0 0 16px 16px; */
+  font-weight: 400;
+  color: gray;
+}
+
+.nap-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon-container {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.common {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
 }
 </style>

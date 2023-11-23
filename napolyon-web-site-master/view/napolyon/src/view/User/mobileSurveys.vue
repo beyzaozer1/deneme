@@ -453,7 +453,7 @@
                               class="required"
                               :checked="
                               item.questionId === 12 &&
-                                subItem.answerId === authUser.gender
+                                subItem.answerId === authUser?.gender
                             "
                               @change="
                               setSelectedOption(
@@ -528,7 +528,7 @@
                     <template v-if="item.questionId == 48">
                       <h5 class="main_question d-inline">Cep Telefonunu</h5>
                       <em class="ml-2 d-inline">
-                        <span v-if="authUser.gsmNumber != '9999999999' && authUser.gsmNumber"> Güncellemek için</span>
+                        <span v-if="authUser?.gsmNumber != '9999999999' && authUser?.gsmNumber"> Güncellemek için</span>
                         <span v-else> Aktifleştirmek için</span>
                         <a
                             href="#"
@@ -538,7 +538,7 @@
                       </em>
                       <div class="form-group">
                         <input
-                            :placeholder="authUser.gsmNumber != '9999999999' ? authUser.gsmNumber : ''"
+                            :placeholder="authUser?.gsmNumber != '9999999999' ? authUser?.gsmNumber : ''"
                             class="form-control required answer"
                             v-model="gsmNumber"
                             type="text"
@@ -911,7 +911,7 @@
             </div>
             <div class="form-group">
               <button
-                  @click.prevent="closeWindow"
+                  @click="$router.push({name: 'index.tasks'})"
                   class="btn btn-warning mr-2"
                   type="button"
               >
@@ -1840,7 +1840,7 @@ export default {
     feather.replace();
     this.code = this.$route.params.id;
     if (!this.code) {
-      this.$router.push({ name: "user.tasks" });
+      this.$router.push({ name: "index.tasks" });
     } else {
       // getting question ids
       let questionIds = this.profileSurveyQuestionIds.find(
