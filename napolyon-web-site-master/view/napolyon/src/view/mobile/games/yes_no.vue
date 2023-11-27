@@ -1,61 +1,70 @@
 <template>
-  <div class="d-flex justify-content-center">
-    <div class="col-lg-8 col-12">
-      <div v-if="pageLoading">
-        <loader :loading="pageLoading"></loader>
-      </div>
-      <div
-        v-else
-        id="game"
-        :style="{ backgroundImage: 'url(assets/images/npbg1.png)' }"
-        class="rounded shadow border-bottom p-4"
-      >
-        <div
-          v-if="question"
-          id="game-area"
-          class="row d-flex justify-content-center"
-        >
-          <div class="col-lg-12 col-md-12 col-12 head-box">
-            <h3 class="title">{{ $t("haveFundAndLearn.yes_no") }}</h3>
-            <p class="description">{{ $t("haveFundAndLearn.yes_no_desc") }}</p>
-            <div v-if="start" id="timer">{{ start }}</div>
+  <div class="col-lg-8 col-12">
+    <div v-if="pageLoading">
+      <loader :loading="pageLoading"></loader>
+    </div>
+    <div v-else id="game">
+      <div v-if="question" id="game-area">
+        <div class="game-container">
+          <div class="game-image">
+            <img src="/images/mobile/money-add.svg" width="45" height="45" />
           </div>
-
-          <transition
-            enter-active-class="animated fadeInLeft"
-            leave-active-class="animated bounceOutRight"
-            name="custom-classes-transition"
-          >
-            <div class="col-lg-12 col-md-12 col-12 question text-center">
-              <img
-                v-if="question.question_image"
-                :src="question.question_image"
-                width="110"
-              />
-              <p class="information">{{ question.question_text }}</p>
-              <div class="counter-box">
-                <span class="counter">{{ quiz }}</span>
-              </div>
-            </div>
-          </transition>
-
-          <div
-            v-for="(answer, index) in question.options"
-            v-if="question.options"
-            :key="index"
-            class="col-lg-6 col-md-6 col-6 reply"
-          >
-            <a
-              href="#"
-              @click.prevent="
-                submitQuiz(answer.option_is_right, answer.option_text)
-              "
+          <p class="description">{{ $t("haveFundAndLearn.yes_no_desc") }}</p>
+          <div v-if="start" id="timer">{{ start }}</div>
+          <div class="question-container">
+            <p class="information">{{ question.question_text }}</p>
+            <div
+              v-for="(answer, index) in question.options"
+              v-if="question.options"
+              :key="index"
+              class="answer"
             >
-              <img :src="answer.option_image" width="60" />
-              <span>{{ answer.option_text }}</span>
-            </a>
+              <a
+                href="#"
+                @click.prevent="
+                  submitQuiz(answer.option_is_right, answer.option_text)
+                "
+              >
+                <span class="answer-text">{{ answer.option_text }}</span>
+              </a>
+            </div>
           </div>
         </div>
+        <!-- 
+        <transition
+          enter-active-class="animated fadeInLeft"
+          leave-active-class="animated bounceOutRight"
+          name="custom-classes-transition"
+        >
+          <div class="col-lg-12 col-md-12 col-12 question text-center">
+            <img
+              v-if="question.question_image"
+              :src="question.question_image"
+              width="110"
+            />
+            <p class="information">{{ question.question_text }}</p>
+            <div class="counter-box">
+              <span class="counter">{{ quiz }}</span>
+            </div>
+          </div>
+        </transition>
+
+        <div
+          v-for="(answer, index) in question.options"
+          v-if="question.options"
+          :key="index"
+          class="col-lg-6 col-md-6 col-6 reply"
+        >
+          <a
+            href="#"
+            @click.prevent="
+              submitQuiz(answer.option_is_right, answer.option_text)
+            "
+          >
+            <img :src="answer.option_image" width="60" />
+            <span>{{ answer.option_text }}</span>
+          </a>
+        </div> -->
       </div>
     </div>
   </div>
@@ -287,6 +296,63 @@ export default {
 </script>
 
 <style scoped>
+
+.answer-text {
+  color: gray;
+}
+.game-image {
+  border-radius: 50%;
+  background: rgb(234, 245, 248);
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.information {
+  font-size: 20px !important;
+  margin-bottom: 30px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+}
+
+.description {
+  color: gray;
+  max-width: 80%;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.answer {
+  background-color: white;
+  padding: 12px 24px;
+  border-radius: 60px;
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.question-container {
+  background: rgb(234, 245, 248);
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  min-height: 464px;
+  margin-bottom: 16px;
+}
+
 #timer {
   margin-bottom: 15px;
   color: #fff;
@@ -320,9 +386,6 @@ export default {
   padding: 15px;
 }
 
-.question .information {
-  padding-top: 10px;
-}
 
 .question .counter-box {
   display: flex;
@@ -340,16 +403,10 @@ export default {
   border: 1px solid #e4e4e4;
 }
 
-.title,
-.description {
-  color: #fff;
-}
-
 #game {
-  background-color: rgb(10 155 140);
   background-position: center top;
   width: 100%;
-  height: 530px;
+  height: 100%;
   background-size: 400px auto;
   overflow: hidden;
 }
