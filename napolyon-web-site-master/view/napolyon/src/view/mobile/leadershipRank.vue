@@ -148,8 +148,8 @@
                     height="100%"
                     class="user-avatar"
                     :src="
-                      item?.avatar
-                        && mediaBase + '/images/avatars/' + item?.avatar
+                      item?.avatar &&
+                      mediaBase + '/images/avatars/' + item?.avatar
                     "
                   />
                   <div v-else class="bg-no-image-queue user-avatar">
@@ -314,6 +314,11 @@ export default {
     },
   },
   mounted() {
+    const urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
+    const token = urlParams.get("token");
+
+    window.localStorage.setItem("token", token);
+    window.localStorage.setItem("refresh_token", token);
     feather.replace();
     this.getItems(true);
   },

@@ -399,6 +399,11 @@ export default {
     },
   },
   mounted() {
+    const urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
+    const token = urlParams.get("token");
+
+    window.localStorage.setItem("token", token);
+    window.localStorage.setItem("refresh_token", token);
     feather.replace();
     this.getItems();
   },
