@@ -180,8 +180,9 @@
               <img
                 v-if="userLeadership?.avatar"
                 :src="
-                  userLeadership?.avatar &&
-                  mediaBase + '/images/avatars/' + userLeadership?.avatar
+                  userLeadership.avatar
+                    ? mediaBase + '/images/avatars/' + userLeadership.avatar
+                    : defaultAvatar
                 "
                 width="100%"
                 height="100%"
@@ -302,6 +303,9 @@ export default {
       this.isLast = isLast;
       this.$store.dispatch(_MODULE_NAME_USER + "/" + GET_ITEMS, {
         url: this.url,
+        // headers: {
+        //   Authorization: `Bearer ${token}`
+        // },
         filters: {
           last: isLast,
           size: 50,

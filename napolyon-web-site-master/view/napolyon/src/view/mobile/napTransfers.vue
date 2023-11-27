@@ -1059,7 +1059,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="rounded shadow border-bottom py-2 px-4 mb-4">
+        <!-- <div class="rounded shadow border-bottom py-2 px-4 mb-4">
           <div class="row">
             <div class="col-12">
               <p>
@@ -1082,8 +1082,8 @@
                 sonra iade talep edilemez.
               </div>
             </div>
-          </div>
-        </div>
+          </div> 
+        </div> -->
         <!-- <div
           class="rounded shadow border-bottom p-2 cursor-pointer"
           @click.prevent="onClickItem(1)"
@@ -1106,8 +1106,20 @@
           </div>
         </div>
       </div>
--->
-        <div
+-->     
+        <div class="container mb-1" @click.prevent="onClickItem(2)">
+          <div class="image-container">
+            <img src="/images/mobile/ticket-star.png" width="26px" height="21px"/>
+          </div>
+          <div>Hediye Çekine Dönüştür</div>
+        </div>
+        <div class="container" @click.prevent="onClickItem(3)">
+          <div class="image-container">
+            <img src="/images/mobile/money-add.png" width="21px" height="21px"/>
+          </div>
+          <div>100 TL talep et</div>
+        </div>
+        <!-- <div
           class="rounded shadow border-bottom p-2 mt-4 cursor-pointer"
           @click.prevent="onClickItem(2)"
         >
@@ -1156,7 +1168,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </template>
     </div>
   </div>
@@ -1837,5 +1849,22 @@ export default {
 
 .scroll-overflow {
   overflow: scroll;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #F2EEFC;
+  gap: 12px;
+  padding: 16px 8px 16px 16px;
+  border-radius: 16px;
+
+}
+
+.image-container {
+  background-color: white;
+  border-radius: 50%;
+  padding: 8px;
 }
 </style>

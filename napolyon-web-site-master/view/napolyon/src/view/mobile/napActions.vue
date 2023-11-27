@@ -4,12 +4,31 @@
       <div v-if="pointsLoading">
         <loader :loading="pointsLoading"></loader>
       </div>
-      <div v-else class="rounded shadow border-bottom p-4">
+      <div v-else>
         <div class="row">
           <div class="col-12">
             <h4>NAP Puan Dökümü</h4>
           </div>
           <div class="table-responsive bg-white">
+            <div class="container"  v-for="(item, index) in points" :key="index">
+              <div
+                class="survey-container mb-1"
+                @click.prevent="onClickItem(2)"
+              >
+                <img
+                  src="/images/mobile/icons.png"
+                  width="65px"
+                  height="65px"
+                />
+                <div class="content">
+                  <span class="first"><strong>{{ item.title }}</strong></span>
+                  <span class="second">27.11.2023 (date gelmiyor apiden)</span>
+                </div>
+              </div>
+              <div class="point">
+                <span>{{ formatNumber(item.point > 0 ? item.point : 0) }}</span>
+              </div>
+            </div>
             <table class="table mb-0 table-center">
               <tbody>
                 <tr v-for="(item, index) in points" :key="index">
@@ -545,6 +564,55 @@ export default {
   font-size: 15px !important;
   background-color: #ddd !important;
   color: #161c2d !important;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 5px 20px 0px #cdcdcd40;
+  padding: 16px 8px 16px 16px;
+  border-radius: 16px;
+}
+
+.survey-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  align-self: center;
+}
+
+.image-container {
+  background-color: #f4f5f7;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.point {
+  align-self: flex-end;
+  color: #40c9c0;
+  border-radius: 6px;
+  padding: 3px 6px 3px 6px;
+  background-color: #f1f8f6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.first {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.second {
+  font-weight: 400;
+  color: #657c9f;
+  font-size: 14px;
 }
 </style>
   

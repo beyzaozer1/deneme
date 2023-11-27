@@ -59,13 +59,13 @@
                 class="img-fluid menu-images-7 menu-images"
             />
           </div>
-          <div class="menu-button-images">
+          <!-- <div class="menu-button-images">
             <img
                 :src="mediaBase + '/images/icons/ayarlar.png'"
                 alt=""
                 class="img-fluid menu-images-8 menu-images"
             />
-          </div>
+          </div> -->
         </div>
       </button>
     </div>
@@ -317,7 +317,7 @@
           </div>
           <!--end col-->
 
-          <div
+          <!-- <div
               class="col-lg-6 col-md-4 col-sm-4 settings-items col-6 mt-4 pt-2"
               @click="closeToggleMenu"
           >
@@ -334,7 +334,7 @@
                 {{ $t("setting.setting") }}
               </h6>
             </router-link>
-          </div>
+          </div> -->
           <!--end col-->
 
           <div
