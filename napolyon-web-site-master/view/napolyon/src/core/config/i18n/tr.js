@@ -328,7 +328,7 @@ export const locale = {
     play: "BAŞLA",
     yes_no_desc: "Lütfen doğru cevap olduğunu düşündüğün şıkkı seç",
     fill_in_the_blank_desc:
-      "Sence aşağıda bulunan anket sonucunda boşluk yerine hangi kelime gelmelidir ? ",
+      "Sence boşluk yerine hangi kelime gelmeli?",
     match_desc:
       "Aşağıda bulunan iki ayrı grubu doğru bir şekilde eşleştirebilecek misin?",
   },
