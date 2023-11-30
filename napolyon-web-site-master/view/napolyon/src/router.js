@@ -328,6 +328,11 @@ export default new Router({
       component: () => import("@/view/mobile/games/fill_in_the_blank"),
     },
     {
+      path:"/beyza",
+      name: "index.beyza",
+      component: () => import("@/view/mobile/beyza.vue")
+    },
+    {
       path: "/payment-success",
       name: "index.payment-success",
       component: () => import("@/view/mobile/situation/Success"),

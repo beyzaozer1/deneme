@@ -3,32 +3,8 @@
     <div v-if="pageLoading">
       <loader :loading="pageLoading"></loader>
     </div>
-    <div v-else id="game"></div>
-      <div class="game-container">
-        <div class="game-image">
-          <img src="/images/mobile/money-add.svg" width="45" height="45" />
-        </div>
-        <p class="description">{{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}</p>
-        <div class="question-container">
-          <p class="information" v-html="question.question_text"></p>
-          <div
-            v-for="(answer, index) in question.options"
-            v-if="question.options"
-            :key="index"
-            class="answer"
-          >
-            <a
-              href="#"
-              @click.prevent="
-                submitQuiz(answer.option_is_right, answer.option_text)
-              "
-            >
-              <span class="answer-text">{{ answer.option_text }}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- <div id="game-area" class="row d-flex justify-content-center">
+    <div v-else id="game">
+      <div id="game-area" class="row d-flex justify-content-center">
         <div class="col-lg-12 col-md-12 col-12 head-box">
           <h3 class="title">{{ $t("haveFundAndLearn.fill_in_the_blank") }}</h3>
           <p v-show="false" class="description">
@@ -81,7 +57,7 @@
             Gönder
           </a>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>

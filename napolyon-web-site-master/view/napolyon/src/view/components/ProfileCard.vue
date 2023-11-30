@@ -113,7 +113,7 @@
                               style="z-index:10; position:absolute; transform:translate(-23px, -10px) scale(0.8);"
                           >{{ notificationCount }}</span>
                         </li>
-                        <li class="list-inline-item">
+                        <!-- <li class="list-inline-item">
                           <router-link
                               :to="{ name: 'user.setting' }"
                               class="rounded"
@@ -125,7 +125,7 @@
                                 data-feather="tool"
                             ></i>
                           </router-link>
-                        </li>
+                        </li> -->
                       </ul>
                       <!--end icon-->
                     </div>

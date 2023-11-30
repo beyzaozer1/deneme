@@ -5,234 +5,252 @@
         <loader :loading="pointsLoading"></loader>
       </div>
       <div v-else>
-        <div class="row">
+        <div class="overlay" id="overlay" v-if="showFilterSection"></div>
+        <div class="row background-color">
           <div class="col-12">
-            <h4>NAP Puan Dökümü</h4>
-          </div>
-          <div class="table-responsive bg-white">
-            <div class="container"  v-for="(item, index) in points" :key="index">
-              <div
-                class="survey-container mb-1"
-                @click.prevent="onClickItem(2)"
-              >
-                <img
-                  src="/images/mobile/icons.png"
-                  width="65px"
-                  height="65px"
-                />
-                <div class="content">
-                  <span class="first"><strong>{{ item.title }}</strong></span>
-                  <span class="second">27.11.2023 (date gelmiyor apiden)</span>
-                </div>
-              </div>
-              <div class="point">
-                <span>{{ formatNumber(item.point > 0 ? item.point : 0) }}</span>
-              </div>
-            </div>
-            <table class="table mb-0 table-center">
-              <tbody>
-                <tr v-for="(item, index) in points" :key="index">
-                  <td>{{ item.title }}</td>
-                  <td>
-                    <span
-                      :class="
-                        item.title == 'Toplam NAP Puan'
-                          ? 'badge-default badge-nap-point'
-                          : 'badge-warning'
-                      "
-                      class="badge rounded"
-                    >
-                      {{ formatNumber(item.point > 0 ? item.point : 0) }}</span
-                    >
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="rounded shadow border-bottom p-4 mt-5">
-        <div class="row">
-          <div class="col-12">
-            <h4>NAP Puan Hareketlerim</h4>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label> Başlangıç Tarihi</label>
-              <div class="position-relative">
-                <input v-model="start_date" class="form-control" type="date" />
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label> Bitiş Tarihi</label>
-              <div class="position-relative">
-                <input v-model="end_date" class="form-control" type="date" />
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label> Puan Türü</label>
-              <div class="position-relative">
-                <select
-                  v-model="point_type"
-                  class="form-control"
-                  name="puan-turu"
+            <div
+              class="d-flex align-items-center justify-content-center p-4 flex-column"
+            >
+              <div class="tab-tournament">
+                <button
+                  type="button"
+                  class="tab-detail"
+                  :class="{ 'active-tab': activeTab === 'NAP Puan' }"
+                  @click="switchTab('NAP Puan')"
                 >
-                  <option
-                    v-for="(item, index) in categories"
-                    :key="index"
-                    :value="item.id"
-                  >
-                    {{ item.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label>Filtrele</label>
-              <div class="position-relative">
-                <button class="btn btn-primary" type="button" @click="getItems">
-                  Tamam
+                  <img src="images/mobile/image 63.svg" />
+                  NAP Puan
+                </button>
+                <button
+                  type="button"
+                  class="tab-detail"
+                  :class="{ 'active-tab': activeTab === 'Kupa Puan' }"
+                  @click="switchTab('Kupa Puan')"
+                >
+                  <img src="images/mobile/image 76.svg" /> Kupa Puan
                 </button>
               </div>
             </div>
           </div>
-          <div class="table-responsive bg-white">
-            <table class="table mb-0 table-center" v-if="loading">
-              <loader :loading="loading"></loader>
-            </table>
-            <table class="table mb-0 table-center" v-else>
-              <thead>
-                <tr>
-                  <th scope="col" class="text-nowrap">Tarih</th>
-                  <th scope="col" class="text-nowrap">Nap Puan Türü</th>
-                  <th scope="col" class="text-nowrap">Nap Puanı</th>
-                  <th scope="col" class="text-nowrap">Kampanya</th>
-                  <th scope="col" class="text-nowrap">Durum</th>
-                  <th scope="col" class="text-nowrap">Promosyon Kodu</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in items" :key="index">
+          <div class="col-12">
+            <div v-if="activeTab === 'NAP Puan'">
+              <div class="col-12">
+                <p class="title">NAP Puan Dökümü</p>
+              </div>
+              <div
+                class="container mb-2"
+                v-for="item in points"
+                :key="item.title"
+              >
+                <div class="survey-container" @click.prevent="onClickItem(2)">
+                  <img
+                    src="/images/mobile/icons.png"
+                    width="65px"
+                    height="65px"
+                  />
+                  <div class="content">
+                    <span class="first"
+                      ><strong>{{ item.title }}</strong></span
+                    >
+                    <!-- <span class="second"
+                      >27.11.2023 (date gelmiyor apiden)</span
+                    > -->
+                  </div>
+                </div>
+                <div class="point">
+                  <span>{{
+                    formatNumber(item.point > 0 ? item.point : 0)
+                  }}</span>
+                </div>
+              </div>
+              <div
+                class="col-12 mt-4 d-flex justify-content-between align-items-center"
+              >
+                <p class="title">NAP Puan Hareketleri</p>
+                <button class="filter-button mb-3" @click="toggleFilterSection">
+                  <img src="images/mobile/filter.svg" />
+                </button>
+              </div>
+              <div
+                class="container mb-2"
+                v-for="(item, index) in items"
+                :key="index"
+              >
+                <div class="survey-container">
+                  <img
+                    src="/images/mobile/icons.png"
+                    width="65px"
+                    height="65px"
+                  />
+                  <div class="content">
+                    <span class="first"
+                      ><strong>{{ item.type }}</strong></span
+                    >
+                    <span class="second">{{ item.date }}</span>
+                  </div>
+                </div>
+                <div class="point">
+                  <span>{{ formatNumber(item.point) }}</span>
+                </div>
+                <!-- <tr v-for="(item, index) in items" :key="index">
                   <td>{{ item.date }}</td>
                   <td>{{ item.type }}</td>
                   <td class="text-nowrap">{{ formatNumber(item.point) }} Ň</td>
                   <td class="text-center">{{ item.campaign }}</td>
                   <td class="text-center">{{ item.status }}</td>
                   <td class="text-center">{{ item.code }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <Pagination
-          v-if="totalPages > 1 && !loading"
-          :paginate="paginateData"
-          :per-page="perPage"
-          @change="getItems"
-        />
-      </div>
-      <div class="rounded shadow border-bottom p-4 mt-5">
-        <div class="row">
-          <div class="col-12">
-            <h4>Kupa Hareketlerim</h4>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label> Başlangıç Tarihi</label>
-              <div class="position-relative">
-                <input
-                  v-model="start_date_cup"
-                  class="form-control"
-                  type="date"
-                />
+                </tr> -->
+              </div>
+              <div v-if="showFilterSection" class="filter-container">
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group mt-4">
+                    <label> Başlangıç Tarihi</label>
+                    <div class="position-relative">
+                      <input
+                        v-model="start_date"
+                        class="form-control"
+                        type="date"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group">
+                    <label> Bitiş Tarihi</label>
+                    <div class="position-relative">
+                      <input
+                        v-model="end_date"
+                        class="form-control"
+                        type="date"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group">
+                    <label> Puan Türü</label>
+                    <div>
+                      <select
+                        v-model="point_type"
+                        class="form-control"
+                        name="puan-turu"
+                      >
+                        <option
+                          v-for="(item, index) in categories"
+                          :key="index"
+                          :value="item.id"
+                        >
+                          {{ item.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group d-flex flex-column justify-content-center align-items-end">
+                    <div>
+                      <button
+                        class="btn btn-primary"
+                        type="button"
+                        @click="getItems"
+                      >
+                        Tamam
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label> Bitiş Tarihi</label>
-              <div class="position-relative">
-                <input
-                  v-model="end_date_cup"
-                  class="form-control"
-                  type="date"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label> Kupa Türü</label>
-              <div class="position-relative">
-                <select
-                  v-model="cup_type"
-                  class="form-control"
-                  name="kupa-turu"
-                >
-                  <option
-                    v-for="(item, index) in cup_categories"
-                    :key="index"
-                    :value="item.id"
-                  >
-                    {{ item.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-12">
-            <div class="form-group">
-              <label>Filtrele</label>
-              <div class="position-relative">
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  @click="getCupItems"
-                >
-                  Tamam
+            <div v-else-if="activeTab === 'Kupa Puan'">
+              <div class="d-flex justify-content-end">
+                <button class="filter-button mb-3" @click="toggleFilterSection">
+                  <img src="images/mobile/filter.svg" />
                 </button>
               </div>
+              <div
+                class="container mb-2"
+                v-for="(item, index) in items_cups"
+                :key="index"
+              >
+                <div class="survey-container">
+                  <img
+                    src="/images/mobile/icons.png"
+                    width="65px"
+                    height="65px"
+                  />
+                  <div class="content">
+                    <span class="first"
+                      ><strong>{{ item.type }}</strong></span
+                    >
+                    <span class="second">{{ item.date }}</span>
+                  </div>
+                </div>
+                <div class="point">
+                  <span> {{ formatNumber(item.point) }}</span>
+                </div>
+              </div>
+              <div v-if="showFilterSection" class="filter-container">
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group mt-4">
+                    <label> Başlangıç Tarihi</label>
+                    <div class="position-relative">
+                      <input
+                        v-model="start_date_cup"
+                        class="form-control"
+                        type="date"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group">
+                    <label> Bitiş Tarihi</label>
+                    <div class="position-relative">
+                      <input
+                        v-model="end_date_cup"
+                        class="form-control"
+                        type="date"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group">
+                    <label> Kupa Türü</label>
+                    <div class="position-relative">
+                      <select
+                        v-model="cup_type"
+                        class="form-control"
+                        name="kupa-turu"
+                      >
+                        <option
+                          v-for="item in cup_categories"
+                          :key="item.id"
+                          :value="item.id"
+                        >
+                          {{ item.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                  <div class="form-group d-flex flex-column justify-content-center align-items-end">
+                    <div class="position-relative">
+                      <button
+                        class="btn btn-primary"
+                        type="button"
+                        @click="getCupItems"
+                      >
+                        Tamam
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="table-responsive bg-white">
-            <table class="table mb-0 table-center" v-if="cupsLoading">
-              <loader :loading="cupsLoading"></loader>
-            </table>
-            <table class="table mb-0 table-center" v-else>
-              <thead>
-                <tr>
-                  <th scope="col" class="text-nowrap">Tarih</th>
-                  <th scope="col" class="text-nowrap">Kupa Türü</th>
-                  <th scope="col" class="text-nowrap">Kupa Sayısı</th>
-                  <th scope="col" class="text-nowrap">Kampanya</th>
-                  <th scope="col" class="text-nowrap">Durum</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in items_cups" :key="index">
-                  <td>{{ item.date }}</td>
-                  <td>{{ item.type }}</td>
-                  <td class="text-nowrap">{{ formatNumber(item.point) }}</td>
-                  <td class="text-center">{{ item.campaign }}</td>
-                  <td class="text-center">{{ item.status }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
-        <Pagination
-          v-if="totalPages_cup > 1 && !cupsLoading"
-          :paginate="paginateCupData"
-          :per-page="perPage_cup"
-          @change="getCupItems"
-        />
       </div>
     </div>
   </div>
@@ -300,6 +318,8 @@ export default {
       totalPages_cup: 0,
       totalElements_cup: 0,
       loadingCups: false,
+      activeTab: "NAP Puan",
+      showFilterSection: false,
     };
   },
   computed: {
@@ -493,10 +513,14 @@ export default {
       if (this.end_date) {
         filters.finish = this.end_date;
       }
-      this.$store.dispatch(_MODULE_NAME + "/" + GET_ITEMS, {
-        url: BASE_URL,
-        filters: filters,
-      });
+      this.$store
+        .dispatch(_MODULE_NAME + "/" + GET_ITEMS, {
+          url: BASE_URL,
+          filters: filters,
+        })
+        .then(() => {
+          this.showFilterSection = false;
+        });
     },
     getCupItems(value = null) {
       if (value >= 0) {
@@ -521,10 +545,14 @@ export default {
         filters.finish = this.end_date_cup;
       }
 
-      this.$store.dispatch(_MODULE_NAME + "/" + GET_CUPS, {
-        url: "/mobile/memberCup",
-        filters: filters,
-      });
+      this.$store
+        .dispatch(_MODULE_NAME + "/" + GET_CUPS, {
+          url: "/mobile/memberCup",
+          filters: filters,
+        })
+        .then(() => {
+          this.showFilterSection = false;
+        });
     },
     getPoints() {
       let filters = {};
@@ -547,13 +575,24 @@ export default {
         filters: filters,
       });
     },
+    switchTab(tab) {
+      this.activeTab = tab;
+    },
+    toggleFilterSection() {
+      this.showFilterSection = !this.showFilterSection;
+    },
   },
   mounted() {
     const urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
     const token = urlParams.get("token");
 
-    window.localStorage.setItem("token", token);
-    window.localStorage.setItem("refresh_token", token);
+    if (
+      !window.localStorage.getItem("token") &&
+      !window.localStorage.getItem("refresh_token")
+    ) {
+      window.localStorage.setItem("token", token);
+      window.localStorage.setItem("refresh_token", token);
+    }
     feather.replace();
     this.getItems();
     this.getCupItems();
@@ -618,6 +657,67 @@ export default {
   font-weight: 400;
   color: #657c9f;
   font-size: 14px;
+}
+
+.tab-tournament {
+  background-color: #edeff2;
+  border-radius: 80px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 51px;
+}
+
+.tab-detail {
+  border-radius: 40px;
+  padding: 4px 16px;
+  border: none;
+  background-color: #edeff2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.tab-detail.active-tab {
+  background: radial-gradient(
+    293.12% 580.72% at 218.02% 240.74%,
+    #c3f197 0%,
+    #01d9dc 100%
+  );
+  width: 105%;
+}
+
+.title {
+  color: #40c9c0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.filter-container {
+  padding: 8px 24px 18px 24px;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.filter-button {
+  background-color: white;
+  border: none;
 }
 </style>
   

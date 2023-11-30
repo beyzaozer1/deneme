@@ -1,72 +1,83 @@
 <template>
-  <div class="d-flex justify-content-center">
-    <div class="col-lg-8 col-12">
-      <div v-if="pageLoading">
-        <loader :loading="pageLoading"></loader>
-      </div>
-      <div
-        v-else
-        id="game"
-        :style="{ backgroundImage: 'url(assets/images/npbg1.png)' }"
-        class="rounded shadow border-bottom p-4"
-      >
-        <div id="game-area" class="row d-flex justify-content-center">
-          <div class="col-lg-12 col-md-12 col-12 head-box">
-            <h3 class="title">
-              {{ $t("haveFundAndLearn.fill_in_the_blank") }}
-            </h3>
-            <p v-show="false" class="description">
-              {{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}
-            </p>
-          </div>
-
-          <transition
-            enter-active-class="animated fadeInLeft"
-            leave-active-class="animated bounceOutRight"
-            name="custom-classes-transition"
-          >
-            <div v-if="question" class="text-center" style="padding: 15px">
-              <div class="col-lg-12 col-md-12 col-12 question text-center">
-                <img
-                  v-if="question.question_image"
-                  :src="question.question_image"
-                  width="110"
-                />
-                <p class="information" v-html="question.question_text"></p>
-              </div>
-              <div class="container mt-4">
-                <div class="row text-center">
-                  <div
-                    v-for="(q1reply, index) in question.options"
-                    :key="index"
-                    class="col-md-4 col-lg-4 col-4"
-                  >
-                    <a
-                      class="btn btn-pills btn-light mt-2 me-2 p-2"
-                      href="javascript:void(0)"
-                      @click.prevent="reply($event)"
-                    >
-                      {{ q1reply }}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </transition>
-
+  <div class="col-lg-8 col-12">
+    <div v-if="pageLoading">
+      <loader :loading="pageLoading"></loader>
+    </div>
+      <div v-else id="game" class="game-container">
+        <div class="game-image">
+          <img src="/images/mobile/Group 14088.svg" width="45" height="45" />
+        </div>
+        <p class="description">{{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}</p>
+        <div v-if="start" id="timer">{{ start }}</div>
+        <div class="question-container">
           <div
-            class="col-lg-12 col-md-12 col-12 reply d-flex fixed-bottom justify-content-center align-content-center position-absolute"
+            v-for="(q1reply, index) in question.options"
+            :key="index"
+            class="answer"
           >
             <a
-              class="btn btn-pills btn-light"
               href="javascript:void(0)"
-              @click.prevent="submitQuiz"
+              @click.prevent="reply($event)"
             >
-              Gönder
+              <span class="answer-text">{{ q1reply }}</span>
             </a>
           </div>
         </div>
       </div>
+      <!-- <div id="game-area" class="row d-flex justify-content-center">
+        <div class="col-lg-12 col-md-12 col-12 head-box">
+          <h3 class="title">{{ $t("haveFundAndLearn.fill_in_the_blank") }}</h3>
+          <p v-show="false" class="description">
+            {{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}
+          </p>
+        </div>
+
+        <transition
+          enter-active-class="animated fadeInLeft"
+          leave-active-class="animated bounceOutRight"
+          name="custom-classes-transition"
+        >
+          <div v-if="question" class="text-center" style="padding: 15px">
+            <div class="col-lg-12 col-md-12 col-12 question text-center">
+              <img
+                v-if="question.question_image"
+                :src="question.question_image"
+                width="110"
+              />
+              <p class="information" v-html="question.question_text"></p>
+            </div>
+            <div class="container mt-4">
+              <div class="row text-center">
+                <div
+                  v-for="(q1reply, index) in question.options"
+                  :key="index"
+                  class="col-md-4 col-lg-4 col-4"
+                >
+                  <a
+                    class="btn btn-pills btn-light mt-2 me-2 p-2"
+                    href="javascript:void(0)"
+                    @click.prevent="reply($event)"
+                  >
+                    {{ q1reply }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+
+        <div
+          class="col-lg-12 col-md-12 col-12 reply d-flex fixed-bottom justify-content-center align-content-center position-absolute"
+        >
+          <a
+            class="btn btn-pills btn-light"
+            href="javascript:void(0)"
+            @click.prevent="submitQuiz"
+          >
+            Gönder
+          </a>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -283,6 +294,61 @@ export default {
 </script>
 
 <style scoped>
+.answer-text {
+  color: gray;
+}
+.game-image {
+  border-radius: 50%;
+  background: rgb(234, 245, 248);
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.information {
+  font-size: 20px !important;
+  margin-bottom: 30px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+}
+
+.description {
+  color: gray;
+  max-width: 80%;
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.answer {
+  background-color: white;
+  padding: 12px 24px;
+  border-radius: 60px;
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.question-container {
+  background: rgb(234, 245, 248);
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  min-height: 464px;
+  margin-bottom: 16px;
+}
 .information #reply {
   font-weight: bold;
 }
@@ -320,7 +386,6 @@ export default {
 .question .counter {
   text-align: center;
   margin-top: 10px;
-  background-color: #fff;
   border-radius: 50%;
   padding-left: 7px;
   padding-right: 7px;
@@ -329,18 +394,4 @@ export default {
   bottom: -14px;
 }
 
-.title,
-.description {
-  color: #fff;
-}
-
-#game {
-  background-color: rgb(10 155 140);
-  background-position: center top;
-  width: 100%;
-  height: 680px;
-  background-size: 400px auto;
-  overflow: hidden;
-  position: relative;
-}
 </style>
