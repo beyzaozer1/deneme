@@ -12,7 +12,7 @@
           <p class="description">{{ $t("haveFundAndLearn.yes_no_desc") }}</p>
           <div v-if="start" id="timer">{{ start }}</div>
           <div class="question-container">
-            <p class="information">{{ question.question_text }}</p>
+            <p class="information">{{ question?.question_text }}</p>
             <div
               v-for="(answer, index) in question.options"
               v-if="question.options"
