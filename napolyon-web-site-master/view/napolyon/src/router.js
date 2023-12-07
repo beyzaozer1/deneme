@@ -283,6 +283,11 @@ export default new Router({
       component: () => import("@/view/mobile/leadershipRank"),
     },
     {
+      path: "/beyza",
+      name: "index.beyza",
+      component: () => import("@/view/mobile/beyza"),
+    },
+    {
       path: "/mobil-nap-transferleri/:type?/:id?",
       name: "index.nap_transfers",
       component: () => import("@/view/mobile/napTransfers"),
@@ -326,11 +331,6 @@ export default new Router({
       path: "/mobil-bosluklari-doldur",
       name: "index.games.fill_in_the_blank",
       component: () => import("@/view/mobile/games/fill_in_the_blank"),
-    },
-    {
-      path:"/beyza",
-      name: "index.beyza",
-      component: () => import("@/view/mobile/beyza.vue")
     },
     {
       path: "/payment-success",

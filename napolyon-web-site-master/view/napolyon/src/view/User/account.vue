@@ -25,18 +25,6 @@
     <br />
     <div v-if="userAccount" class="rounded shadow border-bottom p-4">
       <div class="row">
-        <div class="col-12 text-center download-app">
-          Ayarlar, Napoylon mobil uygulamasına taşındı  uygulamayı indirerek ayarlara erişebilirsin.
-        </div>
-        <div class="col-12">
-          <img src="/images/account/downloadApp.png" alt="" width="100%" height="100%">
-        </div>
-      </div>
-      <!--end row-->
-    </div>
-  <br />
-    <div v-if="userAccount" class="rounded shadow border-bottom p-4">
-      <div class="row">
         <div class="col-12">
           <h5>{{ $t("account.personal_information") }}:</h5>
         </div>

@@ -3,28 +3,39 @@
     <div v-if="pageLoading">
       <loader :loading="pageLoading"></loader>
     </div>
-      <div v-else id="game" class="game-container">
-        <div class="game-image">
-          <img src="/images/mobile/Group 14088.svg" width="45" height="45" />
+    <div v-else id="game" class="game-container">
+      <div class="game-image">
+        <img src="/images/mobile/Group 14088.svg" width="45" height="45" />
+      </div>
+      <p class="description">
+        {{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}
+      </p>
+
+      <div class="question-container">
+        <p class="information" v-html="question?.question_text"></p>
+        <div
+          v-for="(q1reply, index) in question?.options"
+          :key="index"
+          class="answer"
+        >
+          <a href="javascript:void(0)" @click.prevent="reply($event, index)">
+            <span class="answer-text">{{ q1reply }}</span>
+          </a>
         </div>
-        <p class="description">{{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}</p>
-        <div v-if="start" id="timer">{{ start }}</div>
-        <div class="question-container">
-          <div
-            v-for="(q1reply, index) in question.options"
-            :key="index"
-            class="answer"
+        <div
+          class="col-lg-12 col-md-12 col-12 reply d-flex justify-content-center align-content-center"
+        >
+          <a
+            class="btn btn-pills btn-light"
+            href="javascript:void(0)"
+            @click.prevent="submitQuiz"
           >
-            <a
-              href="javascript:void(0)"
-              @click.prevent="reply($event)"
-            >
-              <span class="answer-text">{{ q1reply }}</span>
-            </a>
-          </div>
+            Gönder
+          </a>
         </div>
       </div>
-      <!-- <div id="game-area" class="row d-flex justify-content-center">
+    </div>
+    <!-- <div id="game-area" class="row d-flex justify-content-center">
         <div class="col-lg-12 col-md-12 col-12 head-box">
           <h3 class="title">{{ $t("haveFundAndLearn.fill_in_the_blank") }}</h3>
           <p v-show="false" class="description">
@@ -78,7 +89,7 @@
           </a>
         </div>
       </div> -->
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -157,7 +168,6 @@ export default {
       let token = {
         accessToken: localStorage.getItem("token"),
       };
-
       axios
         .post(
           process.env.VUE_APP_MOBIL_URL +
@@ -184,7 +194,7 @@ export default {
               self.start = null;
               self.pageLoading = false;
 
-              if (response.data.status == 0) {
+              if ((response.data.status = 0)) {
                 let item = response.data;
                 self.process_control_block_id = item.process_control_block_id;
                 self.question = item.questions[0];
@@ -240,7 +250,7 @@ export default {
         customerId: this.user.memberId,
         processControlBlockId: this.process_control_block_id,
         questionId: self.question.question_id,
-        questionText: self.question.question_text,
+        questionText: self.question?.question_text,
         answerText: self.selectReply,
         subjectId: 2,
       };
@@ -336,6 +346,7 @@ export default {
   border-radius: 60px;
   margin-bottom: 10px;
   color: gray;
+  border: 1px solid transparent; /* Initially set border as transparent */
 }
 
 .question-container {
@@ -393,5 +404,4 @@ export default {
   position: absolute;
   bottom: -14px;
 }
-
 </style>

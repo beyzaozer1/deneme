@@ -968,8 +968,8 @@
       <template v-else-if="selectedItem">
         <div class="rounded shadow border-bottom p-4 mb-2">
           <div class="container">
-            <div v-if="loading" class="row">
-              <loader :loading="loading" style="width: 100%"></loader>
+            <div v-if="loading" class="loading">
+              <loader :loading="loading"></loader>
             </div>
             <div v-else class="row">
               <div
@@ -1107,18 +1107,20 @@
         </div>
       </div>
 -->     
-        <div class="container mb-1" @click.prevent="onClickItem(2)">
-          <div class="image-container">
-            <img src="/images/mobile/ticket-star.png" width="26px" height="21px"/>
-          </div>
-          <div>Hediye Çekine Dönüştür</div>
-        </div>
-        <div class="container" @click.prevent="onClickItem(3)">
-          <div class="image-container">
-            <img src="/images/mobile/money-add.png" width="21px" height="21px"/>
-          </div>
-          <div>100 TL talep et</div>
-        </div>
+    <div class="container-new">
+      <div class="container mb-3" @click.prevent="onClickItem(2)">
+              <div class="image-container">
+                <img src="/images/mobile/ticket-star.png" width="26px" height="21px"/>
+              </div>
+              <div class="content">Hediye Çekine Dönüştür</div>
+            </div>
+            <div class="container" @click.prevent="onClickItem(3)">
+              <div class="image-container">
+                <img src="/images/mobile/money-add.png" width="21px" height="21px"/>
+              </div>
+              <div class="content">100 TL talep et</div>
+            </div>
+    </div>
         <!-- <div
           class="rounded shadow border-bottom p-2 mt-4 cursor-pointer"
           @click.prevent="onClickItem(2)"
@@ -1694,8 +1696,13 @@ export default {
     const urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
     const token = urlParams.get("token");
 
-    window.localStorage.setItem("token", token);
-    window.localStorage.setItem("refresh_token", token);
+    if (
+      !window.localStorage.getItem("token") ||
+      !window.localStorage.getItem("refresh_token")
+    ) {
+      window.localStorage.setItem("token", token);
+        window.localStorage.setItem("refresh_token", token);
+    }
 
     window.insider_object = window.insider_object || {};
     window.insider_object.page = {
@@ -1859,7 +1866,6 @@ export default {
 
 .container {
   display: flex;
-  align-items: center;
   justify-content: flex-start;
   background-color: #F2EEFC;
   gap: 12px;
@@ -1872,5 +1878,22 @@ export default {
   background-color: white;
   border-radius: 50%;
   padding: 8px;
+}
+
+.container-new {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+} 
+
+.content {
+  margin-top: 7px;
+}
+
+.loading {
+  width: 100%;
 }
 </style>

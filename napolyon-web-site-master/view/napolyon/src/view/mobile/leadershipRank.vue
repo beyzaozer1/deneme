@@ -363,10 +363,12 @@ export default {
   border-radius: 40px;
   padding: 4px 16px;
   border: none;
+  color: #000000 !important;
+  background-color: #edeff2;
 }
 
 .pink-background-container {
-  position: relative; /* Set the position of the container to relative */
+  position: relative;
   background-color: rgb(249, 238, 242);
   border-radius: 32px;
   display: flex;
@@ -515,7 +517,7 @@ export default {
 }
 
 .tab-detail.active {
-  background-color: white; /* Change this to the desired background color */
+  background-color: #fff !important; /* Change this to the desired background color */
 }
 
 .current-user {

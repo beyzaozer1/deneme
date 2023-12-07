@@ -339,7 +339,7 @@ export default {
               if (response.data.status == 1) {
                 window.location.href = response.data.content;
               } else {
-                this.$router.push({ path: response.data.content });
+                this.$router.push({ path: 'index.tasks'});
               }
             } else {
               let error;
@@ -374,7 +374,7 @@ export default {
               if (response.data.status == 1) {
                 window.location.href = response.data.content;
               } else {
-                this.$router.push({ path: response.data.content });
+                this.$router.push({ path: 'index.tasks' });
               }
             } else {
               let error;
@@ -473,6 +473,8 @@ export default {
   color: black;
   font-weight: 600;
   font-size: 20px;
+  margin-bottom: 3px;
+  margin-left: 2px;
 }
 
 .content-desc {

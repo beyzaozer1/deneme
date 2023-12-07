@@ -4,21 +4,21 @@
       <div class="rounded shadow border-bottom p-4">
         <div class="row">
           <div
-              v-for="(item, index) in avatars"
-              :key="index"
-              class="col-lg-4 col-md-4 col-12 d-flex justify-content-center align-items-center pr-5 pl-5 pb-3"
+            v-for="(item, index) in avatars"
+            :key="index"
+            class="col-lg-4 col-md-4 col-12 d-flex justify-content-center align-items-center pr-5 pl-5 pb-3"
           >
             <img
-                :src="mediaBase + '/images/avatars/' + item"
-                class="avatar avatar-medium shadow-lg rounded-pill"
-                style="cursor: pointer"
-                @click.prevent="changeProfileImage(item)"
+              :src="mediaBase + '/images/avatars/' + item"
+              class="avatar avatar-medium shadow-lg rounded-pill"
+              style="cursor: pointer"
+              @click.prevent="changeProfileImage(item)"
             />
           </div>
           <button
-              class="btn btn-info btn-block btn-xs"
-              type="button"
-              @click="showAvatars = !showAvatars"
+            class="btn btn-info btn-block btn-xs"
+            type="button"
+            @click="showAvatars = !showAvatars"
           >
             Vazgeç
           </button>
@@ -27,106 +27,127 @@
     </template>
 
     <template v-else>
-      <div class="card border-0 rounded shadow">
+      <div class="rounded shadow border-bottom p-4"  v-if="!disabledSection">
+        <div class="row">
+          <div class="col-12 d-flex align-items-center justify-content-end">
+            <button @click="closeSection" class="close-button">x</button>
+          </div>
+          <div class="col-12 text-center download-app">
+            Ayarlar, Napoylon mobil uygulamasına taşındı  uygulamayı indirerek
+            ayarlara erişebilirsin.
+          </div>
+          <div class="col-12">
+            <img
+              src="/images/account/downloadApp.png"
+              alt=""
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="card border-0 rounded shadow" v-if="disabledSection">
         <div class="card-body">
           <h5 class="text-md-left text-center">
             {{ $t("setting.profile_information") }} :
           </h5>
           <div class="mt-3 text-md-left text-center d-sm-flex">
             <img
-                :src="
+              :src="
                 userSetting && userSetting.avatar
                   ? mediaBase + '/images/avatars/' + userSetting.avatar
                   : mediaBase + '/images/avatars/Avatar0.png'
               "
-                alt=""
-                class="avatar float-md-left avatar-medium rounded-circle shadow mr-md-4"
+              alt=""
+              class="avatar float-md-left avatar-medium rounded-circle shadow mr-md-4"
             />
-            <div class="mt-md-4 mt-3 mt-sm-0">
+            <!-- <div class="mt-md-4 mt-3 mt-sm-0">
               <a
-                  class="btn btn-primary mt-2"
-                  href="javascript:void(0)"
-                  @click="showAvatars = !showAvatars"
-              >{{ $t("setting.update") }}</a
+                class="btn btn-primary mt-2"
+                href="javascript:void(0)"
+                @click="showAvatars = !showAvatars"
+                >{{ $t("setting.update") }}</a
               >
               <a
-                  class="btn btn-outline-primary mt-2 ml-2"
-                  href="javascript:void(0)"
-                  @click="changeProfileImage(avatars[0])"
-              >{{ $t("setting.delete") }}</a
+                class="btn btn-outline-primary mt-2 ml-2"
+                href="javascript:void(0)"
+                @click="changeProfileImage(avatars[0])"
+                >{{ $t("setting.delete") }}</a
               >
-            </div>
+            </div> -->
           </div>
           <nav class="mt-5 pt-2">
             <div id="nav-tab" class="nav nav-tabs" role="tablist">
               <a
-                  id="nav-email-tab"
-                  aria-controls="nav-email"
-                  aria-selected="true"
-                  class="nav-item nav-link active"
-                  data-toggle="tab"
-                  href="#nav-email"
-                  role="tab"
-              >Kullanıcı</a
+                id="nav-email-tab"
+                aria-controls="nav-email"
+                aria-selected="true"
+                class="nav-item nav-link active"
+                data-toggle="tab"
+                href="#nav-email"
+                role="tab"
+                >Kullanıcı</a
               >
               <a
-                  id="nav-password-tab"
-                  aria-controls="nav-password"
-                  aria-selected="false"
-                  class="nav-item nav-link"
-                  data-toggle="tab"
-                  href="#nav-password"
-                  role="tab"
-              >Şifre</a
+                id="nav-password-tab"
+                aria-controls="nav-password"
+                aria-selected="false"
+                class="nav-item nav-link"
+                data-toggle="tab"
+                href="#nav-password"
+                role="tab"
+                >Şifre</a
               >
               <a
-                  id="nav-GSM-tab"
-                  aria-controls="nav-GSM"
-                  aria-selected="false"
-                  class="nav-item nav-link"
-                  data-toggle="tab"
-                  href="#nav-GSM"
-                  role="tab"
-              >GSM</a
-              >
-              <a v-if="false"
-                  id="nav-facebook-tab"
-                  aria-controls="nav-facebook"
-                  aria-selected="false"
-                  class="nav-item nav-link"
-                  data-toggle="tab"
-                  href="#nav-facebook"
-                  role="tab"
-              >Facebook</a
+                id="nav-GSM-tab"
+                aria-controls="nav-GSM"
+                aria-selected="false"
+                class="nav-item nav-link"
+                data-toggle="tab"
+                href="#nav-GSM"
+                role="tab"
+                >GSM</a
               >
               <a
-                  id="nav-permissions-tab"
-                  aria-controls="nav-permissions"
-                  aria-selected="false"
-                  class="nav-item nav-link"
-                  data-toggle="tab"
-                  href="#nav-permissions"
-                  role="tab"
-              >İzinler</a
+                v-if="false"
+                id="nav-facebook-tab"
+                aria-controls="nav-facebook"
+                aria-selected="false"
+                class="nav-item nav-link"
+                data-toggle="tab"
+                href="#nav-facebook"
+                role="tab"
+                >Facebook</a
               >
               <a
-                  id="nav-tc-confirmation-tab"
-                  aria-controls="nav-tc-confirmation"
-                  aria-selected="false"
-                  class="nav-item nav-link"
-                  data-toggle="tab"
-                  href="#nav-tc-confirmation"
-                  role="tab"
-              >T.C. Onay</a
+                id="nav-permissions-tab"
+                aria-controls="nav-permissions"
+                aria-selected="false"
+                class="nav-item nav-link"
+                data-toggle="tab"
+                href="#nav-permissions"
+                role="tab"
+                >İzinler</a
+              >
+              <a
+                id="nav-tc-confirmation-tab"
+                aria-controls="nav-tc-confirmation"
+                aria-selected="false"
+                class="nav-item nav-link"
+                data-toggle="tab"
+                href="#nav-tc-confirmation"
+                role="tab"
+                >T.C. Onay</a
               >
             </div>
           </nav>
           <div id="nav-tabContent" class="tab-content mb-n4">
             <div
-                id="nav-email"
-                aria-labelledby="nav-email-tab"
-                class="tab-pane fade show active"
-                role="tabpanel"
+              id="nav-email"
+              aria-labelledby="nav-email-tab"
+              class="tab-pane fade show active"
+              role="tabpanel"
             >
               <form>
                 <div class="row mt-4 pt-2">
@@ -139,7 +160,7 @@
                   <div v-if="section_1_status && error" class="col-12">
                     <div class="alert alert-danger text-center">
                       <span
-                      >İşlem yapılırken hata oluştur. Tekrardan
+                        >İşlem yapılırken hata oluştur. Tekrardan
                         deneyiniz</span
                       >
                     </div>
@@ -151,17 +172,18 @@
                       <div class="position-relative">
                         <i class="fea icon-sm icons" data-feather="user"></i>
                         <input
-                            id="firstName"
-                            v-model="userSetting.firstName"
-                            class="form-control pl-5"
-                            disabled
-                            placeholder="Adınız :"
-                            type="text"
+                          id="firstName"
+                          v-model="userSetting.firstName"
+                          class="form-control pl-5"
+                          disabled
+                          placeholder="Adınız :"
+                          type="text"
+                          readonly
                         />
                       </div>
                       <div
-                          v-if="section_1_status && !$v.user.firstName"
-                          class="error d-block"
+                        v-if="section_1_status && !$v.user.firstName"
+                        class="error d-block"
                       >
                         Adınızı giriniz
                       </div>
@@ -173,21 +195,22 @@
                       <label for="lastName"> {{ $t("setting.surname") }}</label>
                       <div class="position-relative">
                         <i
-                            class="fea icon-sm icons"
-                            data-feather="user-check"
+                          class="fea icon-sm icons"
+                          data-feather="user-check"
                         ></i>
                         <input
-                            id="lastName"
-                            v-model="userSetting.lastName"
-                            class="form-control pl-5"
-                            disabled
-                            placeholder="Soyadınız :"
-                            type="text"
+                          id="lastName"
+                          v-model="userSetting.lastName"
+                          class="form-control pl-5"
+                          disabled
+                          placeholder="Soyadınız :"
+                          type="text"
+                          readonly
                         />
                       </div>
                       <div
-                          v-if="section_1_status && !$v.user.lastName"
-                          class="error d-block"
+                        v-if="section_1_status && !$v.user.lastName"
+                        class="error d-block"
                       >
                         Soyadınızı giriniz
                       </div>
@@ -200,17 +223,18 @@
                       <div class="position-relative">
                         <i class="fea icon-sm icons" data-feather="mail"></i>
                         <input
-                            id="email"
-                            v-model="userSetting.email"
-                            class="form-control pl-5"
-                            disabled
-                            placeholder="E-Postanız :"
-                            type="email"
+                          id="email"
+                          v-model="userSetting.email"
+                          class="form-control pl-5"
+                          disabled
+                          placeholder="E-Postanız :"
+                          type="email"
+                          readonly
                         />
                       </div>
                       <div
-                          v-if="section_1_status && !$v.user.email"
-                          class="error d-block"
+                        v-if="section_1_status && !$v.user.email"
+                        class="error d-block"
                       >
                         E-Postanızı giriniz
                       </div>
@@ -228,10 +252,10 @@
 
             <!--end form-->
             <div
-                id="nav-GSM"
-                aria-labelledby="nav-GSM-tab"
-                class="tab-pane fade"
-                role="tabpanel"
+              id="nav-GSM"
+              aria-labelledby="nav-GSM-tab"
+              class="tab-pane fade"
+              role="tabpanel"
             >
               <div class="row">
                 <div v-if="section_2_status" class="col-12 mt-4">
@@ -242,12 +266,8 @@
 
                 <div class="col-12 mt-4 pt-2">
                   <form>
-                    <p>
-                      Telefon numaranızı 10 haneli olacak şekilde giriniz
-                    </p>
-                    <p>
-                      Örnek: 5324444444
-                    </p>
+                    <p>Telefon numaranızı 10 haneli olacak şekilde giriniz</p>
+                    <p>Örnek: 5324444444</p>
 
                     <div class="row mt-4 pt-2">
                       <div class="col-12">
@@ -255,15 +275,16 @@
                           <label> {{ $t("setting.phone_no") }}:</label>
                           <div class="position-relative">
                             <i
-                                class="fea icon-sm icons"
-                                data-feather="phone"
+                              class="fea icon-sm icons"
+                              data-feather="phone"
                             ></i>
                             <input
-                                id="number"
-                                v-model="gsmNumber"
-                                class="form-control pl-5"
-                                placeholder="Telefon :"
-                                type="number"
+                              id="number"
+                              v-model="gsmNumber"
+                              class="form-control pl-5"
+                              placeholder="Telefon :"
+                              type="number"
+                              readonly
                             />
                           </div>
                         </div>
@@ -274,14 +295,15 @@
                     </div>
                     <div class="d-flex justify-content-center">
                       <button
-                          class="btn btn-primary btn-block"
-                          type="button"
-                          @click="updateGsm"
+                        class="btn btn-primary btn-block"
+                        type="button"
+                        disabled
+                        @click="updateGsm"
                       >
                         {{
                           userSetting.gsmNumber !== null
-                              ? $t("setting.update")
-                              : $t("setting.save")
+                            ? $t("setting.update")
+                            : $t("setting.save")
                         }}
                       </button>
                     </div>
@@ -291,31 +313,31 @@
               </div>
             </div>
             <div
-                v-if="false"
-                id="nav-facebook"
-                aria-labelledby="nav-facebook-tab"
-                class="tab-pane fade"
-                role="tabpanel"
+              v-if="false"
+              id="nav-facebook"
+              aria-labelledby="nav-facebook-tab"
+              class="tab-pane fade"
+              role="tabpanel"
             >
               <div class="row">
                 <div class="col-12 mt-4 pt-2 text-center">
                   <img
-                      alt="facebook"
-                      class="img-fluid"
-                      src="/images/fb-ile-baglan.jpg"
+                    alt="facebook"
+                    class="img-fluid"
+                    src="/images/fb-ile-baglan.jpg"
                   />
                   <button
-                      v-if="userSetting.facebookUserId"
-                      class="btn text-white"
-                      style="background: #325a97; width:100%;"
+                    v-if="userSetting.facebookUserId"
+                    class="btn text-white"
+                    style="background: #325a97; width: 100%"
                   >
                     <span><i class="fab fa-facebook-square"></i></span
                     >Bağlantılı
                   </button>
                   <button
-                      v-else
-                      class="btn text-white"
-                      style="background: #325a97; width:100%;"
+                    v-else
+                    class="btn text-white"
+                    style="background: #325a97; width: 100%"
                   >
                     <span><i class="fab fa-facebook-square"></i></span>
                     Facebook eşleştirmenizi oluşturmak için tıklayınız.
@@ -324,20 +346,20 @@
               </div>
             </div>
             <div
-                id="nav-tc-confirmation"
-                aria-labelledby="nav-tc-confirmation-tab"
-                class="tab-pane fade"
-                role="tabpanel"
+              id="nav-tc-confirmation"
+              aria-labelledby="nav-tc-confirmation-tab"
+              class="tab-pane fade"
+              role="tabpanel"
             >
               <div class="row">
                 <div class="col-12 mt-4 pt-2">
                   <form>
                     <p>
-                      T.C kimlik numaranızdan hata alıyorsanız üyelik bilgileriniz
-                      ile T.C kimlik bilgilerinizin örtüşüp örtüşmediğini
-                      (kimliğinizde isim ve soy isim alanından “i,ö,ü,ü,ğ”
-                      harfleri var iken üyeliğinizde “ı,o,o,g” ) yer alıyor ise
-                      kontrol edin.
+                      T.C kimlik numaranızdan hata alıyorsanız üyelik
+                      bilgileriniz ile T.C kimlik bilgilerinizin örtüşüp
+                      örtüşmediğini (kimliğinizde isim ve soy isim alanından
+                      “i,ö,ü,ü,ğ” harfleri var iken üyeliğinizde “ı,o,o,g” ) yer
+                      alıyor ise kontrol edin.
                     </p>
                     <p>
                       Eğer bilgileriniz örtüştüğü halde bu hatayı alıyorsanız
@@ -353,10 +375,10 @@
 
                       <div v-if="section_1_status && error" class="col-12">
                         <div class="alert alert-danger text-center">
-                        <span
-                        >İşlem yapılırken hata oluştur. Tekrardan
-                          deneyiniz</span
-                        >
+                          <span
+                            >İşlem yapılırken hata oluştur. Tekrardan
+                            deneyiniz</span
+                          >
                         </div>
                       </div>
 
@@ -367,34 +389,37 @@
                             <i class="far fa-address-card icons"></i>
 
                             <input
-                                id="tc_identity"
-                                v-model="tc_identity"
-                                class="form-control pl-5"
-                                placeholder="T.C. Kimlik Numaranız"
-                                type="text"
+                              id="tc_identity"
+                              v-model="tc_identity"
+                              class="form-control pl-5"
+                              placeholder="T.C. Kimlik Numaranız"
+                              type="text"
+                              readonly
                             />
                           </div>
                           <div
-                              v-if="ready_to_submit_tc && !$v.tc_identity.required"
-                              class="error d-block"
+                            v-if="
+                              ready_to_submit_tc && !$v.tc_identity.required
+                            "
+                            class="error d-block"
                           >
                             T.C. Kimlik No'nuzu giriniz.
                           </div>
                           <div v-else>
                             <div
-                                v-if="
-                              ready_to_submit_tc && !$v.tc_identity.minLength
-                            "
-                                class="error d-block"
+                              v-if="
+                                ready_to_submit_tc && !$v.tc_identity.minLength
+                              "
+                              class="error d-block"
                             >
                               Eksik karakter girdiniz
                             </div>
 
                             <div
-                                v-if="
-                              ready_to_submit_tc && !$v.tc_identity.maxLength
-                            "
-                                class="error d-block"
+                              v-if="
+                                ready_to_submit_tc && !$v.tc_identity.maxLength
+                              "
+                              class="error d-block"
                             >
                               Fazla karakter girdiniz
                             </div>
@@ -403,14 +428,18 @@
                         <div class="form-group">
                           <label> {{ $t("setting.name") }}</label>
                           <div class="position-relative">
-                            <i class="fea icon-sm icons" data-feather="user"></i>
+                            <i
+                              class="fea icon-sm icons"
+                              data-feather="user"
+                            ></i>
                             <input
-                                id="first"
-                                v-model="userSetting.firstName"
-                                class="form-control pl-5"
-                                disabled
-                                placeholder="Adınız :"
-                                type="text"
+                              id="first"
+                              v-model="userSetting.firstName"
+                              class="form-control pl-5"
+                              disabled
+                              placeholder="Adınız :"
+                              type="text"
+                              readonly
                             />
                           </div>
                         </div>
@@ -421,66 +450,71 @@
                           <label> {{ $t("setting.surname") }}</label>
                           <div class="position-relative">
                             <i
-                                class="fea icon-sm icons"
-                                data-feather="user-check"
+                              class="fea icon-sm icons"
+                              data-feather="user-check"
                             ></i>
                             <input
-                                id="last"
-                                v-model="userSetting.lastName"
-                                class="form-control pl-5"
-                                disabled
-                                placeholder="Soyadınız :"
-                                type="text"
+                              id="last"
+                              v-model="userSetting.lastName"
+                              class="form-control pl-5"
+                              disabled
+                              placeholder="Soyadınız :"
+                              type="text"
+                              readonly
                             />
                           </div>
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-12" style="width: 100%;">
+                      <div class="col-12" style="width: 100%">
                         <div
-                            class="col-12 font-weight-bold m-0 p-0"
-                            style="font-size: 14px;"
+                          class="col-12 font-weight-bold m-0 p-0"
+                          style="font-size: 14px"
                         >
                           Doğum Tarihi
                         </div>
                         <div
-                            class="row m-0 py-0 px-0 justify-content-between"
-                            style="width: 100%;"
+                          class="row m-0 py-0 px-0 justify-content-between"
+                          style="width: 100%"
                         >
                           <div class="col-md-4 m-0 px-0 py-1">
                             <div class="form-group m-0 p-0">
                               <select
-                                  v-model="userSetting.birthday.split('-')[2]"
-                                  class="form-control custom-select"
-                                  disabled
+                                v-model="userSetting.birthday.split('-')[2]"
+                                class="form-control custom-select"
+                                disabled
                               >
-                                <option selected value="null"
-                                >{{ $t("login.birthday") }}
+                                <option selected value="null">
+                                  {{ $t("login.birthday") }}
                                 </option>
                                 <option
-                                    v-for="(item, index) in days"
-                                    :value="item.value"
-                                    :key="index"
-                                >{{ item.text }}
+                                  v-for="(item, index) in days"
+                                  :value="item.value"
+                                  :key="index"
+                                >
+                                  {{ item.text }}
                                 </option>
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-4 m-0 py-1 tc-confirmation-month-part">
+                          <div
+                            class="col-md-4 m-0 py-1 tc-confirmation-month-part"
+                          >
                             <div class="form-group m-0 p-0 form-month-style">
                               <select
-                                  v-model="userSetting.birthday.split('-')[1]"
-                                  class="form-control custom-select"
-                                  disabled
+                                v-model="userSetting.birthday.split('-')[1]"
+                                class="form-control custom-select"
+                                disabled
                               >
-                                <option selected value="null"
-                                >{{ $t("login.month_of_birth") }}
+                                <option selected value="null">
+                                  {{ $t("login.month_of_birth") }}
                                 </option>
                                 <option
-                                    v-for="(item, index) in months"
-                                    :value="item.value"
-                                    :key="index"
-                                >{{ item.text }}
+                                  v-for="(item, index) in months"
+                                  :value="item.value"
+                                  :key="index"
+                                >
+                                  {{ item.text }}
                                 </option>
                               </select>
                             </div>
@@ -488,18 +522,19 @@
                           <div class="col-md-4 m-0 px-0 py-1">
                             <div class="form-group m-0 p-0 form-year-style">
                               <select
-                                  v-model="userSetting.birthday.split('-')[0]"
-                                  class="form-control custom-select"
-                                  disabled
+                                v-model="userSetting.birthday.split('-')[0]"
+                                class="form-control custom-select"
+                                disabled
                               >
-                                <option selected value="null"
-                                >{{ $t("login.year_of_birth") }}
+                                <option selected value="null">
+                                  {{ $t("login.year_of_birth") }}
                                 </option>
                                 <option
-                                    v-for="(item, index) in years"
-                                    :value="item.value"
-                                    :key="index"
-                                >{{ item.text }}
+                                  v-for="(item, index) in years"
+                                  :value="item.value"
+                                  :key="index"
+                                >
+                                  {{ item.text }}
                                 </option>
                               </select>
                             </div>
@@ -518,20 +553,20 @@
 
                 <div class="col-12 mt-4 pt-2 text-center">
                   <button
-                      :disabled="
+                    :disabled="
                       !(
                         $v.tc_identity.required &&
                         $v.tc_identity.maxLength &&
                         $v.tc_identity.minLength
                       )
                     "
-                      class="btn btn-primary btn-block"
-                      @click.prevent="updateInformationTC"
+                    class="btn btn-primary btn-block"
+                    @click.prevent="updateInformationTC"
                   >
                     {{
                       userSetting.tcNo
-                          ? "Güncellemek İçin Tıklayınız"
-                          : "Tanımlamak için tıklayın"
+                        ? "Güncellemek İçin Tıklayınız"
+                        : "Tanımlamak için tıklayın"
                     }}
                   </button>
                 </div>
@@ -539,10 +574,10 @@
             </div>
             <!--end col-->
             <div
-                id="nav-password"
-                aria-labelledby="nav-password-tab"
-                class="tab-pane fade"
-                role="tabpanel"
+              id="nav-password"
+              aria-labelledby="nav-password-tab"
+              class="tab-pane fade"
+              role="tabpanel"
             >
               <div class="row">
                 <div v-if="section_3_status && success" class="col-12 mt-4">
@@ -567,18 +602,19 @@
                           <div class="position-relative">
                             <i class="fea icon-sm icons" data-feather="key"></i>
                             <input
-                                v-model="current_password"
-                                class="form-control pl-5"
-                                placeholder="Mevcut şifreniz"
-                                required=""
-                                type="password"
+                              v-model="current_password"
+                              class="form-control pl-5"
+                              placeholder="Mevcut şifreniz"
+                              required=""
+                              type="password"
+                              readonly
                             />
                           </div>
                           <div
-                              v-if="
-                            section_3_status && !$v.current_password.required
-                          "
-                              class="error d-block"
+                            v-if="
+                              section_3_status && !$v.current_password.required
+                            "
+                            class="error d-block"
                           >
                             Mevcut şifrenizi giriniz
                           </div>
@@ -591,34 +627,35 @@
                           <div class="position-relative">
                             <i class="fea icon-sm icons" data-feather="key"></i>
                             <input
-                                v-model="password"
-                                class="form-control pl-5"
-                                placeholder="Yeni şifreniz"
-                                required=""
-                                type="password"
+                              v-model="password"
+                              class="form-control pl-5"
+                              placeholder="Yeni şifreniz"
+                              required=""
+                              type="password"
+                              readonly
                             />
                           </div>
                           <div
-                              v-if="section_3_status && !$v.password.required"
-                              class="error d-block"
+                            v-if="section_3_status && !$v.password.required"
+                            class="error d-block"
                           >
                             Yeni şifrenizi giriniz
                           </div>
                           <div
-                              v-if="section_3_status && !$v.password.valid"
-                              class="error d-block"
+                            v-if="section_3_status && !$v.password.valid"
+                            class="error d-block"
                           >
                             En az 1 harf 1 rakam olmalıdır.
                           </div>
                           <div
-                              v-if="section_3_status && !$v.password.minLength"
-                              class="error d-block"
+                            v-if="section_3_status && !$v.password.minLength"
+                            class="error d-block"
                           >
                             Yeni şifrenizi en az 6 karakterden oluşmalıdır
                           </div>
                           <div
-                              v-if="section_3_status && !$v.password.maxLength"
-                              class="error d-block"
+                            v-if="section_3_status && !$v.password.maxLength"
+                            class="error d-block"
                           >
                             Yeni şifrenizi en fazla 20 karakter olabilir
                           </div>
@@ -627,20 +664,25 @@
                       <!--end col-->
                       <div class="col-12">
                         <div class="form-group">
-                          <label>{{ $t("setting.repeat_new_password") }} :</label>
+                          <label
+                            >{{ $t("setting.repeat_new_password") }} :</label
+                          >
                           <div class="position-relative">
                             <i class="fea icon-sm icons" data-feather="key"></i>
                             <input
-                                v-model="password_confirm"
-                                class="form-control pl-5"
-                                placeholder="Yeni şifrenizi tekrar giriniz."
-                                required=""
-                                type="password"
+                              v-model="password_confirm"
+                              class="form-control pl-5"
+                              placeholder="Yeni şifrenizi tekrar giriniz."
+                              required=""
+                              type="password"
+                              readonly
                             />
                           </div>
                           <div
-                              v-if="password && !$v.password_confirm.sameAsPassword"
-                              class="error d-block"
+                            v-if="
+                              password && !$v.password_confirm.sameAsPassword
+                            "
+                            class="error d-block"
                           >
                             Şifreler aynı olmalıdır
                           </div>
@@ -650,15 +692,16 @@
 
                       <!--end col-->
                       <div
-                          v-if="password_alert"
-                          class="col-lg-12 mt-2 mb-0"
+                        v-if="password_alert"
+                        class="col-lg-12 mt-2 mb-0"
                       ></div>
                     </div>
                     <div class="d-flex justify-content-center">
                       <button
-                          class="btn btn-primary btn-block"
-                          type="button"
-                          @click.prevent="updatePassword"
+                        class="btn btn-primary btn-block"
+                        type="button"
+                        @click.prevent="updatePassword"
+                        disabled
                       >
                         {{ $t("setting.update") }}
                       </button>
@@ -667,16 +710,15 @@
                   </form>
                 </div>
               </div>
-
             </div>
             <!--end col-->
 
-            <div class="p-4 "></div>
+            <div class="p-4"></div>
             <div
-                id="nav-permissions"
-                aria-labelledby="nav-permissions-tab"
-                class="tab-pane fade"
-                role="tabpanel"
+              id="nav-permissions"
+              aria-labelledby="nav-permissions-tab"
+              class="tab-pane fade"
+              role="tabpanel"
             >
               <div class="p-4">
                 <div class="row">
@@ -686,12 +728,12 @@
                     </div>
                   </div>
                   <div
-                      v-if="section_4_status && section_4_error"
-                      class="col-12"
+                    v-if="section_4_status && section_4_error"
+                    class="col-12"
                   >
                     <div class="alert alert-danger text-center">
                       <span
-                      >İşlem yapılırken hata oluştur. Tekrardan
+                        >İşlem yapılırken hata oluştur. Tekrardan
                         deneyiniz</span
                       >
                     </div>
@@ -703,37 +745,41 @@
                   </h6>
                   <div class="custom-control custom-switch">
                     <input
-                        id="customSwitch1"
-                        :checked="
+                      id="customSwitch1"
+                      :checked="
                         userSetting.emailPermissionType !== 'NOP' ? true : false
                       "
-                        class="custom-control-input"
-                        type="checkbox"
-                        @change="updatePermissionType(1)"
+                      class="custom-control-input"
+                      type="checkbox"
+                      @change="updatePermissionType(1)"
+                      readonly
+                      disabled
                     />
                     <label
-                        class="custom-control-label"
-                        for="customSwitch1"
+                      class="custom-control-label"
+                      for="customSwitch1"
                     ></label>
                   </div>
                 </div>
                 <div
-                    class="media d-flex justify-content-between py-4 border-top"
+                  class="media d-flex justify-content-between py-4 border-top"
                 >
                   <h6 class="mb-0">{{ $t("setting.need_all_emails") }}</h6>
                   <div class="custom-control custom-switch">
                     <input
-                        id="customSwitch2"
-                        :checked="
+                      id="customSwitch2"
+                      :checked="
                         userSetting.gsmPermissionType !== 'NOP' ? true : false
                       "
-                        class="custom-control-input"
-                        type="checkbox"
-                        @change="updatePermissionType(2)"
+                      class="custom-control-input"
+                      type="checkbox"
+                      @change="updatePermissionType(2)"
+                      readonly
+                      disabled
                     />
                     <label
-                        class="custom-control-label"
-                        for="customSwitch2"
+                      class="custom-control-label"
+                      for="customSwitch2"
                     ></label>
                   </div>
                 </div>
@@ -862,6 +908,7 @@ export default {
       password_alert: false,
       tc_identity: "",
       ready_to_submit_tc: false,
+      disabledSection: false
     };
   },
   watch: {
@@ -878,9 +925,9 @@ export default {
       handler(value) {
         if (value && value.hasOwnProperty("gsmNumber")) {
           this.gsmNumber =
-              value.gsmNumber == "9999999999" || !value.gsmNumber
-                  ? null
-                  : value.gsmNumber;
+            value.gsmNumber == "9999999999" || !value.gsmNumber
+              ? null
+              : value.gsmNumber;
         }
       },
     },
@@ -902,25 +949,46 @@ export default {
 
         if (item && item.hasOwnProperty("birthday")) {
           let day = item.birthday ? Number(item.birthday.split("-")[2]) : "01";
-          let month = item.birthday ? Number(item.birthday.split("-")[1]) : "01";
-          let year = item.birthday ? Number(item.birthday.split("-")[0]) : "1989";
+          let month = item.birthday
+            ? Number(item.birthday.split("-")[1])
+            : "01";
+          let year = item.birthday
+            ? Number(item.birthday.split("-")[0])
+            : "1989";
 
-          day = day.length != 2 ? day.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false}) : 0;
-          month = month.length != 2 ? month.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false}) : month;
-          year =  year.length != 4 ? year.toLocaleString('en-US', {minimumIntegerDigits: 4, useGrouping: false}) : year;
-          item.birthday = year +"-"+ month + "-" + day;
+          day =
+            day.length != 2
+              ? day.toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                  useGrouping: false,
+                })
+              : 0;
+          month =
+            month.length != 2
+              ? month.toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                  useGrouping: false,
+                })
+              : month;
+          year =
+            year.length != 4
+              ? year.toLocaleString("en-US", {
+                  minimumIntegerDigits: 4,
+                  useGrouping: false,
+                })
+              : year;
+          item.birthday = year + "-" + month + "-" + day;
         }
 
         if (item && item.hasOwnProperty("gsmNumber")) {
           item.gsmNumber =
-              item.gsmNumber == "9999999999" || !item.gsmNumber
-                  ? null
-                  : item.gsmNumber;
+            item.gsmNumber == "9999999999" || !item.gsmNumber
+              ? null
+              : item.gsmNumber;
         }
         return item;
       },
-      set(value) {
-      },
+      set(value) {},
     },
     isAuthenticated() {
       return store.getters[_MODULE_NAME + "/" + IS_AUTHENTICATED];
@@ -932,8 +1000,7 @@ export default {
       get() {
         return store.getters[_MODULE_NAME + "/" + SUCCESS];
       },
-      set(value) {
-      },
+      set(value) {},
     },
     birthday() {
       if (this.userSetting && this.userSetting.birthday) {
@@ -943,7 +1010,7 @@ export default {
     },
     titles() {
       let items = store.getters[_MODULE_NAME_CONTENT + "/" + TITLES];
-      let results = [{text: "Mesleğiniz", value: null}];
+      let results = [{ text: "Mesleğiniz", value: null }];
       if (items && items.length) {
         for (let i = 0; i < items.length; i++) {
           let item = items[i];
@@ -959,6 +1026,9 @@ export default {
     },
   },
   methods: {
+    closeSection () {
+      this.disabledSection = true;
+    },
     changeProfileImage(image) {
       this.userSetting.avatar = image;
       this.sendUpdateRequest();
@@ -1002,11 +1072,11 @@ export default {
       this.section_3_status = true;
 
       if (
-          !(
-              this.$v.current_password.$invalid ||
-              this.$v.password.$invalid ||
-              this.$v.password_confirm.$invalid
-          )
+        !(
+          this.$v.current_password.$invalid ||
+          this.$v.password.$invalid ||
+          this.$v.password_confirm.$invalid
+        )
       ) {
         let contents = {
           oldPass: this.current_password,
@@ -1014,51 +1084,49 @@ export default {
         };
 
         this.$store
-            .dispatch(CREATE_ITEM, {
-              url: "/mobile/member/updatePassword/",
-              contents: contents,
-              returnType: "stateless",
-            })
-            .then((response) => {
-              if (response.status) {
+          .dispatch(CREATE_ITEM, {
+            url: "/mobile/member/updatePassword/",
+            contents: contents,
+            returnType: "stateless",
+          })
+          .then((response) => {
+            if (response.status) {
+              Swal.fire({
+                title: response.data.title,
+                text: response.data.content,
+                icon: "success",
+                confirmButtonColor: "#0a9c8c",
+                confirmButtonText: "Tamam",
+              });
+              this.success = true;
+            } else {
+              if (typeof response.data.response.data.title != "undefined") {
                 Swal.fire({
-                  title: response.data.title,
-                  text: response.data.content,
-                  icon: "success",
+                  title: response.data.response.data.title,
+                  text: response.data.response.data.content,
+                  icon: "warning",
                   confirmButtonColor: "#0a9c8c",
                   confirmButtonText: "Tamam",
                 });
-                this.success = true;
               } else {
-                if (typeof response.data.response.data.title != "undefined") {
-                  Swal.fire({
-                    title: response.data.response.data.title,
-                    text: response.data.response.data.content,
-                    icon: "warning",
-                    confirmButtonColor: "#0a9c8c",
-                    confirmButtonText: "Tamam",
-                  });
-                } else {
-                  Swal.fire({
-                    title: "Hata",
-                    text:
-                        "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
-                    icon: "warning",
-                    confirmButtonColor: "#0a9c8c",
-                    confirmButtonText: "Tamam",
-                  });
-                }
+                Swal.fire({
+                  title: "Hata",
+                  text: "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+                  icon: "warning",
+                  confirmButtonColor: "#0a9c8c",
+                  confirmButtonText: "Tamam",
+                });
               }
-            })
-            .catch((err) => {
-            });
+            }
+          })
+          .catch((err) => {});
       }
     },
     showGSMUpdateSwal() {
       let self = this;
       return Swal.fire({
         title:
-            "<h5>Cep Telefonu Tanımlama</h5><p class='m-0 p-0' style='font-size:14px;'>Telefon numaranızı 10 haneli olacak şekilde giriniz<p>",
+          "<h5>Cep Telefonu Tanımlama</h5><p class='m-0 p-0' style='font-size:14px;'>Telefon numaranızı 10 haneli olacak şekilde giriniz<p>",
         input: "text",
         inputLabel: "Örnek: 5324444444",
         showCancelButton: true,
@@ -1067,8 +1135,6 @@ export default {
         cancelButtonColor: "#f17425",
         cancelButtonText: "Vazgeç",
         inputValidator: (value) => {
-
-
           self.gsmNumber = value;
         },
       });
@@ -1098,52 +1164,55 @@ export default {
           store.commit(SET_LOADING, true);
 
           self.$store
-              .dispatch(CREATE_ITEM, {
-                url: "/mobile/member/confirmCode",
-                contents: {code: self.gsmCode, gsm: self.gsmNumber},
-                returnType: "stateless",
-                isAuthenticated: self.isAuthenticated,
-              })
-              .then((response) => {
-                store.commit(SET_LOADING, false);
-                if (response.status) {
-                  self.showSuccessNotification();
-                  self.getUser();
-                } else {
-                  let error;
-                  try {
-                    error = response.data.response.data.content || "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-                  } catch (e) {
-                    error =
-                        "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-                  }
-                  self.showErrorNotification("Hata Oluştu", error);
+            .dispatch(CREATE_ITEM, {
+              url: "/mobile/member/confirmCode",
+              contents: { code: self.gsmCode, gsm: self.gsmNumber },
+              returnType: "stateless",
+              isAuthenticated: self.isAuthenticated,
+            })
+            .then((response) => {
+              store.commit(SET_LOADING, false);
+              if (response.status) {
+                self.showSuccessNotification();
+                self.getUser();
+              } else {
+                let error;
+                try {
+                  error =
+                    response.data.response.data.content ||
+                    "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
+                } catch (e) {
+                  error =
+                    "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
                 }
-              });
+                self.showErrorNotification("Hata Oluştu", error);
+              }
+            });
         }
         if (result.isDenied) {
-
           self.$store
-              .dispatch(CREATE_ITEM, {
-                url: "/mobile/member/getConfirmCode",
-                contents: {gsm: self.gsmNumber},
-                returnType: "stateless",
-                isAuthenticated: self.isAuthenticated,
-              })
-              .then((response) => {
-                if (response.status) {
-                  self.showGSMCodeSwal();
-                } else {
-                  let error;
-                  try {
-                    error = response.data.response.data.content || "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-                  } catch (e) {
-                    error =
-                        "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-                  }
-                  self.showErrorNotification(error);
+            .dispatch(CREATE_ITEM, {
+              url: "/mobile/member/getConfirmCode",
+              contents: { gsm: self.gsmNumber },
+              returnType: "stateless",
+              isAuthenticated: self.isAuthenticated,
+            })
+            .then((response) => {
+              if (response.status) {
+                self.showGSMCodeSwal();
+              } else {
+                let error;
+                try {
+                  error =
+                    response.data.response.data.content ||
+                    "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
+                } catch (e) {
+                  error =
+                    "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
                 }
-              });
+                self.showErrorNotification(error);
+              }
+            });
         }
       });
     },
@@ -1156,38 +1225,45 @@ export default {
         return;
       }
       if (!Number.isInteger(Number(value))) {
-        self.showErrorNotification("Hata Oluştu", "Lütfen rakamlardan oluşan telefon numaranızı giriniz");
+        self.showErrorNotification(
+          "Hata Oluştu",
+          "Lütfen rakamlardan oluşan telefon numaranızı giriniz"
+        );
         return;
       }
       if (String(value).length !== 10) {
-        self.showErrorNotification("Hata Oluştu", "Lütfen başında 0 olmadan 10 haneli olarak giriniz");
+        self.showErrorNotification(
+          "Hata Oluştu",
+          "Lütfen başında 0 olmadan 10 haneli olarak giriniz"
+        );
         return;
       }
 
       store.commit(SET_LOADING, true);
       self.$store
-          .dispatch(CREATE_ITEM, {
-            url: "/mobile/member/getConfirmCode",
-            contents: {gsm: self.gsmNumber},
-            returnType: "stateless",
-            isAuthenticated: self.isAuthenticated,
-          })
-          .then((response) => {
-            store.commit(SET_LOADING, false);
-            if (response.status) {
-              self.showGSMCodeSwal();
-            } else {
-              let error;
-              try {
-                error = response.data.response.data.content || "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-              } catch (e) {
-                error =
-                    "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-              }
-              self.showErrorNotification(null, error);
+        .dispatch(CREATE_ITEM, {
+          url: "/mobile/member/getConfirmCode",
+          contents: { gsm: self.gsmNumber },
+          returnType: "stateless",
+          isAuthenticated: self.isAuthenticated,
+        })
+        .then((response) => {
+          store.commit(SET_LOADING, false);
+          if (response.status) {
+            self.showGSMCodeSwal();
+          } else {
+            let error;
+            try {
+              error =
+                response.data.response.data.content ||
+                "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
+            } catch (e) {
+              error =
+                "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
             }
-          });
-
+            self.showErrorNotification(null, error);
+          }
+        });
     },
     updatePermissionType(type) {
       let self = this;
@@ -1206,21 +1282,21 @@ export default {
       };
 
       this.$store
-          .dispatch(CREATE_ITEM, {
-            url:
-                "/mobile/member/setConfirmation?" + querystring.stringify(params),
-            contents: null,
-            returnType: "stateless",
-            isAuthenticated: self.isAuthenticated,
-          })
-          .then((response) => {
-            if (response.status) {
-              self.getUser();
-              store.commit(_MODULE_NAME + "/" + SET_SUCCESS, true);
-            } else {
-              self.section_4_error = true;
-            }
-          });
+        .dispatch(CREATE_ITEM, {
+          url:
+            "/mobile/member/setConfirmation?" + querystring.stringify(params),
+          contents: null,
+          returnType: "stateless",
+          isAuthenticated: self.isAuthenticated,
+        })
+        .then((response) => {
+          if (response.status) {
+            self.getUser();
+            store.commit(_MODULE_NAME + "/" + SET_SUCCESS, true);
+          } else {
+            self.section_4_error = true;
+          }
+        });
     },
     getTitles() {
       store.dispatch(_MODULE_NAME_CONTENT + "/" + GET_TITLES, {
@@ -1250,28 +1326,30 @@ export default {
       store.commit(SET_LOADING, true);
 
       self.$store
-          .dispatch(CREATE_ITEM, {
-            url: "/mobile/memberInfoTaskEntry/singleResult",
-            contents: contents,
-            returnType: "stateless",
-            isAuthenticated: self.isAuthenticated,
-          })
-          .then((response) => {
-            if (response.status) {
-              self.showSuccessNotification();
-              self.getUser();
-            } else {
-              let error;
-              try {
-                error = response.data.response.data.content || "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-              } catch (e) {
-                error =
-                    "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
-              }
-              self.showErrorNotification("", error);
+        .dispatch(CREATE_ITEM, {
+          url: "/mobile/memberInfoTaskEntry/singleResult",
+          contents: contents,
+          returnType: "stateless",
+          isAuthenticated: self.isAuthenticated,
+        })
+        .then((response) => {
+          if (response.status) {
+            self.showSuccessNotification();
+            self.getUser();
+          } else {
+            let error;
+            try {
+              error =
+                response.data.response.data.content ||
+                "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
+            } catch (e) {
+              error =
+                "İşlem yapılırken hata oluştu. Lütfen sonra tekrar deneyiniz";
             }
-            store.commit(SET_LOADING, false);
-          });
+            self.showErrorNotification("", error);
+          }
+          store.commit(SET_LOADING, false);
+        });
 
       return false;
     },
@@ -1280,7 +1358,7 @@ export default {
     feather.replace();
     this.getTitles();
     window.scrollTo(0, 0);
-  }
+  },
 };
 </script>
 
@@ -1288,6 +1366,27 @@ export default {
 .tc-confirmation-month-part {
   padding-left: 0;
   padding-right: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 30px;
+}
+
+.download-app {
+  z-index: 1;
+  margin-top: 11%;
+  font-size: 20px;
+  margin-bottom: -80px;
+
+}
+
+@media (max-width: 972px) {
+  .download-app {
+    margin-bottom: 0px !important;
+  }
+  
 }
 
 @media (min-width: 768px) {
