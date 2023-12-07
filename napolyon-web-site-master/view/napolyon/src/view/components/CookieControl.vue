@@ -1,5 +1,5 @@
 <template>
-  <div class="cookie-control">
+  <div class="cookie-control" id="cookieContainer">
     <div class="inner-content container">
       <div class="cookie-control-text">
         <p class="cookie-exp">
@@ -9,48 +9,85 @@
       <div class="cookie-control-button">
         <button
           :class="{ active: isAcceptAllActive }"
-          @click="activateAcceptAll"
+          @click="reject"
         >
           {{ $t("acceptAll") }}
         </button>
         <button
           :class="{ active: isRejectAllActive }"
-          @click="activateRejectAll"
+          @click="accept"
         >
           {{ $t("rejectAll") }}
         </button>
-      <!--    <button @click="activateMoreInfo">{{ $t("manageCookies") }}</button> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-import Cookie from "js-cookie";
+
 export default {
   data() {
     return {
       isAcceptAllActive: true,
-      isRejectAllActive: false
+      isRejectAllActive: false,
     };
   },
   methods: {
-    activateAcceptAll() {
-      (this.isAcceptAllActive = true), Cookie.set("cookieAcceptedAll", true);
-      this.$parent.isCookieControl = true;
+    setCookie(cookieName, cookieValue, nDays) {
+      var today = new Date();
+      var expire = new Date();
+
+      if (!nDays) nDays = 1;
+      expire.setTime(today.getTime() + 3600000 * 24 * nDays);
+      document.cookie =
+        cookieName +
+        "=" +
+        escape(cookieValue) +
+        ";expires=" +
+        expire.toUTCString() +
+        ";path=/";
+      return false;
     },
-    activateRejectAll() {
-      (this.isRejectAllActive = true),
-        (this.isAcceptAllActive = false),
-        Cookie.set("cookieAcceptedAll", false);
-      this.$parent.isCookieControl = true;
+
+    accept() {
+      var expireDate = new Date();
+      expireDate.setDate(expireDate.getDate() + 365);
+      document.cookie =
+        "isUserAccept=accepted; expires=" +
+        expireDate.toUTCString() +
+        "; path=/";
+      var cookieContainer = document.getElementById("cookieContainer");
+      if (cookieContainer) {
+        cookieContainer.style.display = "none";
+      }
     },
-    activateMoreInfo() {
-      this.isAcceptAllActive = false;
-      this.isRejectAllActive = false;
-      this.$router.push({ path: this.$t("cookieSettingsURL") });
-      //this.manageCookie = true
+
+    reject() {
+      var expireDate = new Date();
+      expireDate.setDate(expireDate.getDate() + 365);
+      document.cookie =
+        "isUserAccept=rejected; expires=" +
+        expireDate.toUTCString() +
+        "; path=/";
+      var cookieContainer = document.getElementById("cookieContainer");
+      if (cookieContainer) {
+        cookieContainer.style.display = "none";
+      }
     },
   },
+  mounted() {
+    const kullaniciDurum = document.cookie.replace(/(?:(?:^|.*;\s*)isUserAccept\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    var cookieContainer = document.getElementById('cookieContainer');
+    if (kullaniciDurum === "accepted" || kullaniciDurum === "rejected") {
+        if (cookieContainer) {
+            cookieContainer.style.display = 'none';
+        }
+    } else {
+        if (cookieContainer) {
+            cookieContainer.style.display = 'block';
+        }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
