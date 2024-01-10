@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="col-lg-8 col-12">
-      <div v-if="pointsLoading">
-        <loader :loading="pointsLoading"></loader>
+      <div v-if="pointsLoading" class="loading">
+        <lottie-animation :animationData="animationData"></lottie-animation>
       </div>
       <div v-else>
         <div class="overlay" id="overlay" v-if="showFilterSection"></div>
@@ -147,7 +147,9 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-xs-12">
-                  <div class="form-group d-flex flex-column justify-content-center align-items-end">
+                  <div
+                    class="form-group d-flex flex-column justify-content-center align-items-end"
+                  >
                     <div>
                       <button
                         class="btn btn-primary"
@@ -235,7 +237,9 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-xs-12">
-                  <div class="form-group d-flex flex-column justify-content-center align-items-end">
+                  <div
+                    class="form-group d-flex flex-column justify-content-center align-items-end"
+                  >
                     <div class="position-relative">
                       <button
                         class="btn btn-primary"
@@ -256,7 +260,7 @@
   </div>
 </template>
   
-  <script>
+<script>
 import feather from "feather-icons";
 import store from "@/core/services";
 import module, {
@@ -282,14 +286,14 @@ import moduleAuth, {
 } from "@/core/services/store/auth.module";
 import moment from "moment";
 import Pagination from "@/view/components/dataTable/Pagination";
-import Loader from "@/view/components/Loader";
+import LottieAnimation from '../components/LottieAnimation.vue';
 
 const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_AUTH = MODULE_NAME_AUTH;
 
 export default {
   name: "napTransfers",
-  components: { Pagination, Loader },
+  components: { Pagination, LottieAnimation },
   beforeCreate() {
     function registerStoreModule(moduleName, storeModule) {
       if (!(store && store.state && store.state[moduleName])) {
@@ -320,6 +324,7 @@ export default {
       loadingCups: false,
       activeTab: "NAP Puan",
       showFilterSection: false,
+      animationData: require('./Loading.json'),
     };
   },
   computed: {
@@ -718,6 +723,11 @@ export default {
 .filter-button {
   background-color: white;
   border: none;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
   

@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center">
     <div class="col-lg-8 col-12">
       <template v-if="loading">
-        <loader :loading="loading"></loader>
+        <lottie-animation :animationData="animationData"></lottie-animation>
       </template>
       <template v-else>
         <div
@@ -218,14 +218,15 @@ import userModule, {
   ERROR as ERROR_USER,
   LOADING_LEADERSHIP,
 } from "@/core/services/store/user.module";
-import Loader from "@/view/components/Loader";
+import LottieAnimation from '../components/LottieAnimation.vue';
+
 
 const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_USER = MODULE_NAME_USER;
 
 export default {
   name: "leadership_rank",
-  components: { Loader },
+  components: { LottieAnimation },
   beforeCreate() {
     function registerStoreModule(moduleName, storeModule) {
       if (!(store && store.state && store.state[moduleName])) {
@@ -251,6 +252,7 @@ export default {
         "#e8d431",
         "#11a6ee",
       ],
+      animationData: require('./Loading.json'),
     };
   },
   computed: {

@@ -1668,7 +1668,7 @@ export default {
                 icon: "success",
                 confirmButtonText: "Tamam",
               }).then(() => {
-                location.href = "page_done";
+                this.$router.push({ name: 'index.tasks' });
               });
             } else {
               let error;

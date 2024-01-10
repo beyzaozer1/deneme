@@ -2,15 +2,16 @@
   <div class="d-flex justify-content-center">
     <div class="col-lg-8 col-12">
       <div v-if="tasksLoading">
-        <loader :loading="tasksLoading"></loader>
+        <lottie-animation :animationData="animationData"></lottie-animation>
       </div>
-      <div v-else class="pb-4">
+      <div v-else class="mt-4">
         <div>
           <div v-for="(item, index) in items" :key="index">
-            <div>
+            <div :style="{marginBottom: '-26px'}">
+              <!-- <div>{{ item.taskImage }}</div> -->
               <div class="image-container">
                 <img
-                  src="images/mobile/green-task-bg.png"
+                  :src="item.taskImage"
                   width="100%"
                   height="100%"
                   class="image"
@@ -18,107 +19,10 @@
               </div>
               <div class="description-container">
                 <div class="description">
-                  <!-- <a
-                    class="content-title"
-                    href="#"
-                    @click="
-                      $router.push({
-                        name: 'user.surveys.mobil',
-                        params: {
-                          name: convertToKebabCase(item.name),
-                          id: item.id,
-                          questionIds: item.questionIds,
-                          code: item.code,
-                        },
-                      })
-                    "
-                    >{{ item.name }}</a
-                  > -->
-                  <template v-if="!item.isCelebration">
-                    <template v-if="item.taskType == 'ProfileTask'">
-                      <a
-                        class="content-title"
-                        href="#"
-                        @click="
-                          $router.push({
-                            name: 'user.surveys.mobil',
-                            params: {
-                              name: convertToKebabCase(item.name),
-                              id: item.id,
-                              questionIds: item.questionIds,
-                              code: item.code,
-                            },
-                          })
-                        "
-                        >{{ item.name }}</a
-                      >
-                    </template>
-
-                    <template v-else-if="item.taskType == 'CRMCampaign'">
-                      <a
-                        class="content-title"
-                        href="#"
-                        @click="
-                          $router.push({
-                            name: 'user.campaign',
-                            params: { id: item.id },
-                          })
-                        "
-                        >{{ item.name }} ></a
-                      >
-                    </template>
-
-                    <template v-else-if="item.taskType == 'ExternalSurvey'">
-                      <a
-                        class="content-title"
-                        href="#"
-                        @click="redirectTo(item)"
-                        >{{ item.name }} ></a
-                      >
-                    </template>
-
-                    <template v-else-if="item.taskType == 'LiveSurvey'">
-                      <a
-                        class="content-title"
-                        href="#"
-                        @click="redirectTo(item, 'live')"
-                        >{{ item.name }} ></a
-                      >
-                    </template>
-
-                    <template v-else-if="item.taskType == 'CrmMiniAnket'">
-                      <a class="content-title" :href="item.urlLink">
-                        {{ item.name }}
-                        ></a
-                      >
-                    </template>
-                    <template v-else>
-                      <a
-                        class="content-title"
-                        href="#"
-                        @click.prevent="return false;"
-                        >{{ item.name }} ></a
-                      >
-                      <span class="float-right text-muted small mt-2"> </span>
-                    </template>
-                  </template>
-                  <div class="nap-points">
-                    <p class="content-desc" v-html="item.description"></p>
-                    <!-- <div class="common">
-                      <img src="/images/mobile/clock.png" />
-                      <span>5 dk</span>
-                    </div>
-                    <div class="common">
-                      <img
-                        src="/images/mobile/coin.png"
-                        width="18"
-                        height="18"
-                      />
-                      <span>3000 NAP Puan</span>
-                    </div> -->
-                  </div>
+                  <span class="item-title"><bold>{{ item.name }}</bold></span>
+                  <p class="content-desc" v-html="item.description"></p>
                 </div>
-                <div>
+                <div :style="{alignSelf: 'flex-end', marginBottom: '16px'}">
                   <div class="icon-container">
                     <template v-if="!item.isCelebration">
                       <template v-if="item.taskType == 'ProfileTask'">
@@ -160,8 +64,7 @@
                             width="8px"
                             height="10px"
                           />
-                          </a
-                        >
+                        </a>
                       </template>
 
                       <template v-else-if="item.taskType == 'ExternalSurvey'">
@@ -175,8 +78,7 @@
                             width="8px"
                             height="10px"
                           />
-                          </a
-                        >
+                        </a>
                       </template>
 
                       <template v-else-if="item.taskType == 'LiveSurvey'">
@@ -190,8 +92,7 @@
                             width="8px"
                             height="10px"
                           />
-                          </a
-                        >
+                        </a>
                       </template>
 
                       <template v-else-if="item.taskType == 'CrmMiniAnket'">
@@ -228,16 +129,16 @@ import taskModule, {
 } from "@/core/services/store/task.module";
 
 import { GET_ITEMS as REST_GET_ITEMS } from "@/core/services/store/rest.module";
+import LottieAnimation from "../components/LottieAnimation.vue";
 
 import moment from "moment";
-import Loader from "@/view/components/Loader";
 import Swal from "sweetalert2";
 
 const _MODULE_NAME_TASK = MODULE_NAME_TASK;
 
 export default {
   name: "tasks",
-  components: { Loader },
+  components: { LottieAnimation },
   beforeCreate() {
     function registerStoreModule(moduleName, storeModule) {
       if (!(store && store.state && store.state[moduleName])) {
@@ -252,6 +153,7 @@ export default {
       hasProfileSurvey: false,
       hasProfileSurveyStatus: false,
       from: null,
+      animationData: require("./Loading.json"),
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -339,7 +241,7 @@ export default {
               if (response.data.status == 1) {
                 window.location.href = response.data.content;
               } else {
-                this.$router.push({ path: 'index.tasks'});
+                this.$router.push({ path: "index.tasks" });
               }
             } else {
               let error;
@@ -374,7 +276,7 @@ export default {
               if (response.data.status == 1) {
                 window.location.href = response.data.content;
               } else {
-                this.$router.push({ path: 'index.tasks' });
+                this.$router.push({ path: "index.tasks" });
               }
             } else {
               let error;
@@ -402,8 +304,13 @@ export default {
     const urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
     const token = urlParams.get("token");
 
-    window.localStorage.setItem("token", token);
-    window.localStorage.setItem("refresh_token", token);
+    if (
+      !window.localStorage.getItem("token") ||
+      !window.localStorage.getItem("refresh_token")
+    ) {
+      window.localStorage.setItem("token", token);
+      window.localStorage.setItem("refresh_token", token);
+    }
     feather.replace();
     this.getItems();
   },
@@ -426,8 +333,17 @@ export default {
   justify-content: center;
   position: relative;
   height: 200px;
+  
 }
 
+.image {
+  border-radius: 16px;
+}
+
+.item-title {
+  font-weight: 800;
+  font-family: Eina 01;
+}
 .content-container {
   display: flex;
   flex-direction: column;
@@ -436,8 +352,9 @@ export default {
   position: absolute;
   z-index: 12;
   color: white;
-  margin-bottom: 37px;
-  padding: 16px;
+  margin-bottom: 27px;
+  padding: 12px;
+  font-family: Eina 01;
 }
 .description-container {
   background-color: white;
@@ -447,16 +364,16 @@ export default {
   top: -47px;
   box-shadow: 0px 5px 20px 0px #cdcdcd40;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
-  padding: 16px;
+  padding: 16px 16px 0px 16px;
+  margin: 22px 0 0 0;
 }
 
 .description {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 8px;
   flex-direction: column;
 }
 .company-list {
@@ -475,10 +392,11 @@ export default {
   font-size: 20px;
   margin-bottom: 3px;
   margin-left: 2px;
+  font-family: Eina 01;
 }
 
 .content-desc {
-  /* padding: 0 0 16px 16px; */
+  padding-right: 16px;
   font-weight: 400;
   color: gray;
 }
@@ -504,5 +422,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   gap: 2px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -32,7 +32,7 @@
                 <div class="testimonial-item">
                   <div class="testimonial-thumb">
                     <div class="thumb">
-                      <img src="http://napolyon.com/Content/Napolyon70/img/pt/tocev-logo-.jpg" alt="client">
+                      <img src="https://napolyon.com/Content/Napolyon70/img/pt/tocev-logo-.jpg" alt="client">
                     </div>
                   </div>
                   <div class="testimonial-content">
@@ -48,7 +48,7 @@
                 <div class="testimonial-item">
                   <div class="testimonial-thumb">
                     <div class="thumb">
-                      <img src="http://cdn.napolyon.com/napolyon/kampanya/350x250/halistores.png" alt="client">
+                      <img src="https://cdn.napolyon.com/napolyon/kampanya/350x250/halistores.png" alt="client">
                     </div>
                   </div>
                   <div class="testimonial-content">
@@ -64,7 +64,7 @@
                 <div class="testimonial-item">
                   <div class="testimonial-thumb">
                     <div class="thumb">
-                      <img src="http://cdn.napolyon.com/napolyon/kampanya/350x250/goldmaster--50-indirim-.png"
+                      <img src="https://cdn.napolyon.com/napolyon/kampanya/350x250/goldmaster--50-indirim-.png"
                            alt="client">
                     </div>
                   </div>
@@ -81,7 +81,7 @@
                 <div class="testimonial-item">
                   <div class="testimonial-thumb">
                     <div class="thumb">
-                      <img src="http://cdn.napolyon.com/napolyon/kampanya/350x250/365ist--10-hediye-indirim-kodu.png"
+                      <img src="https://cdn.napolyon.com/napolyon/kampanya/350x250/365ist--10-hediye-indirim-kodu.png"
                            alt="client">
                     </div>
                   </div>
@@ -98,7 +98,7 @@
                 <div class="testimonial-item">
                   <div class="testimonial-thumb">
                     <div class="thumb">
-                      <img src="http://cdn.napolyon.com/napolyon/kampanya/350x250/napolyon-100tl.png" alt="client">
+                      <img src="https://cdn.napolyon.com/napolyon/kampanya/350x250/napolyon-100tl.png" alt="client">
                     </div>
                   </div>
                   <div class="testimonial-content">

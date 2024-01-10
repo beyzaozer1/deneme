@@ -8,6 +8,7 @@ Vue.config.productionTip = false;
 // Global 3rd party plugins
 import i18n from "./core/plugins/vue-i18n";
 import Vuelidate from 'vuelidate'
+
 Vue.use(Vuelidate)
 
 // As a plugin

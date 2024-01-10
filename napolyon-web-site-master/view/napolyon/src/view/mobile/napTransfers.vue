@@ -3,7 +3,7 @@
     <div id="nap-transfer-page" class="col-lg-8 col-12">
       <template v-if="campaignDetail">
         <template v-if="campaignDetailLoading">
-          <loader :loading="campaignDetailLoading"></loader>
+          <lottie-animation :animationData="animationData"></lottie-animation>
         </template>
         <template v-else>
           <div class="rounded shadow border-bottom p-4 mb-2">
@@ -383,7 +383,7 @@
                 </div>
               </div>
 
-              <div class="col-4 m-auto text-center">
+              <div class="col-12 m-auto text-center">
                 <div class="row">
                   <div class="col-12">
                     <img
@@ -403,7 +403,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-8">
+              <div class="col-12">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
@@ -555,7 +555,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <h4>
-                        <span>
+                        <span class="text-style">
                           Transfer Edilecek NAP Puan:
                           {{ formatNumber(activeItem.point) }}
                         </span>
@@ -567,21 +567,21 @@
                     <div class="form-group">
                       <div
                         v-if="!resultSuccess"
-                        class="mt-auto p-2 justify-content-center d-flex align-items-center"
+                        class="mt-auto p-2 justify-content-center d-flex align-items-center gap-4"
                       >
                         <button
                           :disabled="
                             napTransferLoading ||
                             !(Number(activeItem.point) < Number(user.point))
                           "
-                          class="btn btn-primary"
+                          class="approve-button"
                           type="button"
                           @click="approveCampaign(2)"
                         >
                           Onaylıyorum
                         </button>
                         <button
-                          class="btn btn-warning ml-2"
+                          class="give-up-button"
                           type="button"
                           @click.prevent="
                             showItemDetails = null;
@@ -787,7 +787,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-12 hidden">
                     <div class="form-group">
                       <label>IBAN: <span class="text-danger">*</span></label>
                       <div class="position-relative">
@@ -795,12 +795,11 @@
                           v-model="form.iban"
                           class="form-control"
                           placeholder="IBAN"
-                          required=""
                           type="text"
                         />
                       </div>
                       <div
-                        v-if="submitStatus && !$v.form.iban.required"
+                        v-if="submitStatus"
                         class="error d-block"
                       >
                         IBAN giriniz
@@ -810,7 +809,7 @@
                   <div class="col-md-12">
                     <div class="form-group text-center">
                       <h4>
-                        <span>
+                        <span class="text-style">
                           Transfer Edilecek NAP Puan:
                           {{ formatNumber(activeItem.point) }}
                         </span>
@@ -969,7 +968,9 @@
         <div class="rounded shadow border-bottom p-4 mb-2">
           <div class="container">
             <div v-if="loading" class="loading">
-              <loader :loading="loading"></loader>
+              <lottie-animation
+                :animationData="animationData"
+              ></lottie-animation>
             </div>
             <div v-else class="row">
               <div
@@ -1106,21 +1107,29 @@
           </div>
         </div>
       </div>
--->     
-    <div class="container-new">
-      <div class="container mb-3" @click.prevent="onClickItem(2)">
-              <div class="image-container">
-                <img src="/images/mobile/ticket-star.png" width="26px" height="21px"/>
-              </div>
-              <div class="content">Hediye Çekine Dönüştür</div>
+-->
+        <div class="container-new">
+          <div class="container mb-3" @click.prevent="onClickItem(2)">
+            <div class="image-container">
+              <img
+                src="/images/mobile/ticket-star.png"
+                width="26px"
+                height="21px"
+              />
             </div>
-            <div class="container" @click.prevent="onClickItem(3)">
-              <div class="image-container">
-                <img src="/images/mobile/money-add.png" width="21px" height="21px"/>
-              </div>
-              <div class="content">100 TL talep et</div>
+            <div class="content">Hediye Çekine Dönüştür</div>
+          </div>
+          <div class="container" @click.prevent="onClickItem(3)">
+            <div class="image-container">
+              <img
+                src="/images/mobile/money-add.png"
+                width="21px"
+                height="21px"
+              />
             </div>
-    </div>
+            <div class="content">100 TL talep et</div>
+          </div>
+        </div>
         <!-- <div
           class="rounded shadow border-bottom p-2 mt-4 cursor-pointer"
           @click.prevent="onClickItem(2)"
@@ -1183,6 +1192,7 @@ import module, {
   ERROR,
   MODULE_NAME,
   USER,
+  GET_USER,
 } from "@/core/services/store/auth.module";
 import ntCampaignModule, {
   BASE_URL,
@@ -1209,8 +1219,9 @@ import {
 
 import moment from "moment";
 import { required } from "vuelidate/lib/validators";
-import Loader from "@/view/components/Loader";
 import router from "@/router";
+import Swal from "sweetalert2";
+import LottieAnimation from "../components/LottieAnimation.vue";
 
 const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_NT_CAMPAIGN = MODULE_NAME_NT_CAMPAIGN;
@@ -1218,7 +1229,7 @@ const _MODULE_NAME_USER = MODULE_NAME_USER;
 
 export default {
   name: "napTransfers",
-  components: { Loader },
+  components: { LottieAnimation },
   beforeCreate() {
     function registerStoreModule(moduleName, storeModule) {
       if (!(store && store.state && store.state[moduleName])) {
@@ -1252,9 +1263,9 @@ export default {
           year: {
             required,
           },
-          iban: {
-            required,
-          },
+          // iban: {
+          //   required,
+          // },
           approve: {
             required,
           },
@@ -1286,6 +1297,7 @@ export default {
   },
   data() {
     return {
+      animationData: require("./Loading.json"),
       tocevDescription: true,
       selectedItem: null,
       campaignDetail: null,
@@ -1382,7 +1394,7 @@ export default {
             })
             .then((response) => {
               if (response.status) {
-                this.getTocevStatus();
+                // this.getTocevStatus();
                 this.getUserPoint();
               } else {
                 try {
@@ -1419,7 +1431,7 @@ export default {
             })
             .then((response) => {
               if (response.status) {
-                this.getTocevStatus();
+                // this.getTocevStatus();
                 this.getUserPoint();
               } else {
                 try {
@@ -1466,7 +1478,8 @@ export default {
                 lastName: this.form.lastName,
                 tckn: this.form.tcNo,
               },
-              isAuthenticated: localStorage.getItem("token"),
+              isAuthenticated:
+              localStorage.getItem("token"),
             })
             .then((response) => {
               if (response.status) {
@@ -1508,13 +1521,13 @@ export default {
       this.resultError = false;
       this.tcNoError = false;
       this.campaignDetail = null;
-      if (this.selectedItem == 1) {
-        this.getTocevStatus();
-      }
+      // if (this.selectedItem == 1) {
+      //   this.getTocevStatus();
+      // }
     },
     showDetailItem(item) {
       let self = this;
-      self.campaignDetailLoading = true;
+      self.campaignDetailLoading = false;
       store.commit(
         _MODULE_NAME_NT_CAMPAIGN + "/" + SET_LOADING_NT_CAMPAIGN,
         true
@@ -1613,7 +1626,7 @@ export default {
         this.resultSuccess = false;
         this.resultError = false;
         this.tcNoError = false;
-        this.getTocevStatus();
+        // this.getTocevStatus();
       }
       if (type == 3) {
         this.showItemDetails = true;
@@ -1662,7 +1675,7 @@ export default {
         this.resultSuccess = false;
         this.resultError = false;
         this.tcNoError = false;
-        this.getTocevStatus();
+        // this.getTocevStatus();
       }
     },
     getItems() {
@@ -1673,16 +1686,16 @@ export default {
         },
       });
     },
-    getTocevStatus() {
-      this.$store.commit(
-        _MODULE_NAME_NT_CAMPAIGN + "/" + SET_TOCEV_STATUS,
-        null
-      );
-      this.$store.dispatch(_MODULE_NAME_NT_CAMPAIGN + "/" + GET_TOCEV_STATUS, {
-        url: "mobile/tocevNapTransferi",
-        filters: {},
-      });
-    },
+    // getTocevStatus() {
+    //   this.$store.commit(
+    //     _MODULE_NAME_NT_CAMPAIGN + "/" + SET_TOCEV_STATUS,
+    //     null
+    //   );
+    //   this.$store.dispatch(_MODULE_NAME_NT_CAMPAIGN + "/" + GET_TOCEV_STATUS, {
+    //     url: "mobile/tocevNapTransferi",
+    //     filters: {},
+    //   });
+    // },
     getUserPoint() {
       let filters = {};
 
@@ -1692,16 +1705,59 @@ export default {
       });
     },
   },
+
   mounted() {
+    this.$store.dispatch(_MODULE_NAME + "/" + GET_USER).then((response) => {
+      this.firstName = response.firstName;
+      this.lastName = response.lastName;
+
+      let day = response?.birthday
+        ? Number(response?.birthday?.split("-")[2])
+        : "01";
+      let month = response?.birthday
+        ? Number(response?.birthday?.split("-")[1])
+        : "01";
+      let year = response?.birthday
+        ? Number(response?.birthday?.split("-")[0])
+        : "1989";
+
+      this.form = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        tcNo: response.tcNo,
+        day:
+          day.length != 2
+            ? day.toLocaleString("en-US", {
+                minimumIntegerDigits: 2,
+                useGrouping: false,
+              })
+            : 0,
+        month:
+          month.length != 2
+            ? month.toLocaleString("en-US", {
+                minimumIntegerDigits: 2,
+                useGrouping: false,
+              })
+            : month,
+        year:
+          year.length != 4
+            ? year.toLocaleString("en-US", {
+                minimumIntegerDigits: 4,
+                useGrouping: false,
+              })
+            : year,
+        iban: "TR540001500158007319922483",
+      };
+    });
+
     const urlParams = new URLSearchParams(window.location.hash.split("?")[1]);
     const token = urlParams.get("token");
-
     if (
       !window.localStorage.getItem("token") ||
       !window.localStorage.getItem("refresh_token")
     ) {
       window.localStorage.setItem("token", token);
-        window.localStorage.setItem("refresh_token", token);
+      window.localStorage.setItem("refresh_token", token);
     }
 
     window.insider_object = window.insider_object || {};
@@ -1726,46 +1782,6 @@ export default {
         this.$router.go(-1);
       }
     }
-
-    let day = this.user.birthday
-      ? Number(this.user.birthday.split("-")[2])
-      : "01";
-    let month = this.user.birthday
-      ? Number(this.user.birthday.split("-")[1])
-      : "01";
-    let year = this.user.birthday
-      ? Number(this.user.birthday.split("-")[0])
-      : "1989";
-    this.form = {
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      tcNo: this.user.tcNo,
-      day:
-        day.length != 2
-          ? day.toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-              useGrouping: false,
-            })
-          : 0,
-      month:
-        month.length != 2
-          ? month.toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-              useGrouping: false,
-            })
-          : month,
-      year:
-        year.length != 4
-          ? year.toLocaleString("en-US", {
-              minimumIntegerDigits: 4,
-              useGrouping: false,
-            })
-          : year,
-      iban:
-        this.user.memberIbanObject && this.user.memberIbanObject.iban1
-          ? this.user.memberIbanObject.iban1
-          : null,
-    };
   },
   watch: {
     tocevStatus(value) {
@@ -1793,15 +1809,23 @@ export default {
       }
     },
     activeItem(value) {
+      console.log("value", value.point);
+      console.log("this.user.point", this.user.point);
       let self = this;
       if (value) {
-        if (Number(value.point) > Number(this.user.point)) {
-          self.showErrorNotification(
-            "Uyarı",
-            "Bu kampanyadan faydalanabilmek için " +
+        if (Number(value.point) > this.user.point) {
+          Swal.fire({
+            html:
+              "Bu kampanyadan faydalanabilmek için " +
               this.formatNumber(value.point) +
-              " NAP puanına ulaşmanız gerekmektedir"
-          );
+              " NAP puanına ulaşmanız gerekmektedir",
+            icon: "error",
+            confirmButtonText: "Tamam",
+          }).then((response) => {
+            this.router.push({
+              name: "index.nap_transfers",
+            });
+          });
           setTimeout(() => {
             self.selectedItem = null;
             self.activeItem = null;
@@ -1867,11 +1891,10 @@ export default {
 .container {
   display: flex;
   justify-content: flex-start;
-  background-color: #F2EEFC;
+  background-color: #f2eefc;
   gap: 12px;
   padding: 16px 8px 16px 16px;
   border-radius: 16px;
-
 }
 
 .image-container {
@@ -1887,7 +1910,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-} 
+}
 
 .content {
   margin-top: 7px;
@@ -1895,5 +1918,54 @@ export default {
 
 .loading {
   width: 100%;
+}
+
+.approve-button {
+  border-radius: 32px;
+  background: var(
+    --Gradient-CTA,
+    radial-gradient(650.5% 600.44% at 218.02% 240.74%, #c3f197 0%, #01d9dc 100%)
+  );
+  color: var(--dark-blue, #001d3a);
+  text-align: center;
+  font-family: Eina 01;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 14px 48px;
+  border: none;
+}
+.give-up-button {
+  border-radius: 32px;
+  border: 1px solid var(--medium-grey, #657c9f);
+  padding: 13px 48px;
+  text-align: center;
+  font-family: Eina 01;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #657c9f;
+  background-color: white;
+  margin-left: 5px;
+}
+
+.text-style {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
 }
 </style>

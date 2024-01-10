@@ -30,6 +30,7 @@
         "js-cookie": "^3.0.1",
         "line-awesome": "^1.3.0",
         "lodash": "^4.17.20",
+        "lottie-web-vue": "^2.0.7",
         "mobile-device-detect": "^0.4.3",
         "moment": "^2.29.1",
         "numeral": "^2.0.6",

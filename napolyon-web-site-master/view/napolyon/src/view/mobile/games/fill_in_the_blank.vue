@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-8 col-12">
     <div v-if="pageLoading">
-      <loader :loading="pageLoading"></loader>
+      <lottie-animation :animationData="animationData"></lottie-animation>
     </div>
     <div v-else id="game" class="game-container">
       <div class="game-image">
@@ -10,6 +10,7 @@
       <p class="description">
         {{ $t("haveFundAndLearn.fill_in_the_blank_desc") }}
       </p>
+      <div v-if="start" id="timer">{{ start }}</div>
 
       <div class="question-container">
         <p class="information" v-html="question?.question_text"></p>
@@ -94,6 +95,7 @@
 </template>
 
 <script>
+import LottieAnimation from '../../components/LottieAnimation.vue';
 import * as external from "@/core/mixin/external";
 import feather from "feather-icons";
 import store from "@/core/services";
@@ -110,14 +112,14 @@ import {
 import Swal from "sweetalert2";
 import axios from "axios";
 import querystring from "querystring";
-import Loader from "@/view/components/Loader";
+
 
 const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_USER = MODULE_NAME_USER;
 
 export default {
   name: "fill_in_the_blank",
-  components: { Loader },
+  components: { LottieAnimation },
   data() {
     return {
       pageLoading: false,
@@ -131,6 +133,7 @@ export default {
       subjectId: null,
       process_control_block_id: "",
       question_id: null,
+      animationData: require('../Loading.json'),
     };
   },
   computed: {
@@ -194,7 +197,7 @@ export default {
               self.start = null;
               self.pageLoading = false;
 
-              if ((response.data.status = 0)) {
+              if (response.data.status == 0) {
                 let item = response.data;
                 self.process_control_block_id = item.process_control_block_id;
                 self.question = item.questions[0];

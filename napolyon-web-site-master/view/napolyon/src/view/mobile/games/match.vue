@@ -8,7 +8,7 @@
     <p>Günün oyununu tamamladın ve 10 Kupa kazandın. Her gün Napolyon'a uğramayı unutma. Çünkü daha çok oyun, daha çok kupa!</p>
   </div> -->
     <div v-if="pageLoading">
-      <loader :loading="pageLoading"></loader>
+      <lottie-animation :animationData="animationData"></lottie-animation>
     </div>
     <div v-else id="game">
       <div v-if="question" id="game-area">
@@ -145,7 +145,8 @@ import {
 } from "@/core/services/store/user.module";
 import axios from "axios";
 import querystring from "querystring";
-import Loader from "@/view/components/Loader";
+import LottieAnimation from '../../components/LottieAnimation.vue';
+
 
 const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_USER = MODULE_NAME_USER;
@@ -154,7 +155,7 @@ export default {
   name: "match",
   components: {
     draggable,
-    Loader,
+    LottieAnimation,
   },
   data() {
     return {
@@ -168,6 +169,7 @@ export default {
       question_id: null,
       question_text: null,
       question: null,
+      animationData: require('../Loading.json'),
     };
   },
   computed: {

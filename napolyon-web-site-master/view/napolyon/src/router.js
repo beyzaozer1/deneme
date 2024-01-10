@@ -261,6 +261,12 @@ export default new Router({
       name: "index.clarification_text",
       component: () => import("@/view/Pages/clarification_text"),
     },
+    //MOBILE CAMPAIGN
+    {
+      path: "/mobil-kampanya/:id",
+      name: "index.mobile-campaign",
+      component: () => import("@/view/mobile/Campaign"),
+    },
     ///MOBILE
     { 
       path: "/mobil-nap-hareketleri",
@@ -296,6 +302,11 @@ export default new Router({
       path: "/mobil-duello",
       name: "index.duel",
       component: () => import("@/view/mobile/duel"),
+    },
+    {
+      path: "/mobil-try-again",
+      name: "index.try_again",
+      component: () => import("@/view/mobile/TryAgain"),
     },
 
     //MOBILE DUELLO
@@ -342,6 +353,18 @@ export default new Router({
       name: "index.payment-fail",
       component: () => import("@/view/mobile/situation/Fail"),
     },
+    //test
+    {
+      path: "/payment-success-test",
+      name: "index.payment-success-test",
+      component: () => import("@/view/mobile/situation/SuccessTest"),
+    },
+    {
+      path: "/payment-fail-test",
+      name: "index.payment-fail-test",
+      component: () => import("@/view/mobile/situation/FailTest"),
+    },
+
     //404 
     {
       path: "*",

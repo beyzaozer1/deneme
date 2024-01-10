@@ -96,7 +96,8 @@ export default {
   methods: {
     sendPostRequest() {
       const url =
-        "https://tomcat.skyalp.com.tr:8181/smartgateway/v1/ccpayment/threed/success";
+        // "https://tomcat.skyalp.com.tr:8181/smartgateway/v1/ccpayment/threed/success";
+        "https://mobile.napolyon.com:8443/v1/ccpayment/threed/success"
 
       const requestData = {
         sipayStatus: this.sipayStatus,

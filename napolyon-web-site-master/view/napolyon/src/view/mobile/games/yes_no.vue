@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-8 col-12">
     <div v-if="pageLoading">
-      <loader :loading="pageLoading"></loader>
+      <lottie-animation :animationData="animationData"></lottie-animation>
     </div>
     <div v-else id="game">
       <div v-if="question" id="game-area">
@@ -87,14 +87,14 @@ import {
 import Swal from "sweetalert2";
 import axios from "axios";
 import querystring from "querystring";
-import Loader from "@/view/components/Loader";
+import LottieAnimation from '../../components/LottieAnimation.vue';
 
 const _MODULE_NAME = MODULE_NAME;
 const _MODULE_NAME_USER = MODULE_NAME_USER;
 
 export default {
   name: "yes_no",
-  components: { Loader },
+  components: { LottieAnimation },
   data() {
     return {
       url: "/mobile/yes_no",
@@ -107,6 +107,7 @@ export default {
       question_hash: null,
       counter: 0,
       process_control_block_id: "",
+      animationData: require('../Loading.json'),
     };
   },
   computed: {
